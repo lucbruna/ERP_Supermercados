@@ -1,0 +1,137 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CampanhaTipo {
+  SMS
+  WHATSAPP
+  EMAIL
+  PUSH_NOTIFICATION
+}
+
+enum AutomacaoGatilho {
+  ANIVERSARIO
+  COMPRA
+  INATIVIDADE
+  CADASTRO
+}
+
+enum AutomacaoAcao {
+  SMS
+  WHATSAPP
+  EMAIL
+  PUSH
+}
+
+enum PromocaoTipo {
+  DESCONTO
+  LEVE_MAIS
+  COMBO
+  FIDELIDADE
+}
+
+model Campanha {
+  id             String        @id @default(uuid()) @db.Uuid
+  companyId      String        @map("company_id") @db.Uuid
+  nome           String
+  tipo           CampanhaTipo
+  segmento       String[]      @default([])
+  mensagem       String
+  agendamento    DateTime?     @map("agendamento")
+  enviada        Boolean       @default(false)
+  dataEnvio      DateTime?     @map("data_envio")
+  totalEnviados  Int           @default(0) @map("total_enviados")
+  totalAbertos   Int           @default(0) @map("total_abertos")
+  totalCliques   Int           @default(0) @map("total_cliques")
+  conversao      Decimal       @default(0) @db.Decimal(5, 2) @map("conversao")
+  createdAt      DateTime      @default(now()) @map("created_at")
+  updatedAt      DateTime      @updatedAt @map("updated_at")
+
+  destinatarios  CampanhaDestinatario[]
+
+  @@map("campanhas")
+}
+
+model CampanhaDestinatario {
+  id           String    @id @default(uuid()) @db.Uuid
+  campanhaId   String    @map("campanha_id") @db.Uuid
+  campanha     Campanha  @relation(fields: [campanhaId], references: [id], onDelete: Cascade)
+  clienteId    String?   @map("cliente_id") @db.Uuid
+  nome         String?
+  celular      String?
+  email        String?
+  enviado      Boolean   @default(false)
+  aberto       Boolean   @default(false)
+  clicado      Boolean   @default(false)
+  dataEnvio    DateTime? @map("data_envio")
+  dataAbertura DateTime? @map("data_abertura")
+  dataClique   DateTime? @map("data_clique")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  @@map("campanha_destinatarios")
+}
+
+model ModeloMensagem {
+  id         String   @id @default(uuid()) @db.Uuid
+  companyId  String   @map("company_id") @db.Uuid
+  nome       String
+  tipo       CampanhaTipo
+  assunto    String?
+  conteudo   String
+  variaveis  String[] @default([])
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@map("modelo_mensagens")
+}
+
+model RegraAutomacao {
+  id               String          @id @default(uuid()) @db.Uuid
+  companyId        String          @map("company_id") @db.Uuid
+  nome             String
+  gatilho          AutomacaoGatilho
+  acao             AutomacaoAcao
+  modeloMensagemId String?         @map("modelo_mensagem_id") @db.Uuid
+  parametros       Json[]          @default([])
+  ativo            Boolean         @default(true)
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  @@map("regra_automacoes")
+}
+
+model Promocao {
+  id          String       @id @default(uuid()) @db.Uuid
+  companyId   String       @map("company_id") @db.Uuid
+  nome        String
+  descricao   String?
+  tipo        PromocaoTipo
+  regras      Json[]       @default([])
+  dataInicio  DateTime     @map("data_inicio")
+  dataFim     DateTime     @map("data_fim")
+  ativo       Boolean      @default(true)
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  produtos    PromocaoProduto[]
+
+  @@map("promocoes")
+}
+
+model PromocaoProduto {
+  id               String   @id @default(uuid()) @db.Uuid
+  promocaoId       String   @map("promocao_id") @db.Uuid
+  promocao         Promocao @relation(fields: [promocaoId], references: [id], onDelete: Cascade)
+  produtoId        String   @map("produto_id") @db.Uuid
+  precoPromocional Decimal  @map("preco_promocional") @db.Decimal(12, 2)
+  quantidadeMaxima Int      @map("quantidade_maxima")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  @@unique([promocaoId, produtoId])
+  @@map("promocao_produtos")
+}

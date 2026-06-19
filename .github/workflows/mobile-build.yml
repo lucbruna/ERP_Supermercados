@@ -1,0 +1,131 @@
+name: Mobile Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'packages/mobile/**'
+      - '.github/workflows/mobile-build.yml'
+  workflow_dispatch:
+    inputs:
+      platform:
+        description: 'Platform to build (android, ios, or both)'
+        required: true
+        default: android
+        type: choice
+        options:
+          - android
+          - ios
+          - both
+
+concurrency:
+  group: mobile-build-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [client_app, employee_app]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: stable
+          cache: true
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/mobile/${{ matrix.app }}/.dart_tool
+            packages/mobile/${{ matrix.app }}/.packages
+          key: ${{ runner.os }}-flutter-${{ matrix.app }}-${{ hashFiles(format('packages/mobile/{0}/pubspec.yaml', matrix.app)) }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-${{ matrix.app }}-
+      - name: Get dependencies
+        run: flutter pub get
+        working-directory: packages/mobile/${{ matrix.app }}
+      - name: Run flutter analyze
+        run: flutter analyze
+        working-directory: packages/mobile/${{ matrix.app }}
+      - name: Run flutter test
+        run: flutter test
+        working-directory: packages/mobile/${{ matrix.app }}
+
+  build-android:
+    needs: [analyze]
+    if: ${{ github.event_name == 'push' || github.event.inputs.platform == 'android' || github.event.inputs.platform == 'both' }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [client_app, employee_app]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: stable
+          cache: true
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/mobile/${{ matrix.app }}/.dart_tool
+            packages/mobile/${{ matrix.app }}/.packages
+          key: ${{ runner.os }}-flutter-${{ matrix.app }}-${{ hashFiles(format('packages/mobile/{0}/pubspec.yaml', matrix.app)) }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-${{ matrix.app }}-
+      - name: Get dependencies
+        run: flutter pub get
+        working-directory: packages/mobile/${{ matrix.app }}
+      - name: Build APK
+        run: flutter build apk --release
+        working-directory: packages/mobile/${{ matrix.app }}
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-android-apk
+          path: packages/mobile/${{ matrix.app }}/build/app/outputs/flutter-apk/*.apk
+
+  build-ios:
+    needs: [analyze]
+    if: ${{ (github.event_name == 'push' || github.event.inputs.platform == 'ios' || github.event.inputs.platform == 'both') && runner.os == 'macOS' }}
+    runs-on: macos-14
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        app: [client_app, employee_app]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: stable
+          cache: true
+      - name: Cache Flutter dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            packages/mobile/${{ matrix.app }}/.dart_tool
+            packages/mobile/${{ matrix.app }}/.packages
+          key: ${{ runner.os }}-flutter-${{ matrix.app }}-${{ hashFiles(format('packages/mobile/{0}/pubspec.yaml', matrix.app)) }}
+          restore-keys: |
+            ${{ runner.os }}-flutter-${{ matrix.app }}-
+      - name: Get dependencies
+        run: flutter pub get
+        working-directory: packages/mobile/${{ matrix.app }}
+      - name: Build IPA
+        run: flutter build ios --release --no-codesign
+        working-directory: packages/mobile/${{ matrix.app }}
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.app }}-ios-ipa
+          path: packages/mobile/${{ matrix.app }}/build/ios/ipa/*.ipa

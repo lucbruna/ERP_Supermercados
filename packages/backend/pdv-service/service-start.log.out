@@ -1,0 +1,78 @@
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +34ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mIntegracaoModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mThrottlerModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +61ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPdvModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVendasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTrocasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSangriaModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMesasModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDeliveryModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTabelasPrecoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPagamentosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPdvController {/api/v1/pdv/pdv}:[39m[38;5;3m +55ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv/:id/abertura, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv/:id/fechamento, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv/:id/status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pdv/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVendasController {/api/v1/pdv/vendas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/vendas, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/vendas, GET} route[39m[38;5;3m +83ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/vendas/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/vendas/:id/finalizar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/vendas/:id/cancelar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/vendas/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPagamentosController {/api/v1/pdv/pagamentos}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pagamentos/processar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pagamentos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pagamentos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/pagamentos/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTrocasController {/api/v1/pdv/trocas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/trocas, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/trocas, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/trocas/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/trocas/:id/status, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/trocas/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSangriaController {/api/v1/pdv}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/sangrias, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/sangrias, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/sangrias/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/suprimentos, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/suprimentos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/suprimentos/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/saldo/:pdvId, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTabelasPrecoController {/api/v1/pdv/tabelas-preco}:[39m[38;5;3m +81ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/:id/itens, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/itens/:itemId, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/calcular, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/tabelas-preco/calcular-batch, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mMesasController {/api/v1/pdv/mesas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas/:id/abrir, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas/:id/fechar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas/:id/reservar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/mesas/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDeliveryController {/api/v1/pdv/delivery}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/delivery, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/delivery, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/delivery/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/delivery/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/pdv/delivery/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +7ms[39m
+[32m[Nest] 7180  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[PdvService] [39m[32mPDV Service running on port 3004[39m

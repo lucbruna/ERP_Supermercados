@@ -1,0 +1,726 @@
+# ============================================================================
+# CRM Supermercado - Helm Values
+# ============================================================================
+
+global:
+  environment: production
+  timezone: America/Sao_Paulo
+  imageRegistry: ghcr.io/crm-supermercado
+  imagePullSecrets: []
+  labels: {}
+  annotations: {}
+
+# ============================================================================
+# Infrastructure Dependencies
+# ============================================================================
+
+postgresql:
+  enabled: true
+  fullnameOverride: postgres
+  auth:
+    database: crm_supermercado
+    username: admin
+    password: changeme
+  architecture: standalone
+  primary:
+    persistence:
+      size: 50Gi
+      storageClass: ""
+    resources:
+      requests:
+        memory: 2Gi
+        cpu: "1"
+      limits:
+        memory: 4Gi
+        cpu: "2"
+    livenessProbe:
+      enabled: true
+    readinessProbe:
+      enabled: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+redis:
+  enabled: true
+  fullnameOverride: redis
+  auth:
+    password: changeme
+    enabled: true
+  architecture: standalone
+  master:
+    persistence:
+      size: 5Gi
+      storageClass: ""
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "250m"
+      limits:
+        memory: 1Gi
+        cpu: "500m"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+rabbitmq:
+  enabled: true
+  fullnameOverride: rabbitmq
+  auth:
+    username: admin
+    password: changeme
+    erlangCookie: changeme-erlang-cookie
+  persistence:
+    size: 10Gi
+    storageClass: ""
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "250m"
+    limits:
+      memory: 1Gi
+      cpu: "1"
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+minio:
+  enabled: true
+  fullnameOverride: minio
+  auth:
+    rootUser: admin
+    rootPassword: changeme
+  persistence:
+    size: 50Gi
+    storageClass: ""
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: "250m"
+    limits:
+      memory: 1Gi
+      cpu: "1"
+  defaultBuckets: crm-documents,crm-backups,crm-logos
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+
+# ============================================================================
+# Backend Microservices
+# ============================================================================
+
+apiGateway:
+  enabled: true
+  name: api-gateway
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/api-gateway:latest
+  servicePort: 3000
+  containerPort: 3000
+  env:
+    NODE_ENV: production
+    PORT: "3000"
+    AUTH_SERVICE_URL: "http://auth-service:3001"
+    RH_SERVICE_URL: "http://rh-service:3002"
+    FINANCIAL_SERVICE_URL: "http://financial-service:3003"
+    PDV_SERVICE_URL: "http://pdv-service:3004"
+    INVENTORY_SERVICE_URL: "http://inventory-service:3005"
+    CRM_SERVICE_URL: "http://crm-service:3006"
+    MARKETING_SERVICE_URL: "http://marketing-service:3007"
+    SECURITY_SERVICE_URL: "http://security-service:3008"
+    PURCHASING_SERVICE_URL: "http://purchasing-service:3009"
+    CFTV_SERVICE_URL: "http://cftv-service:3010"
+    DISTRIBUTION_SERVICE_URL: "http://distribution-service:3011"
+    BI_SERVICE_URL: "http://bi-service:3012"
+    AI_SERVICE_URL: "http://ai-service:3013"
+    NOTIFICATION_SERVICE_URL: "http://notification-service:3014"
+  ingress:
+    enabled: true
+    path: /api
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: "0.5"
+    limits:
+      memory: 1Gi
+      cpu: "1"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+  probe:
+    enabled: true
+    path: /health
+    initialDelaySeconds: 15
+    periodSeconds: 15
+
+authService:
+  enabled: true
+  name: auth-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/auth-service:latest
+  servicePort: 3001
+  env:
+    NODE_ENV: production
+    PORT: "3001"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 8
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+rhService:
+  enabled: true
+  name: rh-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/rh-service:latest
+  servicePort: 3002
+  env:
+    NODE_ENV: production
+    PORT: "3002"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+financialService:
+  enabled: true
+  name: financial-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/financial-service:latest
+  servicePort: 3003
+  env:
+    NODE_ENV: production
+    PORT: "3003"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 8
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+pdvService:
+  enabled: true
+  name: pdv-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/pdv-service:latest
+  servicePort: 3004
+  env:
+    NODE_ENV: production
+    PORT: "3004"
+  resources:
+    requests:
+      memory: 512Mi
+      cpu: "500m"
+    limits:
+      memory: 1Gi
+      cpu: "1"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+inventoryService:
+  enabled: true
+  name: inventory-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/inventory-service:latest
+  servicePort: 3005
+  env:
+    NODE_ENV: production
+    PORT: "3005"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+crmService:
+  enabled: true
+  name: crm-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/crm-service:latest
+  servicePort: 3006
+  env:
+    NODE_ENV: production
+    PORT: "3006"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+marketingService:
+  enabled: true
+  name: marketing-service
+  replicaCount: 1
+  image: ghcr.io/crm-supermercado/marketing-service:latest
+  servicePort: 3007
+  env:
+    NODE_ENV: production
+    PORT: "3007"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: false
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+securityService:
+  enabled: true
+  name: security-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/security-service:latest
+  servicePort: 3008
+  env:
+    NODE_ENV: production
+    PORT: "3008"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+purchasingService:
+  enabled: true
+  name: purchasing-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/purchasing-service:latest
+  servicePort: 3009
+  env:
+    NODE_ENV: production
+    PORT: "3009"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+cftvService:
+  enabled: true
+  name: cftv-service
+  replicaCount: 1
+  image: ghcr.io/crm-supermercado/cftv-service:latest
+  servicePort: 3010
+  env:
+    NODE_ENV: production
+    PORT: "3010"
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: "1"
+    limits:
+      memory: 2Gi
+      cpu: "2"
+  hpa:
+    enabled: false
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+distributionService:
+  enabled: true
+  name: distribution-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/distribution-service:latest
+  servicePort: 3011
+  env:
+    NODE_ENV: production
+    PORT: "3011"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+biService:
+  enabled: true
+  name: bi-service
+  replicaCount: 1
+  image: ghcr.io/crm-supermercado/bi-service:latest
+  servicePort: 3012
+  env:
+    NODE_ENV: production
+    PORT: "3012"
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: "1"
+    limits:
+      memory: 4Gi
+      cpu: "2"
+  hpa:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 4
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+aiService:
+  enabled: true
+  name: ai-service
+  replicaCount: 1
+  image: ghcr.io/crm-supermercado/ai-service:latest
+  servicePort: 3013
+  env:
+    NODE_ENV: production
+    PORT: "3013"
+  resources:
+    requests:
+      memory: 2Gi
+      cpu: "1"
+    limits:
+      memory: 8Gi
+      cpu: "4"
+  hpa:
+    enabled: false
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+notificationService:
+  enabled: true
+  name: notification-service
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/notification-service:latest
+  servicePort: 3014
+  env:
+    NODE_ENV: production
+    PORT: "3014"
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 8
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+
+# ============================================================================
+# Frontend Applications
+# ============================================================================
+
+webApp:
+  enabled: true
+  name: web-app
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/web-app:latest
+  servicePort: 3080
+  containerPort: 3080
+  env:
+    NODE_ENV: production
+    NEXT_PUBLIC_API_URL: "https://crm.supermercado.com/api/v1"
+    NEXT_PUBLIC_RH_URL: "http://rh-service:3002/api/v1"
+    NEXT_PUBLIC_FINANCIAL_URL: "http://financial-service:3003/api/v1"
+    NEXT_PUBLIC_PDV_URL: "http://pdv-service:3004/api/v1"
+    NEXT_PUBLIC_INVENTORY_URL: "http://inventory-service:3005/api/v1"
+    NEXT_PUBLIC_CRM_URL: "http://crm-service:3006/api/v1"
+    NEXT_PUBLIC_COMPRAS_URL: "http://purchasing-service:3009/api/v1/compras"
+    NEXT_PUBLIC_FISCAL_URL: "http://notification-service:3014/api/v1"
+    NEXT_PUBLIC_FROTA_URL: "http://distribution-service:3011/api/v1"
+    NEXT_PUBLIC_INTEGRATION_URL: "http://notification-service:3014/api/v1"
+    NEXT_PUBLIC_CODIGO_BARRAS_URL: "http://inventory-service:3005/api/v1"
+    NEXT_PUBLIC_CONTRATOS_URL: "http://auth-service:3001/api/v1"
+    NEXT_PUBLIC_HABILIDADES_URL: "http://rh-service:3002/api/v1"
+  ingress:
+    enabled: true
+    path: /
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+  probe:
+    enabled: true
+    path: /
+    initialDelaySeconds: 10
+    periodSeconds: 10
+
+dashboard:
+  enabled: true
+  name: dashboard
+  replicaCount: 2
+  image: ghcr.io/crm-supermercado/dashboard:latest
+  servicePort: 3081
+  containerPort: 3081
+  env:
+    NODE_ENV: production
+    NEXT_PUBLIC_API_URL: "https://crm.supermercado.com/api/v1"
+  ingress:
+    enabled: true
+    path: /dashboard
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: "200m"
+    limits:
+      memory: 512Mi
+      cpu: "500m"
+  hpa:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 6
+    cpuUtilization: 70
+    memoryUtilization: 80
+  pdb:
+    enabled: true
+    minAvailable: 1
+  probe:
+    enabled: true
+    path: /
+    initialDelaySeconds: 10
+    periodSeconds: 10
+
+# ============================================================================
+# Monitoring
+# ============================================================================
+
+monitoring:
+  prometheus:
+    enabled: true
+    fullnameOverride: prometheus
+    alertmanager:
+      enabled: false
+    server:
+      persistentVolume:
+        size: 50Gi
+      resources:
+        requests:
+          memory: 512Mi
+          cpu: "300m"
+        limits:
+          memory: 2Gi
+          cpu: "1"
+    kubeStateMetrics:
+      enabled: true
+    nodeExporter:
+      enabled: true
+
+  grafana:
+    enabled: true
+    fullnameOverride: grafana
+    adminPassword: admin
+    persistence:
+      size: 10Gi
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "200m"
+      limits:
+        memory: 1Gi
+        cpu: "500m"
+    dashboardProviders:
+      dashboardproviders.yaml:
+        apiVersion: 1
+        providers:
+          - name: crm
+            orgId: 1
+            folder: CRM
+            type: file
+            disableDeletion: false
+            editable: true
+            options:
+              path: /var/lib/grafana/dashboards/crm
+    dashboards:
+      crm:
+        api-gateway:
+          gnetId: 11159
+          revision: 1
+          datasource: Prometheus
+        postgres:
+          gnetId: 9628
+          revision: 1
+          datasource: Prometheus
+
+# ============================================================================
+# Ingress & TLS
+# ============================================================================
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  tls:
+    - hosts:
+        - crm.supermercado.com
+      secretName: crm-tls
+  hosts:
+    - host: crm.supermercado.com
+      paths:
+        - path: /api
+          pathType: Prefix
+          serviceName: api-gateway
+          servicePort: 3000
+        - path: /
+          pathType: Prefix
+          serviceName: web-app
+          servicePort: 3080
+        - path: /dashboard
+          pathType: Prefix
+          serviceName: dashboard
+          servicePort: 3081
+
+# ============================================================================
+# Security
+# ============================================================================
+
+secrets:
+  postgresPassword: changeme
+  redisPassword: changeme
+  rabbitmqPassword: changeme
+  rabbitmqErlangCookie: changeme-erlang-cookie
+  jwtSecret: your-jwt-secret-with-at-least-32-characters
+  aes256Key: your-aes-256-key-that-is-exactly-32-bytes
+  minioRootPassword: changeme
+  grafanaPassword: admin
+
+config:
+  jwtExpiration: "3600"
+  corsOrigin: "https://crm.supermercado.com,https://dashboard.supermercado.com"
+  jaegerHost: "jaeger.crm-monitoring.svc.cluster.local"
+  logLevel: info
+
+# ============================================================================
+# Global Settings
+# ============================================================================
+
+networkPolicy:
+  enabled: true
+
+serviceMonitor:
+  enabled: true
+  interval: 30s
+  scrapeTimeout: 10s

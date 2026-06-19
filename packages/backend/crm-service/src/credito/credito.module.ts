@@ -1,0 +1,12 @@
+import { Module } from '@nestjs/common';
+import { PrismaModule } from '../common/prisma.module';
+import { CreditoController } from './credito.controller';
+import { CreditoService } from './credito.service';
+
+@Module({
+  imports: [PrismaModule],
+  controllers: [CreditoController],
+  providers: [CreditoService],
+  exports: [CreditoService],
+})
+export class CreditoModule {}

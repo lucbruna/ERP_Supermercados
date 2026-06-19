@@ -1,0 +1,37 @@
+export enum WorkflowCategoria {
+  COMPRAS = 'COMPRAS',
+  RH = 'RH',
+  FINANCEIRO = 'FINANCEIRO',
+  ESTOQUE = 'ESTOQUE',
+  CRM = 'CRM',
+  FISCAL = 'FISCAL',
+}
+
+export enum EstadoTipo {
+  INICIAL = 'INICIAL',
+  INTERMEDIARIO = 'INTERMEDIARIO',
+  FINAL = 'FINAL',
+  APROVACAO = 'APROVACAO',
+  REJEICAO = 'REJEICAO',
+}
+
+export enum InstanciaStatus {
+  ATIVA = 'ATIVA',
+  COMPLETA = 'COMPLETA',
+  CANCELADA = 'CANCELADA',
+}
+
+export enum AcaoTipo {
+  NOTIFICACAO = 'NOTIFICACAO',
+  ATUALIZACAO_CAMPO = 'ATUALIZACAO_CAMPO',
+  API_CALL = 'API_CALL',
+  EMAIL = 'EMAIL',
+  CRIAR_TAREFA = 'CRIAR_TAREFA',
+  AGENDAR = 'AGENDAR',
+}
+
+export enum TarefaStatus {
+  PENDENTE = 'PENDENTE',
+  EM_ANDAMENTO = 'EM_ANDAMENTO',
+  COMPLETA = 'COMPLETA',
+}

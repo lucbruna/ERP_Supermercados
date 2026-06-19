@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoNotificacao {
+  EMAIL
+  SMS
+  WHATSAPP
+  PUSH
+  SISTEMA
+}
+
+enum StatusFila {
+  PENDENTE
+  ENVIADO
+  ERRO
+}
+
+model Notificacao {
+  id          String          @id @default(cuid())
+  companyId   String
+  usuarioId   String?
+  tipo        TipoNotificacao
+  titulo      String
+  mensagem    String
+  lida        Boolean         @default(false)
+  dataEnvio   DateTime        @default(now())
+  dataLeitura DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([companyId])
+  @@index([usuarioId])
+  @@index([tipo])
+  @@index([lida])
+}
+
+model TemplateNotificacao {
+  id         String           @id @default(cuid())
+  companyId  String
+  nome       String
+  tipo       TipoNotificacao
+  assunto    String?
+  conteudo   String
+  variaveis  String[]
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+
+  @@index([companyId])
+  @@index([tipo])
+  @@unique([companyId, nome])
+}
+
+model NotificationLog {
+  id        String   @id @default(cuid())
+  channel   String
+  to        String?
+  subject   String?
+  message   String?
+  status    String
+  sentAt    DateTime @default(now())
+  error     String?
+  createdAt DateTime @default(now())
+
+  @@index([channel])
+  @@index([status])
+  @@index([sentAt])
+}
+
+model FilaEnvio {
+  id              String      @id @default(cuid())
+  tipo            TipoNotificacao
+  destinatario    String
+  mensagem        String
+  status          StatusFila  @default(PENDENTE)
+  tentativas      Int         @default(0)
+  proximaTentativa DateTime?
+  erro            String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([status])
+  @@index([tipo])
+  @@index([proximaTentativa])
+}

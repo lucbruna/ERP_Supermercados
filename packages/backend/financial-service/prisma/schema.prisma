@@ -1,0 +1,264 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoContaBancaria {
+  CORRENTE
+  POUPANCA
+  SALARIO
+  INVESTIMENTO
+}
+
+enum StatusConta {
+  PENDENTE
+  VENCIDA
+  PAGA
+  CANCELADA
+  RENEGOCIADA
+}
+
+enum TipoLancamento {
+  ENTRADA
+  SAIDA
+}
+
+enum TipoPix {
+  COBRANCA
+  ENVIO
+  ESTORNO
+}
+
+enum StatusPix {
+  PENDENTE
+  CONCLUIDO
+  FALHOU
+  ESTORNADO
+}
+
+enum TipoFluxo {
+  REAL
+  PROJETADO
+}
+
+enum TipoCategoria {
+  RECEITA
+  DESPESA
+}
+
+enum StatusConciliacao {
+  ABERTA
+  EM_ANDAMENTO
+  CONCILIADA
+  DIVERGENTE
+}
+
+model ContaBancaria {
+  id                   String             @id @default(uuid()) @db.Uuid
+  companyId            String             @map("company_id") @db.Uuid
+  banco                String
+  codigoBanco          String             @map("codigo_banco")
+  agencia              String
+  conta                String
+  digito               String
+  tipo                 TipoContaBancaria  @default(CORRENTE)
+  pix                  String[]
+  saldoAtual           Decimal            @default(0) @map("saldo_atual")
+  saldoDisponivel      Decimal            @default(0) @map("saldo_disponivel")
+  limiteChequeEspecial Decimal            @default(0) @map("limite_cheque_especial")
+  ativo                Boolean            @default(true)
+  createdAt            DateTime           @default(now()) @map("created_at")
+  updatedAt            DateTime           @updatedAt @map("updated_at")
+
+  conciliacoes  ConciliacaoBancaria[]
+  transacoesPix Pix[]
+
+  @@map("contas_bancarias")
+}
+
+model ContaPagar {
+  id             String       @id @default(uuid()) @db.Uuid
+  companyId      String       @map("company_id") @db.Uuid
+  unidadeId      String       @map("unidade_id") @db.Uuid
+  fornecedorId   String       @map("fornecedor_id") @db.Uuid
+  documento      String
+  parcela        Int          @default(1)
+  emitente       String
+  descricao      String
+  valorNominal   Decimal      @map("valor_nominal")
+  valorPago      Decimal?     @map("valor_pago")
+  dataEmissao    DateTime     @map("data_emissao")
+  dataVencimento DateTime     @map("data_vencimento")
+  dataPagamento  DateTime?    @map("data_pagamento")
+  juros          Decimal?     @default(0)
+  multa          Decimal?     @default(0)
+  desconto       Decimal?     @default(0)
+  categoria      String
+  centroCusto    String       @map("centro_custo")
+  formaPagamento String       @map("forma_pagamento")
+  status         StatusConta  @default(PENDENTE)
+  observacao     String?
+  anexos         String[]
+  createdAt      DateTime     @default(now()) @map("created_at")
+  updatedAt      DateTime     @updatedAt @map("updated_at")
+
+  @@map("contas_pagar")
+}
+
+model ContaReceber {
+  id                  String              @id @default(uuid()) @db.Uuid
+  companyId           String              @map("company_id") @db.Uuid
+  unidadeId           String              @map("unidade_id") @db.Uuid
+  clienteId           String              @map("cliente_id") @db.Uuid
+  vendaId             String?             @map("venda_id") @db.Uuid
+  documento           String
+  parcela             Int                 @default(1)
+  emitente            String
+  descricao           String
+  valorNominal        Decimal             @map("valor_nominal")
+  valorRecebido       Decimal?            @map("valor_recebido")
+  dataEmissao         DateTime            @map("data_emissao")
+  dataVencimento      DateTime            @map("data_vencimento")
+  dataRecebimento     DateTime?           @map("data_recebimento")
+  juros               Decimal?            @default(0)
+  multa               Decimal?            @default(0)
+  desconto            Decimal?            @default(0)
+  categoria           String
+  centroCusto         String              @map("centro_custo")
+  formaPagamento      String              @map("forma_pagamento")
+  status              StatusConta         @default(PENDENTE)
+  observacao          String?
+  anexos              String[]
+  gatewayTransacaoId  String?             @map("gateway_transacao_id") @db.Uuid
+  gatewayTransacao    GatewayTransacao?   @relation(fields: [gatewayTransacaoId], references: [id])
+  createdAt           DateTime            @default(now()) @map("created_at")
+  updatedAt           DateTime            @updatedAt @map("updated_at")
+
+  @@map("contas_receber")
+}
+
+model LancamentoCaixa {
+  id             String         @id @default(uuid()) @db.Uuid
+  companyId      String         @map("company_id") @db.Uuid
+  unidadeId      String         @map("unidade_id") @db.Uuid
+  pdvId          String?        @map("pdv_id") @db.Uuid
+  tipo           TipoLancamento
+  categoria      String
+  descricao      String
+  valor          Decimal
+  formaPagamento String         @map("forma_pagamento")
+  dataHora       DateTime       @map("data_hora")
+  operadorId     String         @map("operador_id") @db.Uuid
+  origem         String
+  conciliado     Boolean        @default(false)
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+
+  @@map("lancamentos_caixa")
+}
+
+model ConciliacaoBancaria {
+  id                    String            @id @default(uuid()) @db.Uuid
+  contaBancariaId       String            @map("conta_bancaria_id") @db.Uuid
+  contaBancaria         ContaBancaria     @relation(fields: [contaBancariaId], references: [id])
+  mes                   Int
+  ano                   Int
+  saldoInicial          Decimal           @map("saldo_inicial")
+  saldoFinal            Decimal           @map("saldo_final")
+  lancamentosConciliados Int              @default(0) @map("lancamentos_conciliados")
+  lancamentosPendentes  Int               @default(0) @map("lancamentos_pendentes")
+  diferencas            Decimal           @default(0)
+  status                StatusConciliacao @default(ABERTA)
+  createdAt             DateTime          @default(now()) @map("created_at")
+  updatedAt             DateTime          @updatedAt @map("updated_at")
+
+  @@map("conciliacoes_bancarias")
+}
+
+model Pix {
+  id              String    @id @default(uuid()) @db.Uuid
+  companyId       String    @map("company_id") @db.Uuid
+  contaBancariaId String    @map("conta_bancaria_id") @db.Uuid
+  contaBancaria   ContaBancaria @relation(fields: [contaBancariaId], references: [id])
+  tipo            TipoPix
+  chavePix        String    @map("chave_pix")
+  valor           Decimal
+  descricao       String?
+  status          StatusPix @default(PENDENTE)
+  txid            String?
+  qrCodeUrl       String?   @map("qr_code_url")
+  copiaCola       String?   @map("copia_cola")
+  dataTransacao   DateTime  @map("data_transacao")
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+
+  @@map("pix")
+}
+
+model FluxoCaixaProjecao {
+  id            String     @id @default(uuid()) @db.Uuid
+  companyId     String     @map("company_id") @db.Uuid
+  data          DateTime
+  saldoInicial  Decimal    @map("saldo_inicial")
+  totalEntradas Decimal    @map("total_entradas")
+  totalSaidas   Decimal    @map("total_saidas")
+  saldoFinal    Decimal    @map("saldo_final")
+  tipo          TipoFluxo  @default(REAL)
+  createdAt     DateTime   @default(now()) @map("created_at")
+  updatedAt     DateTime   @updatedAt @map("updated_at")
+
+  @@map("fluxo_caixa_projecoes")
+}
+
+enum GatewayTipoEnum {
+  MERCADO_PAGO
+  PAGSEGURO
+  STONE
+  CIELO
+  REDE
+  GETNET
+}
+
+enum GatewayTransacaoStatusEnum {
+  PENDENTE
+  APROVADO
+  RECUSADO
+  CANCELADO
+  ESTORNADO
+  FALHOU
+}
+
+model GatewayTransacao {
+  id             String                      @id @default(uuid()) @db.Uuid
+  gateway        GatewayTipoEnum
+  transactionId  String                      @map("transaction_id")
+  type           String
+  valor          Decimal
+  parcelas       Int                         @default(1)
+  cartaoBandeira String?                     @map("cartao_bandeira")
+  status         GatewayTransacaoStatusEnum  @default(PENDENTE)
+  responseJson   String?                     @map("response_json")
+  criadoEm       DateTime                    @default(now()) @map("criado_em")
+
+  contasReceber  ContaReceber[]
+
+  @@map("gateway_transacoes")
+}
+
+model CategoriaFinanceira {
+  id        String        @id @default(uuid()) @db.Uuid
+  companyId String        @map("company_id") @db.Uuid
+  nome      String
+  tipo      TipoCategoria
+  centroCusto String     @map("centro_custo")
+  ativo     Boolean       @default(true)
+  createdAt DateTime      @default(now()) @map("created_at")
+  updatedAt DateTime      @updatedAt @map("updated_at")
+
+  @@unique([companyId, nome, centroCusto])
+  @@map("categorias_financeiras")
+}

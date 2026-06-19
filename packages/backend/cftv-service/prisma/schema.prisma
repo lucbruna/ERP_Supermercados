@@ -1,0 +1,114 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Camera {
+  id          String   @id @default(uuid()) @db.Uuid
+  companyId   String   @map("company_id") @db.Uuid
+  unidadeId   String   @map("unidade_id") @db.Uuid
+  nome        String
+  ip          String
+  porta       Int
+  tipo        String   @default("IP")
+  protocolo   String   @default("RTSP")
+  resolucao   String?
+  localizacao String?
+  status      String   @default("ONLINE")
+  urlStream   String?  @map("url_stream")
+  urlSnapshot String?  @map("url_snapshot")
+  hasAI       Boolean  @default(false) @map("has_ai")
+  deteccoes   Json[]   @default([])
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  eventos       EventoCamera[]
+  alertas       AlertaCFTV[]
+  gravacoes     Gravacao[]
+  reconhecimentos ReconhecimentoFacial[]
+  leiturasPlaca LeituraPlaca[]
+
+  @@map("cameras")
+}
+
+model EventoCamera {
+  id           String   @id @default(uuid()) @db.Uuid
+  cameraId     String   @map("camera_id") @db.Uuid
+  camera       Camera   @relation(fields: [cameraId], references: [id])
+  tipo         String
+  confianca    Float
+  snapshotUrl  String?  @map("snapshot_url")
+  videoUrl     String?  @map("video_url")
+  dataHora     DateTime @default(now()) @map("data_hora")
+  processado   Boolean  @default(false)
+  alertaEnviado Boolean @default(false) @map("alerta_enviado")
+  metadata     Json?
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  alertas AlertaCFTV[]
+
+  @@map("eventos_camera")
+}
+
+model AlertaCFTV {
+  id           String    @id @default(uuid()) @db.Uuid
+  cameraId     String    @map("camera_id") @db.Uuid
+  camera       Camera    @relation(fields: [cameraId], references: [id])
+  eventoId     String?   @map("evento_id") @db.Uuid
+  evento       EventoCamera? @relation(fields: [eventoId], references: [id])
+  tipo         String
+  mensagem     String
+  destinatarios String[]
+  enviado      Boolean   @default(false)
+  dataEnvio    DateTime? @map("data_envio")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  @@map("alertas_cftv")
+}
+
+model Gravacao {
+  id           String   @id @default(uuid()) @db.Uuid
+  cameraId     String   @map("camera_id") @db.Uuid
+  camera       Camera   @relation(fields: [cameraId], references: [id])
+  dataInicio   DateTime @map("data_inicio")
+  dataFim      DateTime? @map("data_fim")
+  url          String
+  tamanhoBytes BigInt?  @map("tamanho_bytes")
+  status       String   @default("GRAVANDO")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("gravacoes")
+}
+
+model ReconhecimentoFacial {
+  id          String   @id @default(uuid()) @db.Uuid
+  cameraId    String   @map("camera_id") @db.Uuid
+  camera      Camera   @relation(fields: [cameraId], references: [id])
+  snapshotUrl String   @map("snapshot_url")
+  nome        String?
+  confianca   Float
+  desconhecido Boolean @default(false)
+  data        DateTime @default(now())
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("reconhecimentos_faciais")
+}
+
+model LeituraPlaca {
+  id          String   @id @default(uuid()) @db.Uuid
+  cameraId    String   @map("camera_id") @db.Uuid
+  camera      Camera   @relation(fields: [cameraId], references: [id])
+  snapshotUrl String   @map("snapshot_url")
+  placa       String
+  confianca   Float
+  data        DateTime @default(now())
+  metadata    Json?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@map("leituras_placa")
+}

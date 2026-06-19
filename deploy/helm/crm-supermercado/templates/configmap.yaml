@@ -1,0 +1,52 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: crm-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "crm.labels" . | nindent 4 }}
+data:
+  JWT_EXPIRATION: {{ .Values.config.jwtExpiration | quote }}
+  CORS_ORIGIN: {{ .Values.config.corsOrigin | quote }}
+  JAEGER_HOST: {{ .Values.config.jaegerHost | quote }}
+  LOG_LEVEL: {{ .Values.config.logLevel | quote }}
+  NODE_ENV: {{ .Values.global.environment | quote }}
+  TZ: {{ .Values.global.timezone | quote }}
+{{- if .Values.serviceMonitor.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+  namespace: {{ .Release.Namespace }}-monitoring
+  labels:
+    {{- include "crm.labels" . | nindent 4 }}
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: {{ .Values.serviceMonitor.interval }}
+      evaluation_interval: {{ .Values.serviceMonitor.interval }}
+    scrape_configs:
+      - job_name: 'kubernetes-pods'
+        kubernetes_sd_configs:
+          - role: pod
+        relabel_configs:
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+            action: keep
+            regex: true
+          - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+            action: replace
+            regex: ([^:]+)(?::\d+)?;(\d+)
+            replacement: $1:$2
+            target_label: __address__
+          - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+            action: replace
+            target_label: __metrics_path__
+            regex: (.+)
+      - job_name: 'postgres-exporter'
+        static_configs:
+          - targets: ['postgres-exporter:9187']
+      - job_name: 'node-exporter'
+        kubernetes_sd_configs:
+          - role: node
+{{- end }}

@@ -1,0 +1,191 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Company {
+  id        String   @id @default(uuid()) @db.Uuid
+  cnpj      String   @unique
+  razaoSocial String  @map("razao_social")
+  nomeFantasia String @map("nome_fantasia")
+  inscricaoEstadual String? @map("inscricao_estadual")
+  inscricaoMunicipal String? @map("inscricao_municipal")
+  regimeTributario String @default("SIMPLES_NACIONAL") @map("regime_tributario")
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  unidades  Unidade[]
+  usuarios  User[]
+  auditLogs AuditLog[]
+
+  @@map("companies")
+}
+
+model Unidade {
+  id        String   @id @default(uuid()) @db.Uuid
+  companyId String   @map("company_id") @db.Uuid
+  company   Company  @relation(fields: [companyId], references: [id])
+  tipo      String   @default("LOJA")
+  cnpj      String
+  nome      String
+  ativo     Boolean  @default(true)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  usuarios  User[]
+
+  @@map("unidades")
+}
+
+model User {
+  id         String   @id @default(uuid()) @db.Uuid
+  companyId  String   @map("company_id") @db.Uuid
+  company    Company  @relation(fields: [companyId], references: [id])
+  unidadeId  String?  @map("unidade_id") @db.Uuid
+  unidade    Unidade? @relation(fields: [unidadeId], references: [id])
+  nome       String
+  cpf        String   @unique
+  rg         String?
+  email      String   @unique
+  celular    String
+  foto       String?
+  perfil     String   @default("FUNCIONARIO")
+  departamento String
+  cargo      String
+  setor      String?
+  senha      String
+  salt       String
+  ativo      Boolean  @default(true)
+  mfaAtivado Boolean  @default(false) @map("mfa_ativado")
+  mfaTipo    String?  @map("mfa_tipo")
+  mfaSecret  String?  @map("mfa_secret")
+  tentativasLogin Int @default(0) @map("tentativas_login")
+  bloqueadoAte DateTime? @map("bloqueado_ate")
+  ultimoAcesso DateTime? @map("ultimo_acesso")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  sessoes   Sessao[]
+  auditLogs AuditLog[]
+
+  @@map("users")
+}
+
+model Sessao {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  user         User     @relation(fields: [userId], references: [id])
+  token        String   @unique
+  refreshToken String   @unique @map("refresh_token")
+  ip           String
+  dispositivo  String
+  userAgent    String   @map("user_agent")
+  mfaValidado  Boolean  @default(false) @map("mfa_validado")
+  dataInicio   DateTime @default(now()) @map("data_inicio")
+  dataExpiracao DateTime @map("data_expiracao")
+  dataFim      DateTime? @map("data_fim")
+  ativo        Boolean  @default(true)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("sessoes")
+}
+
+model Permission {
+  id         String @id @default(uuid()) @db.Uuid
+  perfil     String
+  departamento String
+  recurso    String
+  acao       String
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("permissoes")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  companyId String   @map("company_id") @db.Uuid
+  company   Company  @relation(fields: [companyId], references: [id])
+  userId    String   @map("user_id") @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
+  userNome  String   @map("user_nome")
+  acao      String
+  recurso   String
+  recursoId String?  @map("recurso_id")
+  detalhes  String?
+  ip        String
+  userAgent String   @map("user_agent")
+  gravidade String   @default("BAIXA")
+  createdAt DateTime @default(now()) @map("created_at")
+  metadata  Json?
+
+  @@map("audit_logs")
+}
+
+model ApiKey {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  keyHash    String    @unique @map("key_hash")
+  keyPrefix  String    @map("key_prefix")
+  permissions String   @default("read")
+  tier       String    @default("standard")
+  expiresAt  DateTime? @map("expires_at")
+  ativo      Boolean   @default(true)
+  revokedAt  DateTime? @map("revoked_at")
+  lastUsedAt DateTime? @map("last_used_at")
+  usageCount Int       @default(0) @map("usage_count")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@map("api_keys")
+}
+
+model OAuthClient {
+  id            String   @id @default(uuid()) @db.Uuid
+  name          String
+  clientId      String   @unique @map("client_id")
+  clientSecret  String   @map("client_secret")
+  redirectUris  String[] @map("redirect_uris")
+  scopes        String[]
+  grants        String[]
+  ativo         Boolean  @default(true)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  tokens OAuthToken[]
+
+  @@map("oauth_clients")
+}
+
+model OAuthToken {
+  id           String    @id @default(uuid()) @db.Uuid
+  clientId     String    @map("client_id") @db.Uuid
+  client       OAuthClient @relation(fields: [clientId], references: [id])
+  userId       String?   @map("user_id") @db.Uuid
+  accessToken  String    @unique @map("access_token")
+  refreshToken String?   @unique @map("refresh_token")
+  scopes       String[]
+  code         String?   @unique
+  codeUsed     Boolean   @default(false) @map("code_used")
+  codeExpiresAt DateTime? @map("code_expires_at")
+  expiresAt    DateTime  @map("expires_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  revokedAt    DateTime? @map("revoked_at")
+
+  @@map("oauth_tokens")
+}
+
+model PasswordReset {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  token     String   @unique
+  usado     Boolean  @default(false)
+  expiraEm  DateTime @map("expira_em")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("password_resets")
+}

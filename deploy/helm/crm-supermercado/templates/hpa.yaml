@@ -1,0 +1,35 @@
+{{- $allServices := list "apiGateway" "authService" "rhService" "financialService" "pdvService" "inventoryService" "crmService" "marketingService" "securityService" "purchasingService" "cftvService" "distributionService" "biService" "aiService" "notificationService" "webApp" "dashboard" -}}
+{{- range $serviceName := $allServices }}
+{{- $service := index $.Values $serviceName }}
+{{- if and $service.enabled $service.hpa.enabled }}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ $service.name }}-hpa
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ $service.name }}
+  minReplicas: {{ $service.hpa.minReplicas | default 1 }}
+  maxReplicas: {{ $service.hpa.maxReplicas | default 5 }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ $service.hpa.cpuUtilization | default 70 }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ $service.hpa.memoryUtilization | default 80 }}
+{{- end }}
+{{- end }}

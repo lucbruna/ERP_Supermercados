@@ -1,0 +1,65 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cftv-service
+  namespace: crm-supermercado
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cftv-service
+  template:
+    metadata:
+      labels:
+        app: cftv-service
+    spec:
+      containers:
+        - name: cftv-service
+          image: crm/cftv-service:latest
+          ports:
+            - containerPort: 3010
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3010"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: crm-secrets
+                  key: database-url
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3010
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3010
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cftv-service
+  namespace: crm-supermercado
+spec:
+  selector:
+    app: cftv-service
+  ports:
+    - port: 3010
+      targetPort: 3010

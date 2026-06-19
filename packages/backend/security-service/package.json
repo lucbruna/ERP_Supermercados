@@ -1,0 +1,83 @@
+{
+    "name": "@crm/security-service",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "nest start --watch",
+        "build": "nest build",
+        "start": "node dist/main",
+        "start:prod": "node dist/main",
+        "migrate": "npx prisma migrate deploy",
+        "seed": "npx ts-node src/seeds/seed.ts",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage"
+    },
+    "dependencies": {
+        "@crm/logging": "file:../../shared/logging",
+        "@crm/tracing": "file:../../shared/tracing",
+        "@nestjs/common": "^10.3.0",
+        "@nestjs/config": "^4.0.4",
+        "@nestjs/core": "^10.3.0",
+        "@nestjs/platform-express": "^10.3.0",
+        "@nestjs/schedule": "^4.1.2",
+        "@nestjs/swagger": "^7.2.0",
+        "@nestjs/throttler": "^5.1.1",
+        "@prisma/client": "^5.8.0",
+        "class-transformer": "^0.5.1",
+        "class-validator": "^0.14.0",
+        "cookie-parser": "^1.4.6",
+        "helmet": "^7.1.0",
+        "node-cron": "^3.0.3",
+        "reflect-metadata": "^0.2.1",
+        "rxjs": "^7.8.1"
+    },
+    "devDependencies": {
+        "@nestjs/cli": "^10.3.0",
+        "@nestjs/schematics": "^10.1.0",
+        "@nestjs/testing": "^10.3.0",
+        "@types/cookie-parser": "^1.4.10",
+        "@types/express": "^4.17.21",
+        "@types/jest": "^29.5.11",
+        "@types/node-cron": "^3.0.11",
+        "jest": "^29.7.0",
+        "prisma": "^5.8.0",
+        "source-map-support": "^0.5.21",
+        "ts-jest": "^29.1.1",
+        "ts-loader": "^9.5.1",
+        "ts-node": "^10.9.2",
+        "tsconfig-paths": "^4.2.0",
+        "typescript": "^5.3.3"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "transformIgnorePatterns": [
+            "/node_modules/(?!uuid|@nestjs|@prisma|ts-lib|class-validator|class-transformer)/"
+        ],
+        "rootDir": "src",
+        "coverageDirectory": "../coverage",
+        "collectCoverageFrom": [
+            "**/*.(t|j)s"
+        ],
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "testRegex": ".*\\.spec\\.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": [
+                "ts-jest",
+                {
+                    "isolatedModules": true
+                }
+            ]
+        },
+        "moduleNameMapper": {
+            "^@crm/tracing$": "<rootDir>/__mocks__/@crm/tracing.ts",
+            "^@crm/tracing/(.*)$": "<rootDir>/__mocks__/@crm/tracing.ts",
+            "^@crm/logging$": "<rootDir>/__mocks__/@crm/logging.ts",
+            "^@crm/logging/(.*)$": "<rootDir>/__mocks__/@crm/logging.ts"
+        }
+    }
+}

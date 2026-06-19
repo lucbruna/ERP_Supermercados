@@ -1,0 +1,9 @@
+[96msrc/validacao/validacao.service.spec.ts[0m:[93m36[0m:[93m14[0m - [91merror[0m[90m TS18047: [0m'result.data' is possibly 'null'.
+
+[7m36[0m       expect(result.data.mascarado).toBe('529.982.247-25');
+[7m  [0m [91m             ~~~~~~~~~~~[0m
+[96msrc/validacao/validacao.service.spec.ts[0m:[93m67[0m:[93m14[0m - [91merror[0m[90m TS18047: [0m'result.data' is possibly 'null'.
+
+[7m67[0m       expect(result.data.mascarado).toBe('11.444.777/0001-00');
+[7m  [0m [91m             ~~~~~~~~~~~[0m
+

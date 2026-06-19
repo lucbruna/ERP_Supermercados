@@ -1,0 +1,5 @@
+[96msrc/ponto/ponto.service.spec.ts[0m:[93m182[0m:[93m14[0m - [91merror[0m[90m TS18047: [0m'result.data' is possibly 'null'.
+
+[7m182[0m       expect(result.data.id).toBe('p-1');
+[7m   [0m [91m             ~~~~~~~~~~~[0m
+

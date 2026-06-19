@@ -1,0 +1,93 @@
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +70ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +18ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +37ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mFuncionarioModule dependencies initialized[39m[38;5;3m +28ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPontoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mFolhaModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mFeriasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRecrutamentoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTreinamentoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBeneficioModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBancoHorasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mFuncionarioController {/api/v1/rh/funcionarios}:[39m[38;5;3m +300ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios, POST} route[39m[38;5;3m +30ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/matricula/:matricula, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/:id/status, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPontoController {/api/v1/rh/ponto}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto/relatorio, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto/:id/validar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ponto/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mFolhaController {/api/v1/rh/folha}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/calcular, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/:id/fechar, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/:id/pagar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/:id/cancelar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/folha/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mFeriasController {/api/v1/rh/ferias}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias/:id/conceder, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias/:id/cancelar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/ferias/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRecrutamentoController {/api/v1/rh}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos, GET} route[39m[38;5;3m +26ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos/:id/fechar, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/candidatos, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/recrutamentos/:recrutamentoId/candidatos, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/candidatos/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/candidatos/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/candidatos/:id/etapa, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/candidatos/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTreinamentoController {/api/v1/rh}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos/vincular, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos/vinculos/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/treinamentos/vinculos/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/:funcionarioId/treinamentos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBeneficioController {/api/v1/rh}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios/:id/toggle, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios/vincular, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/beneficios/vincular/:funcionarioId/:beneficioId, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/funcionarios/:funcionarioId/beneficios, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBancoHorasController {/api/v1/rh/banco-horas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/funcionario/:funcionarioId/periodo/:mes/:ano, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/funcionario/:funcionarioId/saldo, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/creditar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/debitar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/rh/banco-horas/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +28ms[39m
+[32m[Nest] 16500  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RHService] [39m[32mRH Service running on port 3002[39m

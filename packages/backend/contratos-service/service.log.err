@@ -1,0 +1,9 @@
+[96msrc/rescisoes/rescisoes.service.ts[0m:[93m96[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty '_sum' does not exist on type 'number'.
+
+[7m96[0m         valorTotal: totalRescisoes._sum.valorTotal,
+[7m  [0m [91m                                   ~~~~[0m
+[96msrc/rescisoes/rescisoes.service.ts[0m:[93m97[0m:[93m36[0m - [91merror[0m[90m TS2339: [0mProperty '_avg' does not exist on type 'number'.
+
+[7m97[0m         valorMedio: totalRescisoes._avg.valorTotal,
+[7m  [0m [91m                                   ~~~~[0m
+

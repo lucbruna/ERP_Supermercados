@@ -1,0 +1,354 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum SegmentoCliente {
+  POTENCIAL
+  REGULAR
+  FREQUENTE
+  VIP
+  INATIVO
+  PERDIDO
+}
+
+enum TipoEndereco {
+  ENTREGA
+  COBRANCA
+}
+
+enum TipoProgramaFidelidade {
+  PONTOS
+  CASHBACK
+  CLUBE_VANTAGENS
+  ASSINATURA
+}
+
+enum TipoCupom {
+  PERCENTUAL
+  VALOR_FIXO
+  FRETE_GRATIS
+  COMPRE_LEVE
+}
+
+enum TipoCashbackTransacao {
+  CREDITO
+  DEBITO
+  ESTORNO
+}
+
+enum TipoPontuacaoTransacao {
+  CREDITO
+  DEBITO
+  ESTORNO
+}
+
+model Cliente {
+  id                String   @id @default(cuid())
+  companyId         String
+  nome              String
+  cpfCnpj           String
+  rg                String?
+  email             String
+  celular           String
+  telefone          String?
+  dataNascimento    DateTime?
+  genero            String?
+  endereco          Json?
+  pontos            Int      @default(0)
+  cashbackDisponivel Decimal @default(0) @map("cashback_disponivel")
+  cashbackRecebido  Decimal  @default(0) @map("cashback_recebido")
+  totalCompras      Decimal  @default(0) @map("total_compras")
+  ultimaCompra      DateTime? @map("ultima_compra")
+  segmento          SegmentoCliente @default(POTENCIAL)
+  preferencias      String[] @default([])
+  ativo             Boolean  @default(true)
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  enderecos         EnderecoCliente[]
+  cashbackTransacoes CashbackTransacao[]
+  pontuacaoTransacoes PontuacaoTransacao[]
+  cuponsUsados      CupomUso[]
+  grupos            ClienteGrupo[]
+  compras           CompraHistorico[]
+  credito           CreditoCliente[]
+  transacoesCredito TransacaoCredito[]
+  cobrancas         Cobranca[]
+
+  @@unique([companyId, cpfCnpj])
+  @@unique([companyId, email])
+  @@map("clientes")
+}
+
+model EnderecoCliente {
+  id         String       @id @default(cuid())
+  clienteId  String       @map("cliente_id")
+  tipo       TipoEndereco
+  cep        String
+  logradouro String
+  numero     String
+  complemento String?
+  bairro     String
+  cidade     String
+  estado     String
+  principal  Boolean      @default(false)
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+
+  cliente    Cliente      @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@map("enderecos_cliente")
+}
+
+model FidelidadePrograma {
+  id        String                   @id @default(cuid())
+  companyId String                   @map("company_id")
+  nome      String
+  tipo      TipoProgramaFidelidade
+  regras    Json[]
+  ativo     Boolean                  @default(true)
+  createdAt DateTime                 @default(now()) @map("created_at")
+  updatedAt DateTime                 @updatedAt @map("updated_at")
+
+  @@map("fidelidade_programas")
+}
+
+model Cupom {
+  id         String      @id @default(cuid())
+  companyId  String      @map("company_id")
+  codigo     String
+  tipo       TipoCupom
+  valor      Decimal
+  valorMinimo Decimal?   @map("valor_minimo")
+  clienteId  String?     @map("cliente_id")
+  dataInicio DateTime    @map("data_inicio")
+  dataFim    DateTime    @map("data_fim")
+  usoLimite  Int         @default(0) @map("uso_limite")
+  usoAtual   Int         @default(0) @map("uso_atual")
+  ativo      Boolean     @default(true)
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+
+  usos       CupomUso[]
+
+  @@unique([companyId, codigo])
+  @@map("cupons")
+}
+
+model CashbackTransacao {
+  id           String                 @id @default(cuid())
+  clienteId    String                 @map("cliente_id")
+  vendaId      String?                @map("venda_id")
+  tipo         TipoCashbackTransacao
+  valor        Decimal
+  saldoAnterior Decimal               @map("saldo_anterior")
+  saldoAtual   Decimal                @map("saldo_atual")
+  descricao    String
+  data         DateTime               @default(now())
+  createdAt    DateTime               @default(now()) @map("created_at")
+
+  cliente      Cliente                @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@map("cashback_transacoes")
+}
+
+model PontuacaoTransacao {
+  id           String                  @id @default(cuid())
+  clienteId    String                  @map("cliente_id")
+  vendaId      String?                 @map("venda_id")
+  pontos       Int
+  saldoAnterior Int                    @map("saldo_anterior")
+  saldoAtual   Int                     @map("saldo_atual")
+  tipo         TipoPontuacaoTransacao
+  descricao    String
+  data         DateTime                @default(now())
+  createdAt    DateTime                @default(now()) @map("created_at")
+
+  cliente      Cliente                 @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@map("pontuacao_transacoes")
+}
+
+model CupomUso {
+  id        String   @id @default(cuid())
+  cupomId   String   @map("cupom_id")
+  clienteId String   @map("cliente_id")
+  vendaId   String   @map("venda_id")
+  data      DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
+
+  cupom     Cupom    @relation(fields: [cupomId], references: [id], onDelete: Cascade)
+  cliente   Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@unique([cupomId, clienteId, vendaId])
+  @@map("cupons_uso")
+}
+
+model GrupoCliente {
+  id        String   @id @default(cuid())
+  companyId String   @map("company_id")
+  nome      String
+  criterios Json[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  atribuicoes ClienteGrupo[]
+
+  @@unique([companyId, nome])
+  @@map("grupos_cliente")
+}
+
+model ClienteGrupo {
+  id              String   @id @default(cuid())
+  clienteId       String   @map("cliente_id")
+  grupoId         String   @map("grupo_id")
+  dataAtribuicao  DateTime @default(now()) @map("data_atribuicao")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  cliente         Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  grupo           GrupoCliente @relation(fields: [grupoId], references: [id], onDelete: Cascade)
+
+  @@unique([clienteId, grupoId])
+  @@map("clientes_grupos")
+}
+
+model CompraHistorico {
+  id              String   @id @default(cuid())
+  clienteId       String   @map("cliente_id")
+  companyId       String   @map("company_id")
+  vendaId         String   @map("venda_id")
+  numero          Int
+  dataHora        DateTime @map("data_hora")
+  subtotal        Decimal  @db.Decimal(15, 2)
+  desconto        Decimal  @default(0) @db.Decimal(15, 2)
+  acrescimo       Decimal  @default(0) @db.Decimal(15, 2)
+  total           Decimal  @db.Decimal(15, 2)
+  tipo            String   @default("PDV")
+  status          String   @default("FINALIZADA")
+  itens           Json     @default("[]")
+  pagamentos      Json     @default("[]")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  cliente         Cliente  @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+
+  @@unique([vendaId])
+  @@index([clienteId])
+  @@index([companyId])
+  @@index([dataHora])
+  @@map("compras_historico")
+}
+
+enum StatusCredito {
+  ATIVO
+  BLOQUEADO
+  CANCELADO
+}
+
+enum TipoTransacaoCredito {
+  COMPRA
+  PAGAMENTO
+  AJUSTE
+  JUROS
+  ESTORNO
+}
+
+model CreditoCliente {
+  id              String        @id @default(cuid())
+  clienteId       String        @map("cliente_id")
+  companyId       String        @map("company_id")
+  limite          Decimal       @db.Decimal(15, 2)
+  saldoDevedor    Decimal       @default(0) @db.Decimal(15, 2)
+  dataConcessao   DateTime      @default(now()) @map("data_concessao")
+  dataRenovacao   DateTime?     @map("data_renovacao")
+  status          StatusCredito @default(ATIVO)
+  observacao      String?
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  cliente         Cliente       @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  transacoes      TransacaoCredito[]
+
+  @@unique([clienteId, companyId])
+  @@map("credito_cliente")
+}
+
+model TransacaoCredito {
+  id                  String               @id @default(cuid())
+  clienteId           String               @map("cliente_id")
+  creditoId           String               @map("credito_id")
+  vendaId             String?              @map("venda_id")
+  tipo                TipoTransacaoCredito
+  valor               Decimal              @db.Decimal(15, 2)
+  saldoDevedorAnterior Decimal             @map("saldo_devedor_anterior") @db.Decimal(15, 2)
+  saldoDevedorAtual   Decimal              @map("saldo_devedor_atual") @db.Decimal(15, 2)
+  dataVencimento      DateTime?            @map("data_vencimento")
+  dataPagamento       DateTime?            @map("data_pagamento")
+  descricao           String
+  createdAt           DateTime             @default(now()) @map("created_at")
+
+  cliente             Cliente              @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  credito             CreditoCliente       @relation(fields: [creditoId], references: [id], onDelete: Cascade)
+
+  @@map("transacoes_credito")
+}
+
+enum StatusCobranca {
+  PENDENTE
+  VENCIDA
+  PAGA
+  RENEGOCIADA
+  CANCELADA
+}
+
+enum TipoAcaoCobranca {
+  EMAIL
+  SMS
+  WHATSAPP
+  LIGACAO
+  NEGOCIACAO
+  BOLETO_GERADO
+}
+
+model Cobranca {
+  id              String        @id @default(cuid())
+  clienteId       String        @map("cliente_id")
+  companyId       String        @map("company_id")
+  vendaId         String?       @map("venda_id")
+  documento       String        @map("documento")
+  valorOriginal   Decimal       @db.Decimal(15, 2)
+  valorAtual      Decimal       @db.Decimal(15, 2)
+  dataVencimento  DateTime      @map("data_vencimento")
+  dataPagamento   DateTime?     @map("data_pagamento")
+  status          StatusCobranca @default(PENDENTE)
+  diasAtraso      Int           @default(0) @map("dias_atraso")
+  juros           Decimal?      @db.Decimal(15, 2)
+  multa           Decimal?      @db.Decimal(15, 2)
+  desconto        Decimal?      @db.Decimal(15, 2)
+  observacao      String?
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  cliente         Cliente       @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  historico       HistoricoCobranca[]
+
+  @@map("cobrancas")
+}
+
+model HistoricoCobranca {
+  id              String          @id @default(cuid())
+  cobrancaId      String          @map("cobranca_id")
+  tipo            TipoAcaoCobranca
+  data            DateTime        @default(now())
+  descricao       String
+  resultado       String?
+  createdAt       DateTime        @default(now()) @map("created_at")
+
+  cobranca        Cobranca        @relation(fields: [cobrancaId], references: [id], onDelete: Cascade)
+
+  @@map("historico_cobrancas")
+}

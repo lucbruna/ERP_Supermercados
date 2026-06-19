@@ -1,0 +1,78 @@
+{{- $frontendServices := list "webApp" "dashboard" -}}
+{{- range $serviceName := $frontendServices }}
+{{- $service := index $.Values $serviceName }}
+{{- if $service.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    {{- include "crm.frontend.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+spec:
+  replicas: {{ $service.replicaCount | default 2 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $service.name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ $service.name }}
+        {{- include "crm.labels" $ | nindent 8 }}
+        {{- include "crm.frontend.labels" $ | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ $service.servicePort | quote }}
+    spec:
+      {{- if $.Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- range $.Values.global.imagePullSecrets }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: {{ $service.name }}
+          image: {{ $service.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ $service.containerPort | default $service.servicePort }}
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: {{ $.Values.global.environment | quote }}
+            - name: TZ
+              value: {{ $.Values.global.timezone | quote }}
+            {{- if $service.env }}
+            {{- range $key, $value := $service.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+          resources:
+            {{- toYaml $service.resources | nindent 12 }}
+          {{- if $service.probe }}
+          {{- include "crm.probes" (dict "probe" $service.probe "containerPort" ($service.containerPort | default $service.servicePort)) | nindent 10 }}
+          {{- end }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    {{- include "crm.frontend.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+spec:
+  selector:
+    app.kubernetes.io/name: {{ $service.name }}
+  ports:
+    - port: {{ $service.servicePort }}
+      targetPort: {{ $service.containerPort | default $service.servicePort }}
+      protocol: TCP
+  type: ClusterIP
+{{- end }}
+{{- end }}

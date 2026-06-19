@@ -1,0 +1,8 @@
+C:\Users\tomga\OneDrive\Desktop\CRM_SUPERMERCADO\packages\backend\api-gateway\dist\main.js:21
+    app.use((0, cookie_parser_1.default)());
+                                        ^
+
+TypeError: (0 , cookie_parser_1.default) is not a function
+    at bootstrap (C:\Users\tomga\OneDrive\Desktop\CRM_SUPERMERCADO\packages\backend\api-gateway\dist\main.js:21:41)
+
+Node.js v24.15.0

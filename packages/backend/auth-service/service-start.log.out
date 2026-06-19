@@ -1,0 +1,64 @@
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +48ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPassportModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRedisModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mThrottlerModule dependencies initialized[39m[38;5;3m +25ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mJwtModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMfaModule dependencies initialized[39m[38;5;3m +2ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSessionModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPermissionModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuditModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mEmpresaModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUnidadeModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mUserModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuthModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuthController {/api/v1/auth}:[39m[38;5;3m +226ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/login, POST} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/mfa/validate, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/mfa/setup, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/refresh, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/logout, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/me, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUserController {/api/v1/auth/users}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/users, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/users, GET} route[39m[38;5;3m +15ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/users/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/users/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/users/:id/toggle-status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/users/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mMfaController {/api/v1/auth/mfa}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/mfa/setup, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/mfa/validate, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/mfa, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSessionController {/api/v1/auth/sessions}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/sessions, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/sessions/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/sessions/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/sessions, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPermissionController {/api/v1/auth/permissions}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/permissions, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/permissions, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/permissions/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/permissions/seed, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuditController {/api/v1/auth/audit}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/audit, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/audit/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mEmpresaController {/api/v1/auth/empresas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/empresas, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/empresas, GET} route[39m[38;5;3m +40ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/empresas/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/empresas/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/empresas/:id/toggle-status, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mUnidadeController {/api/v1/auth/unidades}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/unidades, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/unidades, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/unidades/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/unidades/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/auth/unidades/:id/toggle-status, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RedisService] [39m[32mConnected to Redis[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 2880  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[AuthService] [39m[32mAuth Service running on port 3001[39m

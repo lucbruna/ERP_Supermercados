@@ -1,0 +1,35 @@
+{{- if .Values.postgresql.enabled | not }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "crm.labels" . | nindent 4 }}
+    {{- include "crm.database.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.postgresql.primary.persistence.size | default "50Gi" }}
+  storageClassName: {{ .Values.postgresql.primary.persistence.storageClass | default "" }}
+{{- end }}
+{{- if .Values.redis.enabled | not }}
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: redis-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "crm.labels" . | nindent 4 }}
+    {{- include "crm.database.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{ .Values.redis.master.persistence.size | default "5Gi" }}
+  storageClassName: {{ .Values.redis.master.persistence.storageClass | default "" }}
+{{- end }}

@@ -1,0 +1,24 @@
+(node:14744) [DEP0190] DeprecationWarning: Passing args to a child process with shell option true can lead to security vulnerabilities, as the arguments are not escaped, only concatenated.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+[31m[Nest] 22840  - [39m18/06/2026, 21:52:12 [31m  ERROR[39m [38;5;3m[NestApplication] [39m[31mError: listen EADDRINUSE: address already in use :::3001[39m[38;5;3m +3ms[39m
+node:net:2008
+    const ex = new UVExceptionWithHostPort(err, 'listen', address, port);
+               ^
+
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (node:net:2008:16)
+    at listenInCluster (node:net:2065:12)
+    at Server.listen (node:net:2170:7)
+    at ExpressAdapter.listen (C:\Users\tomga\OneDrive\Desktop\CRM_SUPERMERCADO\packages\backend\auth-service\node_modules\@nestjs\platform-express\adapters\express-adapter.js:95:32)
+    at C:\Users\tomga\OneDrive\Desktop\CRM_SUPERMERCADO\packages\backend\auth-service\node_modules\@nestjs\core\nest-application.js:183:30
+    at new Promise (<anonymous>)
+    at NestApplication.listen (C:\Users\tomga\OneDrive\Desktop\CRM_SUPERMERCADO\packages\backend\auth-service\node_modules\@nestjs\core\nest-application.js:173:16)
+    at async bootstrap (C:\Users\tomga\OneDrive\Desktop\CRM_SUPERMERCADO\packages\backend\auth-service\src\main.ts:45:3) {
+  code: 'EADDRINUSE',
+  errno: -4091,
+  syscall: 'listen',
+  address: '::',
+  port: 3001
+}
+
+Node.js v24.15.0

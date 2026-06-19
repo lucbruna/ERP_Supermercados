@@ -1,0 +1,151 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Fornecedor {
+  id                String   @id @default(cuid())
+  companyId         String
+  cnpj              String
+  razaoSocial       String
+  nomeFantasia      String
+  inscricaoEstadual String?
+  endereco          Json
+  contato           Json
+  email             String
+  celular           String
+  telefone          String?
+  prazoEntregaDias  Int
+  condicaoPagamento String
+  bancoInfo         Json?
+  observacao        String?
+  ativo             Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  pedidosCompra   PedidoCompra[]
+  contratos       ContratoFornecedor[]
+  tabelasPreco    TabelaPreco[]
+  avaliacoes      AvaliacaoFornecedor[]
+
+  @@map("fornecedores")
+}
+
+model Cotacao {
+  id                String   @id @default(cuid())
+  companyId         String
+  unidadeId         String
+  itens             Json[]
+  fornecedores      Json[]
+  dataAbertura      DateTime
+  dataFechamento    DateTime?
+  status            String   @default("ABERTA")
+  aprovadoPor       String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  pedidosCompra PedidoCompra[]
+
+  @@map("cotacoes")
+}
+
+model PedidoCompra {
+  id                    String   @id @default(cuid())
+  companyId             String
+  unidadeId             String
+  fornecedorId          String
+  cotacaoId             String?
+  numero                String   @unique
+  itens                 Json[]
+  dataPedido            DateTime
+  dataEntregaPrevista   DateTime
+  dataEntregaReal       DateTime?
+  valorTotal            Decimal  @default(0)
+  frete                 Decimal  @default(0)
+  desconto              Decimal  @default(0)
+  condicaoPagamento     String
+  status                String   @default("RASCUNHO")
+  aprovacaoHierarquica  Json[]
+  recebimento           Json?
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt
+
+  Fornecedor       Fornecedor          @relation(fields: [fornecedorId], references: [id])
+  Cotacao          Cotacao?            @relation(fields: [cotacaoId], references: [id])
+  recebimentos     RecebimentoMercadoria[]
+
+  @@map("pedidos_compra")
+}
+
+model RecebimentoMercadoria {
+  id               String   @id @default(cuid())
+  pedidoCompraId   String
+  notaFiscal       Json
+  dataRecebimento  DateTime
+  conferenteId     String
+  itens            Json[]
+  avarias          String?
+  divergencias     String?
+  observacao       String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  PedidoCompra PedidoCompra @relation(fields: [pedidoCompraId], references: [id])
+
+  @@map("recebimentos_mercadoria")
+}
+
+model ContratoFornecedor {
+  id             String   @id @default(cuid())
+  companyId      String
+  fornecedorId   String
+  numero         String   @unique
+  dataInicio     DateTime
+  dataFim        DateTime
+  condicoes      Json
+  valorEstimado  Decimal  @default(0)
+  status         String   @default("ATIVO")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  Fornecedor Fornecedor @relation(fields: [fornecedorId], references: [id])
+
+  @@map("contratos_fornecedor")
+}
+
+model TabelaPreco {
+  id           String   @id @default(cuid())
+  companyId    String
+  fornecedorId String
+  nome         String
+  dataInicio   DateTime
+  dataFim      DateTime?
+  itens        Json[]
+  ativo        Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  Fornecedor Fornecedor @relation(fields: [fornecedorId], references: [id])
+
+  @@map("tabelas_preco")
+}
+
+model AvaliacaoFornecedor {
+  id              String   @id @default(cuid())
+  fornecedorId    String
+  pedidoCompraId  String?
+  criterios       Json[]
+  notaGlobal      Decimal
+  observacao      String?
+  avaliadorId     String
+  data            DateTime
+  createdAt       DateTime @default(now())
+
+  Fornecedor Fornecedor @relation(fields: [fornecedorId], references: [id])
+
+  @@map("avaliacoes_fornecedor")
+}

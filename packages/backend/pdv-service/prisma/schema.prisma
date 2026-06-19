@@ -1,0 +1,373 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum PdvTipo {
+  FIXO
+  MOVEL
+  AUTOATENDIMENTO
+}
+
+enum PdvStatus {
+  LIVRE
+  OCUPADO
+  FECHADO
+  MANUTENCAO
+}
+
+enum VendaTipo {
+  PDV
+  PRE_VENDA
+  VENDA_ONLINE
+  CREDIARIO
+  CONVENIO
+  MESA
+  DELIVERY
+}
+
+enum VendaStatus {
+  EM_ANDAMENTO
+  FINALIZADA
+  CANCELADA
+  TROCA
+  SUSPENSA
+}
+
+enum MesaStatus {
+  LIVRE
+  OCUPADA
+  RESERVADA
+  FECHADA
+}
+
+enum DeliveryStatus {
+  PENDENTE
+  PREPARANDO
+  SAIU_PARA_ENTREGA
+  ENTREGUE
+  CANCELADO
+}
+
+enum UnidadeMedida {
+  UN
+  KG
+  L
+  PC
+}
+
+enum PagamentoTipo {
+  DINHEIRO
+  CARTAO_CREDITO
+  CARTAO_DEBITO
+  PIX
+  VALE_ALIMENTACAO
+  VALE_REFEICAO
+  CONVENIO
+  CREDIARIO
+}
+
+enum TrocaTipo {
+  DINHEIRO
+  TROCA_DIRETA
+}
+
+enum TrocaStatus {
+  PENDENTE
+  FINALIZADA
+  CANCELADA
+}
+
+model PDV {
+  id              String    @id @default(uuid())
+  companyId       String
+  unidadeId       String
+  codigo          String
+  nome            String
+  tipo            PdvTipo   @default(FIXO)
+  ip              String?
+  mac             String?
+  status          PdvStatus @default(LIVRE)
+  operadorId      String?
+  ultimaAbertura  DateTime?
+  ultimoFechamento DateTime?
+  saldoAbertura   Decimal?  @db.Decimal(15, 2)
+  saldoFechamento Decimal?  @db.Decimal(15, 2)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  vendas     Venda[]
+  sangrias   Sangria[]
+  suprimentos Suprimento[]
+
+  @@index([companyId])
+  @@index([unidadeId])
+  @@index([status])
+  @@map("pdv")
+}
+
+model Venda {
+  id                String      @id @default(uuid())
+  companyId         String
+  unidadeId         String
+  pdvId             String
+  numero            Int
+  clienteId         String?
+  itens             Json        @default("[]")
+  pagamentos        Json        @default("[]")
+  subtotal          Decimal     @db.Decimal(15, 2)
+  desconto          Decimal     @default(0) @db.Decimal(15, 2)
+  acrescimo         Decimal     @default(0) @db.Decimal(15, 2)
+  total             Decimal     @db.Decimal(15, 2)
+  troco             Decimal?    @db.Decimal(15, 2)
+  tipo              VendaTipo   @default(PDV)
+  status            VendaStatus @default(EM_ANDAMENTO)
+  operadorId        String
+  dataHora          DateTime    @default(now())
+  nfce              String?
+  sat               String?
+  cancelada         Boolean     @default(false)
+  motivoCancelamento String?
+  nfceChave         String?
+  nfceProtocolo     String?
+  nfceXml           String?
+  cupomId           String?
+  descontoTotal     Decimal     @default(0) @db.Decimal(15, 2)
+  pontosGerados     Int         @default(0)
+  suspensaEm        DateTime?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  pdv      PDV     @relation(fields: [pdvId], references: [id])
+  itensVenda ItemVenda[]
+  pagamentosVenda PagamentoVenda[]
+  trocas   Troca[]
+  cupom    Cupom?  @relation(fields: [cupomId], references: [id])
+  cupomUsos CupomUso[]
+
+  @@unique([pdvId, numero])
+  @@index([companyId])
+  @@index([unidadeId])
+  @@index([status])
+  @@index([dataHora])
+  @@index([clienteId])
+  @@index([cupomId])
+  @@map("venda")
+}
+
+model ItemVenda {
+  id            String        @id @default(uuid())
+  vendaId       String
+  produtoId     String
+  codigoBarras  String?
+  descricao     String
+  quantidade    Decimal       @db.Decimal(15, 4)
+  unidade       UnidadeMedida @default(UN)
+  precoUnitario Decimal       @db.Decimal(15, 4)
+  precoTotal    Decimal       @db.Decimal(15, 4)
+  desconto      Decimal       @default(0) @db.Decimal(15, 2)
+  peso          Decimal?      @db.Decimal(15, 4)
+  lote          String?
+  validade      DateTime?
+  setor         String
+  estoqueAbatido Boolean     @default(false)
+
+  venda Venda @relation(fields: [vendaId], references: [id])
+
+  @@index([vendaId])
+  @@index([produtoId])
+  @@map("item_venda")
+}
+
+model PagamentoVenda {
+  id               String       @id @default(uuid())
+  vendaId          String
+  tipo             PagamentoTipo
+  valor            Decimal      @db.Decimal(15, 2)
+  parcelas         Int          @default(1)
+  bandeira         String?
+  codigoAutorizacao String?
+  nsu              String?
+  pixCopiaCola     String?
+  chavePix         String?
+  idTransacao      String?
+  trocoPara        Decimal?     @db.Decimal(15, 2)
+  troco            Decimal?     @db.Decimal(15, 2)
+
+  venda Venda @relation(fields: [vendaId], references: [id])
+
+  @@index([vendaId])
+  @@map("pagamento_venda")
+}
+
+model Troca {
+  id           String     @id @default(uuid())
+  vendaId      String
+  itensTrocados Json      @default("[]")
+  itensNovos   Json       @default("[]")
+  diferenca    Decimal    @default(0) @db.Decimal(15, 2)
+  tipo         TrocaTipo  @default(DINHEIRO)
+  status       TrocaStatus @default(PENDENTE)
+  data         DateTime   @default(now())
+  operadorId   String
+
+  venda Venda @relation(fields: [vendaId], references: [id])
+
+  @@index([vendaId])
+  @@map("troca")
+}
+
+model Sangria {
+  id         String   @id @default(uuid())
+  pdvId      String
+  valor      Decimal  @db.Decimal(15, 2)
+  motivo     String
+  data       DateTime @default(now())
+  operadorId String
+
+  pdv PDV @relation(fields: [pdvId], references: [id])
+
+  @@index([pdvId])
+  @@map("sangria")
+}
+
+model Suprimento {
+  id         String   @id @default(uuid())
+  pdvId      String
+  valor      Decimal  @db.Decimal(15, 2)
+  origem     String
+  data       DateTime @default(now())
+  operadorId String
+
+  pdv PDV @relation(fields: [pdvId], references: [id])
+
+  @@index([pdvId])
+  @@map("suprimento")
+}
+
+enum TipoPreco {
+  PADRAO
+  PROMOCIONAL
+  CLIENTE
+  QUANTIDADE
+  ATACADO
+}
+
+model TabelaPreco {
+  id        String   @id @default(uuid())
+  companyId String   @map("company_id")
+  nome      String
+  tipo      TipoPreco
+  ativo     Boolean  @default(true)
+  dataInicio DateTime? @map("data_inicio")
+  dataFim   DateTime? @map("data_fim")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  itens     ItemTabelaPreco[]
+
+  @@unique([companyId, nome])
+  @@index([companyId, ativo])
+  @@map("tabelas_preco")
+}
+
+model ItemTabelaPreco {
+  id         String  @id @default(uuid())
+  tabelaId   String  @map("tabela_id")
+  produtoId  String
+  preco      Decimal @db.Decimal(15, 2)
+  precoMinimo Decimal? @map("preco_minimo") @db.Decimal(15, 2)
+  quantidadeMinima Int? @map("quantidade_minima")
+  clienteId  String? @map("cliente_id")
+
+  tabela TabelaPreco @relation(fields: [tabelaId], references: [id], onDelete: Cascade)
+
+  @@unique([tabelaId, produtoId, clienteId])
+  @@index([produtoId])
+  @@map("itens_tabela_preco")
+}
+
+model Mesa {
+  id              String      @id @default(uuid())
+  companyId       String      @map("company_id")
+  unidadeId       String      @map("unidade_id")
+  numero          Int
+  capacidade      Int         @default(4)
+  localizacao     String?
+  status          MesaStatus  @default(LIVRE)
+  vendaId         String?     @map("venda_id")
+  createdAt       DateTime    @default(now()) @map("created_at")
+  updatedAt       DateTime    @updatedAt @map("updated_at")
+
+  @@unique([unidadeId, numero])
+  @@index([companyId])
+  @@map("mesas")
+}
+
+model Delivery {
+  id              String          @id @default(uuid())
+  companyId       String          @map("company_id")
+  unidadeId       String          @map("unidade_id")
+  vendaId         String          @unique @map("venda_id")
+  clienteId       String?         @map("cliente_id")
+  clienteNome     String          @map("cliente_nome")
+  clienteTelefone String          @map("cliente_telefone")
+  endereco        Json
+  observacao      String?
+  status          DeliveryStatus  @default(PENDENTE)
+  entregadorId    String?         @map("entregador_id")
+  dataPedido      DateTime        @default(now()) @map("data_pedido")
+  dataSaida       DateTime?       @map("data_saida")
+  dataEntrega     DateTime?       @map("data_entrega")
+  taxaEntrega     Decimal         @default(0) @db.Decimal(15, 2)
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  @@index([companyId])
+  @@index([status])
+  @@map("deliveries")
+}
+
+enum CupomTipo {
+  PERCENTUAL
+  FIXO
+}
+
+model Cupom {
+  id            String        @id @default(uuid())
+  codigo        String        @unique
+  tipo          CupomTipo
+  valor         Decimal       @db.Decimal(15, 2)
+  valorMinimo   Decimal?      @db.Decimal(15, 2)
+  produtosIds   Json          @default("[]")
+  usoLimite     Int           @default(1)
+  usosAtuais    Int           @default(0)
+  dataValidade  DateTime?
+  ativo         Boolean       @default(true)
+  criadoEm      DateTime      @default(now())
+
+  vendas        Venda[]
+  cupomUsos     CupomUso[]
+
+  @@map("cupons")
+}
+
+model CupomUso {
+  id            String    @id @default(uuid())
+  cupomId       String
+  vendaId       String
+  clienteId     String?
+  valorDesconto Decimal   @db.Decimal(15, 2)
+  criadoEm      DateTime  @default(now())
+
+  cupom Cupom @relation(fields: [cupomId], references: [id])
+  venda Venda @relation(fields: [vendaId], references: [id])
+
+  @@index([cupomId])
+  @@index([vendaId])
+  @@map("cupom_usos")
+}

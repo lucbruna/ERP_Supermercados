@@ -1,0 +1,14 @@
+[96msrc/rotas/rotas.service.ts[0m:[93m92[0m:[93m31[0m - [91merror[0m[90m TS18047: [0m'veiculo' is possibly 'null'.
+
+[7m92[0m     const kmAnterior = Number(veiculo.kmAtual);
+[7m  [0m [91m                              ~~~~~~~[0m
+[96msrc/seeds/seed.ts[0m:[93m422[0m:[93m9[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'observacoes' does not exist in type 'Without<MultaCreateInput, MultaUncheckedCreateInput> & MultaUncheckedCreateInput'.
+
+[7m422[0m         observacoes: 'Recurso protocolado em 10/06',
+[7m   [0m [91m        ~~~~~~~~~~~[0m
+
+  [96mnode_modules/.prisma/client/index.d.ts[0m:[93m8292[0m:[93m5[0m
+    [7m8292[0m     data: XOR<MultaCreateInput, MultaUncheckedCreateInput>
+    [7m    [0m [96m    ~~~~[0m
+    The expected type comes from property 'data' which is declared here on type '{ select?: MultaSelect<DefaultArgs> | null | undefined; include?: MultaInclude<DefaultArgs> | null | undefined; data: (Without<...> & MultaUncheckedCreateInput) | (Without<...> & MultaCreateInput); }'
+

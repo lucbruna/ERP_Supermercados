@@ -1,0 +1,103 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoRecomendacao {
+  COMPRA
+  PROMOCAO
+  PRECO
+  ESTOQUE
+}
+
+enum PrioridadeRecomendacao {
+  BAIXA
+  MEDIA
+  ALTA
+}
+
+enum TipoDeteccaoFraude {
+  TRANSACAO_SUSPEITA
+  PADRAO_ANORMAL
+  MULTIPLAS_TENTATIVAS
+  LOCAL_INCOMPATIVEL
+  VALOR_ANORMAL
+}
+
+model PrevisaoVenda {
+  id                String   @id @default(cuid())
+  produtoId         String
+  data              DateTime
+  quantidadePrevista Float
+  confianca         Float    @default(0.8)
+  fatores           Json[]
+  geradaEm          DateTime @default(now())
+  createdAt         DateTime @default(now())
+
+  @@index([produtoId])
+  @@index([data])
+  @@index([produtoId, data])
+}
+
+model Recomendacao {
+  id         String                 @id @default(cuid())
+  tipo       TipoRecomendacao
+  produtoId  String
+  acao       String
+  prioridade PrioridadeRecomendacao @default(MEDIA)
+  motivo     String
+  data       DateTime               @default(now())
+  processado Boolean                @default(false)
+  createdAt  DateTime               @default(now())
+
+  @@index([tipo])
+  @@index([produtoId])
+  @@index([prioridade])
+}
+
+model ModeloIA {
+  id               String   @id @default(cuid())
+  nome             String
+  tipo             String
+  versao           String
+  parametros       Json
+  precisao         Float    @default(0)
+  ultimoTreinamento DateTime?
+  ativo            Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([ativo])
+  @@index([tipo])
+}
+
+model DeteccaoFraude {
+  id         String              @id @default(cuid())
+  transacaoId String?
+  tipo       TipoDeteccaoFraude
+  confianca  Float               @default(0)
+  detalhes   Json
+  data       DateTime            @default(now())
+  processado Boolean             @default(false)
+  createdAt  DateTime            @default(now())
+
+  @@index([transacaoId])
+  @@index([tipo])
+  @@index([data])
+}
+
+model AnaliseComportamento {
+  id        String   @id @default(cuid())
+  clienteId String
+  metricas  Json[]
+  periodo   String
+  data      DateTime @default(now())
+  createdAt DateTime @default(now())
+
+  @@index([clienteId])
+  @@index([periodo])
+}

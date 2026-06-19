@@ -1,0 +1,112 @@
+name: Security Scan
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'packages/**'
+      - 'Dockerfile*'
+      - 'package*.json'
+
+concurrency:
+  group: security-scan-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  npm-audit:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        dir:
+          - .
+          - packages/backend/auth-service
+          - packages/backend/security-service
+          - packages/backend/api-gateway
+          - packages/backend/cftv-service
+          - packages/backend/crm-service
+          - packages/backend/financial-service
+          - packages/backend/inventory-service
+          - packages/backend/pdv-service
+          - packages/backend/distribution-service
+          - packages/backend/ai-service
+          - packages/backend/integration-api
+          - packages/backend/monitoring-service
+          - packages/backend/notification-service
+          - packages/backend/marketing-service
+          - packages/backend/rh-service
+          - packages/backend/purchasing-service
+          - packages/backend/bi-service
+          - packages/backend/contratos-service
+          - packages/backend/convenio-service
+          - packages/backend/codigo-barras-service
+          - packages/backend/fiscal-service
+          - packages/backend/frota-service
+          - packages/backend/habilidades-service
+          - packages/backend/base-brasil
+          - packages/frontend/web-app
+          - packages/frontend/dashboard
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Run npm audit in ${{ matrix.dir }}
+        continue-on-error: true
+        run: npm audit --audit-level=high
+        working-directory: ${{ matrix.dir }}
+      - name: Upload npm audit results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-${{ matrix.dir }}
+          path: ${{ matrix.dir }}/**/audit*.json
+
+  trivy-scan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: table
+          exit-code: 0
+          severity: HIGH,CRITICAL
+      - name: Run Trivy on all Dockerfiles
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: config
+          scan-ref: .
+          format: sarif
+          output: trivy-dockerfile-results.sarif
+          exit-code: 0
+      - name: Upload Trivy results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trivy-results
+          path: trivy-*.sarif
+
+  secret-detection:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: TruffleHog scan
+        uses: trufflesecurity/trufflehog@main
+        with:
+          extra_args: --results=verified,unknown --fail=false
+      - name: Upload secret scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: trufflehog-results
+          path: trufflehog*.json

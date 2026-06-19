@@ -1,0 +1,153 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ConvenioStatus {
+  ATIVO
+  INATIVO
+  BLOQUEADO
+}
+
+enum ContratoStatus {
+  ATIVO
+  CANCELADO
+  ENCERRADO
+}
+
+enum FaturaStatus {
+  PENDENTE
+  PARCIAL
+  PAGA
+  ATRASADA
+  CANCELADA
+}
+
+enum TipoFaturamento {
+  MENSAL
+  SEMANAL
+  QUINZENAL
+  AVULSO
+}
+
+model Convenio {
+  id              String          @id @default(uuid())
+  companyId       String          @map("company_id")
+  unidadeId       String          @map("unidade_id")
+  codigo          String          @unique
+  nome            String
+  cnpj            String?
+  contato         String?
+  telefone        String?
+  email           String?
+  endereco        Json            @default("{}")
+  limiteGlobal    Decimal         @default(0) @map("limite_global") @db.Decimal(15, 2)
+  saldoUtilizado  Decimal         @default(0) @map("saldo_utilizado") @db.Decimal(15, 2)
+  descontoPadrao  Decimal         @default(0) @map("desconto_padrao") @db.Decimal(5, 2)
+  prazoPagamento  Int             @default(30) @map("prazo_pagamento")
+  tipoFaturamento TipoFaturamento @default(MENSAL) @map("tipo_faturamento")
+  diaFechamento   Int             @default(1) @map("dia_fechamento")
+  observacao      String?
+  status          ConvenioStatus  @default(ATIVO)
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  contratos       Contrato[]
+  faturas         FaturaConvenio[]
+  vendas          VendaConvenio[]
+
+  @@index([companyId])
+  @@index([status])
+  @@map("convenios")
+}
+
+model Contrato {
+  id              String          @id @default(uuid())
+  convenioId      String          @map("convenio_id")
+  convenio        Convenio        @relation(fields: [convenioId], references: [id])
+  numero          String          @unique
+  dataInicio      DateTime        @map("data_inicio")
+  dataFim         DateTime?       @map("data_fim")
+  valor           Decimal         @db.Decimal(15, 2)
+  limiteMensal    Decimal?        @map("limite_mensal") @db.Decimal(15, 2)
+  carencia        Int             @default(0)
+  taxaJuros       Decimal         @default(0) @map("taxa_juros") @db.Decimal(5, 2)
+  multaAtraso     Decimal         @default(2) @map("multa_atraso") @db.Decimal(5, 2)
+  jurosMora       Decimal         @default(1) @map("juros_mora") @db.Decimal(5, 2)
+  observacao      String?
+  anexos          Json            @default("[]")
+  status          ContratoStatus  @default(ATIVO)
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  vendas          VendaConvenio[]
+
+  @@index([convenioId])
+  @@index([status])
+  @@map("contratos_convenio")
+}
+
+model VendaConvenio {
+  id              String        @id @default(uuid())
+  companyId       String        @map("company_id")
+  unidadeId       String        @map("unidade_id")
+  pdvId           String?       @map("pdv_id")
+  convenioId      String        @map("convenio_id")
+  convenio        Convenio      @relation(fields: [convenioId], references: [id])
+  contratoId      String?       @map("contrato_id")
+  contrato        Contrato?     @relation(fields: [contratoId], references: [id])
+  clienteId       String?       @map("cliente_id")
+  clienteNome     String?       @map("cliente_nome")
+  clienteCpf      String?       @map("cliente_cpf")
+  numero          String        @unique
+  itens           Json          @default("[]")
+  valorBruto      Decimal       @map("valor_bruto") @db.Decimal(15, 2)
+  desconto        Decimal       @default(0) @db.Decimal(15, 2)
+  valorLiquido    Decimal       @map("valor_liquido") @db.Decimal(15, 2)
+  dataVenda       DateTime      @map("data_venda")
+  dataVencimento  DateTime?     @map("data_vencimento")
+  faturaId        String?       @map("fatura_id")
+  status          String        @default("PENDENTE")
+  observacao      String?
+  createdAt       DateTime      @default(now()) @map("created_at")
+
+  fatura          FaturaConvenio? @relation(fields: [faturaId], references: [id])
+
+  @@index([convenioId])
+  @@index([clienteId])
+  @@index([status])
+  @@index([dataVenda])
+  @@map("vendas_convenio")
+}
+
+model FaturaConvenio {
+  id              String        @id @default(uuid())
+  companyId       String        @map("company_id")
+  convenioId      String        @map("convenio_id")
+  convenio        Convenio      @relation(fields: [convenioId], references: [id])
+  numero          String        @unique
+  dataEmissao     DateTime      @map("data_emissao")
+  dataVencimento  DateTime      @map("data_vencimento")
+  dataPagamento   DateTime?     @map("data_pagamento")
+  valorTotal      Decimal       @map("valor_total") @db.Decimal(15, 2)
+  valorPago       Decimal       @default(0) @map("valor_pago") @db.Decimal(15, 2)
+  multa           Decimal       @default(0) @db.Decimal(15, 2)
+  juros           Decimal       @default(0) @db.Decimal(15, 2)
+  desconto        Decimal       @default(0) @db.Decimal(15, 2)
+  status          FaturaStatus  @default(PENDENTE)
+  observacao      String?
+  formaPagamento  String?       @map("forma_pagamento")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @updatedAt @map("updated_at")
+
+  vendas          VendaConvenio[]
+
+  @@index([convenioId])
+  @@index([status])
+  @@index([dataVencimento])
+  @@map("faturas_convenio")
+}

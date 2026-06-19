@@ -1,0 +1,39 @@
+[96msrc/analytics/security-analytics.service.ts[0m:[93m29[0m:[93m40[0m - [91merror[0m[90m TS7006: [0mParameter 'sum' implicitly has an 'any' type.
+
+[7m29[0m     const totalRequests = keys.reduce((sum, k) => sum + k.usageCount, 0);
+[7m  [0m [91m                                       ~~~[0m
+[96msrc/analytics/security-analytics.service.ts[0m:[93m29[0m:[93m45[0m - [91merror[0m[90m TS7006: [0mParameter 'k' implicitly has an 'any' type.
+
+[7m29[0m     const totalRequests = keys.reduce((sum, k) => sum + k.usageCount, 0);
+[7m  [0m [91m                                            ~[0m
+[96msrc/analytics/security-analytics.service.ts[0m:[93m30[0m:[93m37[0m - [91merror[0m[90m TS7006: [0mParameter 'k' implicitly has an 'any' type.
+
+[7m30[0m     const activeKeys = keys.filter((k) => k.lastUsedAt && k.lastUsedAt >= since).length;
+[7m  [0m [91m                                    ~[0m
+[96msrc/analytics/security-analytics.service.ts[0m:[93m57[0m:[93m36[0m - [91merror[0m[90m TS7006: [0mParameter 'a' implicitly has an 'any' type.
+
+[7m57[0m     const success = audits.filter((a) => a.acao === 'LOGIN_SUCCESS').length;
+[7m  [0m [91m                                   ~[0m
+[96msrc/analytics/security-analytics.service.ts[0m:[93m58[0m:[93m35[0m - [91merror[0m[90m TS7006: [0mParameter 'a' implicitly has an 'any' type.
+
+[7m58[0m     const failed = audits.filter((a) => a.acao === 'LOGIN_FAILED').length;
+[7m  [0m [91m                                  ~[0m
+[96msrc/api-keys/api-keys.guard.ts[0m:[93m43[0m:[93m66[0m - [91merror[0m[90m TS7006: [0mParameter 'p' implicitly has an 'any' type.
+
+[7m43[0m       const keyPermissions = keyData.permissions.split(',').map((p) => p.trim());
+[7m  [0m [91m                                                                 ~[0m
+[96msrc/gateway/ws-proxy.middleware.ts[0m:[93m16[0m:[93m7[0m - [91merror[0m[90m TS2353: [0mObject literal may only specify known properties, and 'pathFilter' does not exist in type 'string[] | ((pathname: string, req: Request) => boolean) | Options'.
+
+[7m16[0m       pathFilter: '/socket.io/',
+[7m  [0m [91m      ~~~~~~~~~~[0m
+[96msrc/rate-limit/rate-limit.service.ts[0m:[93m31[0m:[93m20[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ ip: { window: number; max: number; }; 'api-key:standard': { window: number; max: number; }; 'api-key:premium': { window: number; max: number; }; 'user:jwt': { window: number; max: number; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ ip: { window: number; max: number; }; 'api-key:standard': { window: number; max: number; }; 'api-key:premium': { window: number; max: number; }; 'user:jwt': { window: number; max: number; }; }'.
+
+[7m31[0m     const config = this.limits[tier] || this.limits.ip;
+[7m  [0m [91m                   ~~~~~~~~~~~~~~~~~[0m
+[96msrc/rate-limit/rate-limit.service.ts[0m:[93m77[0m:[93m12[0m - [91merror[0m[90m TS7053: [0mElement implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ ip: { window: number; max: number; }; 'api-key:standard': { window: number; max: number; }; 'api-key:premium': { window: number; max: number; }; 'user:jwt': { window: number; max: number; }; }'.
+  No index signature with a parameter of type 'string' was found on type '{ ip: { window: number; max: number; }; 'api-key:standard': { window: number; max: number; }; 'api-key:premium': { window: number; max: number; }; 'user:jwt': { window: number; max: number; }; }'.
+
+[7m77[0m     return this.limits[tier] || this.limits.ip;
+[7m  [0m [91m           ~~~~~~~~~~~~~~~~~[0m
+

@@ -1,0 +1,116 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum CategoriaKPI {
+  VENDAS
+  FINANCEIRO
+  ESTOQUE
+  RH
+  OPERACIONAL
+}
+
+enum PeriodoKPI {
+  REAL_TIME
+  DIARIO
+  SEMANAL
+  MENSAL
+  ANUAL
+}
+
+enum TipoRelatorio {
+  VENDAS
+  FINANCEIRO
+  ESTOQUE
+  OPERACIONAL
+  PERSONALIZADO
+}
+
+enum FrequenciaRelatorio {
+  DIARIO
+  SEMANAL
+  MENSAL
+  TRIMESTRAL
+  ANUAL
+}
+
+enum FormatoIndicador {
+  NUMERO
+  MOEDA
+  PORCENTAGEM
+  TEMPO
+}
+
+model DashboardKPI {
+  id          String       @id @default(cuid())
+  companyId   String
+  unidadeId   String?
+  nome        String
+  categoria   CategoriaKPI
+  valor       Float
+  meta        Float
+  variacao    Float        @default(0)
+  periodo     PeriodoKPI
+  tipo        String       @default("MENSAL")
+  dataReferencia DateTime? @default(now())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@index([companyId])
+  @@index([categoria])
+  @@index([periodo])
+  @@index([unidadeId])
+}
+
+model RelatorioBI {
+  id              String              @id @default(cuid())
+  companyId       String
+  nome            String
+  tipo            TipoRelatorio       @default(PERSONALIZADO)
+  parametros      Json?
+  dados           Json[]
+  criadoPor       String
+  dataCriacao     DateTime            @default(now())
+  agendado        Boolean             @default(false)
+  frequencia      FrequenciaRelatorio?
+  ultimaExecucao  DateTime?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@index([companyId])
+  @@index([tipo])
+}
+
+model DashboardConfig {
+  id          String   @id @default(cuid())
+  companyId   String
+  nome        String
+  layout      Json[]
+  ativo       Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([companyId])
+}
+
+model Indicador {
+  id               String           @id @default(cuid())
+  companyId        String
+  nome             String
+  categoria        CategoriaKPI
+  query            Json
+  formato          FormatoIndicador @default(NUMERO)
+  atualizacaoSegundos Int           @default(3600)
+  ativo            Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+
+  @@index([companyId])
+  @@index([categoria])
+  @@index([ativo])
+}

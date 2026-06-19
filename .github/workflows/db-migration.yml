@@ -1,0 +1,109 @@
+name: Database Migration
+
+on:
+  workflow_dispatch:
+    inputs:
+      services:
+        description: 'Comma-separated services (e.g. auth-service,financial-service). Empty = all.'
+        required: false
+        type: string
+      run_seed:
+        description: 'Run seed data after migration'
+        required: false
+        default: true
+        type: boolean
+      environment:
+        description: 'Target environment'
+        required: true
+        default: staging
+        type: choice
+        options:
+          - staging
+          - production
+
+concurrency:
+  group: db-migration-${{ github.event.inputs.environment }}
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - auth-service
+          - security-service
+          - cftv-service
+          - crm-service
+          - financial-service
+          - inventory-service
+          - pdv-service
+          - distribution-service
+          - ai-service
+          - integration-api
+          - monitoring-service
+          - notification-service
+          - marketing-service
+          - rh-service
+          - purchasing-service
+          - bi-service
+          - contratos-service
+          - convenio-service
+          - codigo-barras-service
+          - fiscal-service
+          - frota-service
+          - habilidades-service
+          - base-brasil
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Cache node_modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            packages/*/*/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
+      - name: Check if service is selected
+        id: check
+        shell: bash
+        run: |
+          INPUT_SERVICES="${{ github.event.inputs.services }}"
+          if [ -n "$INPUT_SERVICES" ]; then
+            IFS=',' read -ra SELECTED <<< "$INPUT_SERVICES"
+            FOUND=0
+            for svc in "${SELECTED[@]}"; do
+              svc=$(echo "$svc" | xargs)
+              if [ "$svc" = "${{ matrix.service }}" ]; then
+                FOUND=1
+                break
+              fi
+            done
+            if [ $FOUND -eq 0 ]; then
+              echo "Skipping ${{ matrix.service }} (not in selected list)"
+              echo "skip=true" >> $GITHUB_OUTPUT
+            fi
+          fi
+      - name: Run Prisma migrations
+        if: steps.check.outputs.skip != 'true'
+        shell: bash
+        run: npx prisma migrate deploy
+        working-directory: packages/backend/${{ matrix.service }}
+        env:
+          DATABASE_URL: ${{ secrets[format('{0}_DATABASE_URL_{1}', github.event.inputs.environment, matrix.service)] }}
+      - name: Run seed data
+        if: ${{ steps.check.outputs.skip != 'true' && github.event.inputs.run_seed == 'true' }}
+        shell: bash
+        run: |
+          npx prisma db seed 2>/dev/null && echo "Seed completed for ${{ matrix.service }}" || echo "No seed script found for ${{ matrix.service }}"
+        working-directory: packages/backend/${{ matrix.service }}
+        env:
+          DATABASE_URL: ${{ secrets[format('{0}_DATABASE_URL_{1}', github.event.inputs.environment, matrix.service)] }}

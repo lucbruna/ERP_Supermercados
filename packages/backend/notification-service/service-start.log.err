@@ -1,0 +1,1 @@
+[31m[Nest] 13168  - [39m18/06/2026, 22:10:00 [31m  ERROR[39m [38;5;3m[MailerService] [39m[31mError occurred while verifying the transporter}: getaddrinfo ENOTFOUND smtp.example.com[39m

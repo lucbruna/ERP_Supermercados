@@ -1,0 +1,65 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rh-service
+  namespace: crm-supermercado
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rh-service
+  template:
+    metadata:
+      labels:
+        app: rh-service
+    spec:
+      containers:
+        - name: rh-service
+          image: crm/rh-service:latest
+          ports:
+            - containerPort: 3002
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "3002"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: crm-secrets
+                  key: database-url
+            - name: REDIS_HOST
+              value: redis
+            - name: REDIS_PORT
+              value: "6379"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 15
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rh-service
+  namespace: crm-supermercado
+spec:
+  selector:
+    app: rh-service
+  ports:
+    - port: 3002
+      targetPort: 3002

@@ -1,0 +1,59 @@
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +27ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +9ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mForecastModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRecommendationModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNlpModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAnomalyModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPricingModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mChatbotModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRecomendacoesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mFraudeModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mComportamentoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrevisoesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPrevisoesController {/previsoes}:[39m[38;5;3m +87ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/previsoes/generate, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/previsoes, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/previsoes/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/previsoes/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRecomendacoesController {/recomendacoes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recomendacoes/generate, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recomendacoes, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recomendacoes/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recomendacoes, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recomendacoes/:id/processed, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mFraudeController {/fraude}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/fraude/analyze, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/fraude, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/fraude/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/fraude/:id/processed, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mComportamentoController {/comportamento}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/comportamento/analyze, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/comportamento, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/comportamento/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/comportamento/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mForecastController {/forecast}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forecast/sales, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forecast/inventory, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/forecast/demand, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRecommendationController {/recommendations}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recommendations/product/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recommendations/cross-sell/:productId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/recommendations/customer/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mNlpController {/nlp}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/nlp/sentiment, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/nlp/classify, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/nlp/keywords, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/nlp/summarize, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/nlp/categorize-product, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAnomalyController {/anomaly}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/anomaly/detect, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/anomaly/pricing, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPricingController {/pricing}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/pricing/suggest, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/pricing/optimize, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mChatbotController {/chatbot}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/chatbot/message, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:10:00 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:10:00 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
+[32m[Nest] 14460  - [39m18/06/2026, 22:10:00 [32m    LOG[39m [38;5;3m[AIService] [39m[32mAI service running on port 3013[39m

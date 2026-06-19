@@ -1,0 +1,181 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoSeparacao {
+  TRANSFERENCIA
+  VENDA_CD
+  VENDA_ONLINE
+}
+
+enum StatusSeparacao {
+  PENDENTE
+  EM_SEPARACAO
+  SEPARADO
+  EM_CONFERENCIA
+  CONFERIDO
+  EXPEDIDO
+}
+
+enum Prioridade {
+  BAIXA
+  MEDIA
+  ALTA
+  URGENTE
+}
+
+enum StatusRoteirizacao {
+  PLANEJADA
+  EM_ROTA
+  FINALIZADA
+  CANCELADA
+}
+
+enum StatusVeiculo {
+  DISPONIVEL
+  EM_ROTA
+  MANUTENCAO
+}
+
+enum StatusExpedicao {
+  PENDENTE
+  EM_EXPEDICAO
+  EXPEDIDO
+  CANCELADO
+}
+
+model SeparacaoPedido {
+  id           String           @id @default(cuid())
+  companyId    String
+  pedidoId     String
+  tipo         TipoSeparacao
+  itens        Json
+  status       StatusSeparacao  @default(PENDENTE)
+  separadorId  String
+  conferenteId String?
+  dataInicio   DateTime         @default(now())
+  dataFim      DateTime?
+  prioridade   Prioridade       @default(MEDIA)
+  observacao   String?
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  expedicao    Expedicao?
+
+  @@index([companyId])
+  @@index([status])
+  @@index([pedidoId])
+  @@index([separadorId])
+}
+
+model Roteirizacao {
+  id              String             @id @default(cuid())
+  companyId       String
+  origemUnidadeId String
+  entregas        Json
+  distanciaKm     Float
+  tempoEstimado   Int
+  custoFrete      Float
+  motoristaId     String
+  veiculoId       String
+  dataSaida       DateTime
+  dataPrevisao    DateTime
+  dataChegada     DateTime?
+  status          StatusRoteirizacao @default(PLANEJADA)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  expedicoes      Expedicao[]
+  motorista       Motorista          @relation(fields: [motoristaId], references: [id])
+  veiculo         Veiculo            @relation(fields: [veiculoId], references: [id])
+
+  @@index([companyId])
+  @@index([status])
+  @@index([motoristaId])
+}
+
+model Veiculo {
+  id            String        @id @default(cuid())
+  companyId     String
+  placa         String        @unique
+  modelo        String
+  ano           Int
+  capacidadeKg  Float
+  capacidadeM3  Float
+  tipo          String
+  status        StatusVeiculo @default(DISPONIVEL)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  roteirizacoes Roteirizacao[]
+
+  @@index([companyId])
+  @@index([status])
+}
+
+model Motorista {
+  id           String        @id @default(cuid())
+  companyId    String
+  nome         String
+  cpf          String        @unique
+  cnh          String        @unique
+  categoriaCNH String
+  validadeCNH  DateTime
+  celular      String
+  ativo        Boolean       @default(true)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  roteirizacoes Roteirizacao[]
+
+  @@index([companyId])
+  @@index([ativo])
+}
+
+model Expedicao {
+  id              String           @id @default(cuid())
+  separacaoId     String           @unique
+  roteirizacaoId  String
+  dataExpedicao   DateTime         @default(now())
+  volumes         Int
+  pesoTotal       Float
+  conferenteId    String
+  status          StatusExpedicao  @default(PENDENTE)
+  observacao      String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  separacao       SeparacaoPedido  @relation(fields: [separacaoId], references: [id])
+  roteirizacao    Roteirizacao     @relation(fields: [roteirizacaoId], references: [id])
+
+  @@index([roteirizacaoId])
+  @@index([separacaoId])
+}
+
+model EnderecoEntrega {
+  id           String  @id @default(cuid())
+  companyId    String
+  clienteId    String?
+  nome         String
+  cep          String
+  logradouro   String
+  numero       String
+  complemento  String?
+  bairro       String
+  cidade       String
+  estado       String
+  contato      String
+  coordenadas  Json?
+  observacao   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([companyId])
+  @@index([clienteId])
+  @@index([cidade])
+}

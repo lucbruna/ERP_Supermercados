@@ -1,0 +1,50 @@
+ERPsupermercado
+
+em 3 formas:
+🚀 Mais rápida — Frontend standalone
+# Terminal 1
+cd packages/frontend/web-app && npm run dev
+# → http://localhost:3080 (PDV, vendas, estoque, etc.)
+
+# Terminal 2
+cd packages/frontend/dashboard && npm run dev
+# → http://localhost:3081 (dashboard executivo)
+🐳 Completa — Docker (todos os serviços)
+# Requer Docker Desktop instalado
+npm run docker:up
+# → web-app: http://localhost:3080
+# → dashboard: http://localhost:3081
+# → API: http://localhost:3000
+# → Swagger: http://localhost:3000/api/docs
+🛠️ Dev (só banco + Redis, apps rodam fora)
+docker-compose -f docker-compose.dev.yml up -d
+# Depois inicia cada backend e frontend manualmente
+Nota: Se for só ver a interface, rode apenas os frontends (opção 1). As páginas vão carregar com dados mock/enquanto a API não estiver rodando — o PDV (/pdv), o Dashboard (/dashboard) e todas as outras páginas já aparecem.
+
+Instaladores Profissionais Criados ✅
+🪟 Windows
+deploy/windows/installer.iss → Gera CRM_Supermercado_Setup_v1.0.0.exe
+- Inno Setup com wizard moderno
+- Verifica/instala Docker automaticamente
+- Cria atalhos (Desktop, Iniciar, Inicialização)
+- Scripts: start, stop, status, backup
+- Primeira execução configura .env automaticamente
+🐧 Linux
+deploy/linux/install.sh → Instalação completa
+- Detecta distro (Ubuntu, Debian, CentOS, Fedora)
+- Instala Docker + systemd service
+- Backup automático via cron (diário 3h, retenção 30 dias)
+- Nginx opcional como reverse proxy
+- Comandos: systemctl start/stop/status crm-supermercado
+🌐 Web Setup Wizard
+http://localhost:3080/setup → Na primeira execução
+- 7 passos: boas-vindas → banco → admin → empresa → módulos → configuração fiscal → concluído
+- Usa MUI Stepper + react-hook-form + zod
+- Redireciona automaticamente se setup não foi concluído
+☸️ Kubernetes (Helm)
+deploy/helm/crm-supermercado/ → Instalação em cluster
+helm install crm-supermercado ./deploy/helm/crm-supermercado \
+  --namespace crm-system --create-namespace
+- 15 templates: deployments, services, HPA, PDB, network policies, ServiceMonitor
+- Ingress com cert-manager (Let's Encrypt)
+- Auto-scaling para todos os serviços

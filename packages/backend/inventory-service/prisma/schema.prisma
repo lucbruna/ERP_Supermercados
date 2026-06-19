@@ -1,0 +1,222 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UnidadeMedida {
+  UN
+  KG
+  L
+  PC
+  CX
+  DUZIA
+  PACOTE
+}
+
+enum TipoMovimento {
+  ENTRADA
+  SAIDA
+  AJUSTE
+  TRANSFERENCIA
+  INVENTARIO
+}
+
+enum StatusInventario {
+  ABERTO
+  EM_ANDAMENTO
+  FECHADO
+  AJUSTADO
+}
+
+enum TipoInventario {
+  COMPLETO
+  PARCIAL
+  ROTATIVO
+  SETOR
+}
+
+enum StatusTransferencia {
+  PENDENTE
+  EXPEDIDA
+  EM_TRANSITO
+  RECEBIDA
+  CANCELADA
+}
+
+enum ClassificacaoABC {
+  A
+  B
+  C
+}
+
+model CategoriaProduto {
+  id               String   @id @default(uuid()) @db.Uuid
+  companyId        String   @map("company_id") @db.Uuid
+  nome             String
+  departamento     String
+  percentualMargem Decimal  @map("percentual_margem") @db.Decimal(5, 2)
+  ativo            Boolean  @default(true)
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  produtos         Produto[]
+
+  @@map("categorias_produto")
+}
+
+model Produto {
+  id                 String         @id @default(uuid()) @db.Uuid
+  companyId          String         @map("company_id") @db.Uuid
+  unidadeId          String         @map("unidade_id") @db.Uuid
+  codigo             String
+  codigoBarras       String         @map("codigo_barras")
+  codigoBarrasSecundario String?    @map("codigo_barras_secundario")
+  descricao          String
+  descricaoReduzida  String?        @map("descricao_reduzida")
+  marca              String
+  fabricante         String?
+  unidadeMedida      UnidadeMedida  @map("unidade_medida")
+  ncm                String
+  cest               String?
+  cfop               String
+  origem             Int
+  precoCusto         Decimal        @map("preco_custo") @db.Decimal(12, 2)
+  precoVenda         Decimal        @map("preco_venda") @db.Decimal(12, 2)
+  precoPromocional   Decimal?       @map("preco_promocional") @db.Decimal(12, 2)
+  lucroPercentual    Decimal        @map("lucro_percentual") @db.Decimal(5, 2)
+  estoqueMinimo      Decimal        @map("estoque_minimo") @db.Decimal(12, 3)
+  estoqueMaximo      Decimal        @map("estoque_maximo") @db.Decimal(12, 3)
+  estoqueAtual       Decimal        @map("estoque_atual") @db.Decimal(12, 3)
+  estoqueReservado   Decimal        @map("estoque_reservado") @db.Decimal(12, 3)
+  fracionado         Boolean        @default(false)
+  pesavel            Boolean        @default(false)
+  validadeDias       Int?           @map("validade_dias")
+  loteControlado     Boolean        @map("lote_controlado") @default(false)
+  ativo              Boolean        @default(true)
+  imagemUrl          String?        @map("imagem_url")
+  categoriaId        String         @map("categoria_id") @db.Uuid
+  categoria          CategoriaProduto @relation(fields: [categoriaId], references: [id])
+  createdAt          DateTime       @default(now()) @map("created_at")
+  updatedAt          DateTime       @updatedAt @map("updated_at")
+
+  movimentos     MovimentoEstoque[]
+  lotes          Lote[]
+  curvaABC       CurvaABC[]
+  sugestoes      SugestaoCompra[]
+
+  @@unique([companyId, codigo])
+  @@unique([companyId, codigoBarras])
+  @@map("produtos")
+}
+
+model MovimentoEstoque {
+  id           String        @id @default(uuid()) @db.Uuid
+  produtoId    String        @map("produto_id") @db.Uuid
+  produto      Produto       @relation(fields: [produtoId], references: [id])
+  unidadeId    String        @map("unidade_id") @db.Uuid
+  tipo         TipoMovimento
+  quantidade   Decimal       @db.Decimal(12, 3)
+  saldoAnterior Decimal      @map("saldo_anterior") @db.Decimal(12, 3)
+  saldoAtual   Decimal       @map("saldo_atual") @db.Decimal(12, 3)
+  documento    String?
+  lote         String?
+  validade     DateTime?
+  observacao   String?
+  usuarioId    String        @map("usuario_id") @db.Uuid
+  data         DateTime      @default(now())
+  createdAt    DateTime      @default(now()) @map("created_at")
+
+  @@map("movimentos_estoque")
+}
+
+model Lote {
+  id                String   @id @default(uuid()) @db.Uuid
+  produtoId         String   @map("produto_id") @db.Uuid
+  produto           Produto  @relation(fields: [produtoId], references: [id])
+  codigoLote        String   @map("codigo_lote")
+  dataFabricacao    DateTime @map("data_fabricacao")
+  dataValidade      DateTime @map("data_validade")
+  quantidadeInicial Decimal  @map("quantidade_inicial") @db.Decimal(12, 3)
+  quantidadeAtual   Decimal  @map("quantidade_atual") @db.Decimal(12, 3)
+  recebidoEm        DateTime @map("recebido_em")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  @@unique([produtoId, codigoLote])
+  @@map("lotes")
+}
+
+model Inventario {
+  id              String          @id @default(uuid()) @db.Uuid
+  companyId       String          @map("company_id") @db.Uuid
+  unidadeId       String          @map("unidade_id") @db.Uuid
+  tipo            TipoInventario
+  setor           String?
+  dataInicio      DateTime        @map("data_inicio")
+  dataFim         DateTime?       @map("data_fim")
+  status          StatusInventario @default(ABERTO)
+  responsavelId   String          @map("responsavel_id") @db.Uuid
+  aprovadoPor     String?         @map("aprovado_por")
+  itens           Json            @default("[]")
+  divergencias    Int             @default(0)
+  createdAt       DateTime        @default(now()) @map("created_at")
+  updatedAt       DateTime        @updatedAt @map("updated_at")
+
+  @@map("inventarios")
+}
+
+model TransferenciaEstoque {
+  id                  String              @id @default(uuid()) @db.Uuid
+  companyId           String              @map("company_id") @db.Uuid
+  origemUnidadeId     String              @map("origem_unidade_id") @db.Uuid
+  destinoUnidadeId    String              @map("destino_unidade_id") @db.Uuid
+  dataCriacao         DateTime            @map("data_criacao") @default(now())
+  dataExpedicao       DateTime?           @map("data_expedicao")
+  dataRecebimento     DateTime?           @map("data_recebimento")
+  status              StatusTransferencia @default(PENDENTE)
+  responsavelOrigemId String              @map("responsavel_origem_id") @db.Uuid
+  responsavelDestinoId String?            @map("responsavel_destino_id")
+  itens               Json                @default("[]")
+  createdAt           DateTime            @default(now()) @map("created_at")
+  updatedAt           DateTime            @updatedAt @map("updated_at")
+
+  @@map("transferencias_estoque")
+}
+
+model CurvaABC {
+  id                   String             @id @default(uuid()) @db.Uuid
+  produtoId            String             @map("produto_id") @db.Uuid
+  produto              Produto            @relation(fields: [produtoId], references: [id])
+  unidadeId            String             @map("unidade_id") @db.Uuid
+  mes                  Int
+  ano                  Int
+  quantidadeVendida    Decimal            @map("quantidade_vendida") @db.Decimal(12, 3)
+  valorVendido         Decimal            @map("valor_vendido") @db.Decimal(14, 2)
+  percentualFaturamento Decimal           @map("percentual_faturamento") @db.Decimal(7, 4)
+  percentualAcumulado  Decimal            @map("percentual_acumulado") @db.Decimal(7, 4)
+  classificacao        ClassificacaoABC
+  createdAt            DateTime           @default(now()) @map("created_at")
+
+  @@unique([produtoId, unidadeId, mes, ano])
+  @@map("curva_abc")
+}
+
+model SugestaoCompra {
+  id                 String   @id @default(uuid()) @db.Uuid
+  produtoId          String   @map("produto_id") @db.Uuid
+  produto            Produto  @relation(fields: [produtoId], references: [id])
+  unidadeId          String   @map("unidade_id") @db.Uuid
+  estoqueAtual       Decimal  @map("estoque_atual") @db.Decimal(12, 3)
+  estoqueMinimo      Decimal  @map("estoque_minimo") @db.Decimal(12, 3)
+  consumoMedio       Decimal  @map("consumo_medio") @db.Decimal(12, 3)
+  quantidadeSugerida Decimal  @map("quantidade_sugerida") @db.Decimal(12, 3)
+  data               DateTime @default(now())
+  processada         Boolean  @default(false)
+  createdAt          DateTime @default(now()) @map("created_at")
+
+  @@map("sugestoes_compra")
+}

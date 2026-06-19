@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model TipoContrato {
+  id        String   @id @default(uuid()) @db.Uuid
+  nome      String   @unique
+  descricao String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  contratos Contrato[]
+
+  @@map("tipos_contrato")
+}
+
+model Contrato {
+  id                   String   @id @default(uuid()) @db.Uuid
+  funcionarioId        String   @map("funcionario_id") @db.Uuid
+  tipoContratoId       String   @map("tipo_contrato_id") @db.Uuid
+  tipoContrato         TipoContrato @relation(fields: [tipoContratoId], references: [id])
+  numero               String   @unique
+  dataInicio           DateTime @map("data_inicio")
+  dataFim              DateTime? @map("data_fim")
+  dataExperienciaInicio DateTime? @map("data_experiencia_inicio")
+  dataExperienciaFim   DateTime? @map("data_experiencia_fim")
+  dataEfetivacao       DateTime? @map("data_efetivacao")
+  salarioBase          Decimal  @map("salario_base") @db.Decimal(12, 2)
+  jornadaSemanal       Int      @map("jornada_semanal")
+  horarioEntrada       String?  @map("horario_entrada")
+  horarioSaida         String?  @map("horario_saida")
+  intervaloRefeicao    String?  @map("intervalo_refeicao")
+  cargo                String
+  funcao               String?
+  cbo                  String?
+  cnpjEmpregador       String?  @map("cnpj_empregador")
+  razaoSocialEmpregador String? @map("razao_social_empregador")
+  localTrabalho        String?  @map("local_trabalho")
+  tipoJornada          String   @map("tipo_jornada")
+  valorValeTransporte  Decimal? @map("valor_vale_transporte") @db.Decimal(12, 2)
+  valorValeRefeicao    Decimal? @map("valor_vale_refeicao") @db.Decimal(12, 2)
+  valorPlanoSaude      Decimal? @map("valor_plano_saude") @db.Decimal(12, 2)
+  status               String   @default("Ativo")
+  observacoes          String?
+  createdBy            String?  @map("created_by")
+  updatedBy            String?  @map("updated_by")
+  createdAt            DateTime @default(now()) @map("created_at")
+  updatedAt            DateTime @updatedAt @map("updated_at")
+
+  aditivos    AditivoContrato[]
+  rescisoes   TermoRescisao[]
+  documentos  DocumentoContrato[]
+
+  @@index([funcionarioId])
+  @@index([status])
+  @@index([tipoContratoId])
+  @@map("contratos")
+}
+
+model AditivoContrato {
+  id            String   @id @default(uuid()) @db.Uuid
+  contratoId    String   @map("contrato_id") @db.Uuid
+  contrato      Contrato @relation(fields: [contratoId], references: [id])
+  data          DateTime
+  tipo          String
+  descricao     String
+  valorAnterior Decimal? @map("valor_anterior") @db.Decimal(12, 2)
+  valorNovo     Decimal? @map("valor_novo") @db.Decimal(12, 2)
+  dataInicial   DateTime? @map("data_inicial")
+  dataFinal     DateTime? @map("data_final")
+  documentoPath String?  @map("documento_path")
+  createdBy     String?  @map("created_by")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@index([contratoId])
+  @@map("aditivos_contrato")
+}
+
+model TermoRescisao {
+  id                 String   @id @default(uuid()) @db.Uuid
+  contratoId         String   @map("contrato_id") @db.Uuid
+  contrato           Contrato @relation(fields: [contratoId], references: [id])
+  dataRescisao       DateTime @map("data_rescisao")
+  tipoRescisao       String   @map("tipo_rescisao")
+  avisoPrevio        String?  @map("aviso_previo")
+  dataAvisoPrevio    DateTime? @map("data_aviso_previo")
+  dataBaixaCTPS      DateTime? @map("data_baixa_ctps")
+  saldoSalario       Decimal? @map("saldo_salario") @db.Decimal(12, 2)
+  feriasVencidas     Decimal? @map("ferias_vencidas") @db.Decimal(12, 2)
+  feriasProporcionais Decimal? @map("ferias_proporcionais") @db.Decimal(12, 2)
+  decimoTerceiro     Decimal? @map("decimo_terceiro") @db.Decimal(12, 2)
+  avisoPrevioValor   Decimal? @map("aviso_previo_valor") @db.Decimal(12, 2)
+  multaFGTS          Decimal? @map("multa_fgts") @db.Decimal(12, 2)
+  indenizacao        Decimal? @map("indenizacao") @db.Decimal(12, 2)
+  valorTotal         Decimal? @map("valor_total") @db.Decimal(12, 2)
+  observacoes        String?
+  ativo              Boolean  @default(true)
+  createdBy          String?  @map("created_by")
+  createdAt          DateTime @default(now()) @map("created_at")
+
+  @@index([contratoId])
+  @@index([dataRescisao])
+  @@map("termos_rescisao")
+}
+
+model DocumentoContrato {
+  id            String   @id @default(uuid()) @db.Uuid
+  contratoId    String   @map("contrato_id") @db.Uuid
+  contrato      Contrato @relation(fields: [contratoId], references: [id])
+  tipo          String
+  nome          String
+  descricao     String?
+  caminhoArquivo String? @map("caminho_arquivo")
+  dataUpload    DateTime @default(now()) @map("data_upload")
+  createdBy     String?  @map("created_by")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@index([contratoId])
+  @@map("documentos_contrato")
+}

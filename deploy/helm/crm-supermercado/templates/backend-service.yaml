@@ -1,0 +1,80 @@
+{{- $backendServices := list "apiGateway" "authService" "rhService" "financialService" "pdvService" "inventoryService" "crmService" "marketingService" "securityService" "purchasingService" "cftvService" "distributionService" "biService" "aiService" "notificationService" -}}
+{{- range $serviceName := $backendServices }}
+{{- $service := index $.Values $serviceName }}
+{{- if $service.enabled }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    {{- include "crm.backend.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+spec:
+  replicas: {{ $service.replicaCount | default 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $service.name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ $service.name }}
+        {{- include "crm.labels" $ | nindent 8 }}
+        {{- include "crm.backend.labels" $ | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: {{ $service.servicePort | quote }}
+    spec:
+      {{- if $.Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- range $.Values.global.imagePullSecrets }}
+        - name: {{ . }}
+        {{- end }}
+      {{- end }}
+      containers:
+        - name: {{ $service.name }}
+          image: {{ $service.image }}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: {{ $service.servicePort }}
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: {{ $.Values.global.environment | quote }}
+            - name: PORT
+              value: {{ $service.servicePort | quote }}
+            - name: TZ
+              value: {{ $.Values.global.timezone | quote }}
+            {{- include "crm.secretEnv" $ | nindent 12 }}
+            {{- if $service.env }}
+            {{- range $key, $value := $service.env }}
+            - name: {{ $key }}
+              value: {{ $value | quote }}
+            {{- end }}
+            {{- end }}
+          resources:
+            {{- toYaml $service.resources | nindent 12 }}
+          {{- $probe := dict "enabled" true "path" "/health" "containerPort" $service.servicePort "initialDelaySeconds" 15 "periodSeconds" 15 }}
+          {{- include "crm.probes" (dict "probe" $probe "containerPort" $service.servicePort) | nindent 10 }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    {{- include "crm.backend.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+spec:
+  selector:
+    app.kubernetes.io/name: {{ $service.name }}
+  ports:
+    - port: {{ $service.servicePort }}
+      targetPort: {{ $service.servicePort }}
+      protocol: TCP
+  type: ClusterIP
+{{- end }}
+{{- end }}

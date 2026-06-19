@@ -1,0 +1,78 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoCodigoBarras {
+  EAN13
+  UPC
+  CODE128
+  DUN14
+  GS1
+}
+
+enum StatusCodigoBarras {
+  Ativo
+  Inativo
+}
+
+enum OrientacaoEtiqueta {
+  Retrato
+  Paisagem
+}
+
+enum StatusImpressao {
+  Pendente
+  Impressa
+  Erro
+}
+
+model CodigoBarras {
+  id             String            @id @default(cuid())
+  produtoId      String
+  codigo         String            @unique
+  tipo           TipoCodigoBarras
+  status         StatusCodigoBarras @default(Ativo)
+  ePrimario      Boolean           @default(false)
+  dataCriacao    DateTime          @default(now())
+  dataAtualizacao DateTime         @updatedAt
+
+  @@map("codigos_barras")
+}
+
+model Etiqueta {
+  id             String            @id @default(cuid())
+  nome           String
+  largura        Float
+  altura         Float
+  margemSuperior  Float             @default(0)
+  margemInferior  Float             @default(0)
+  margemEsquerda Float             @default(0)
+  margemDireita  Float             @default(0)
+  orientacao     OrientacaoEtiqueta @default(Retrato)
+  camposJson     String
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  impressoes     ImpressaoEtiqueta[]
+
+  @@map("etiquetas")
+}
+
+model ImpressaoEtiqueta {
+  id             String            @id @default(cuid())
+  etiquetaId     String
+  produtoIds     String
+  quantidade     Int
+  dataImpressao  DateTime          @default(now())
+  usuarioId      String
+  status         StatusImpressao   @default(Pendente)
+  observacoes    String?
+  createdAt      DateTime          @default(now())
+  etiqueta       Etiqueta          @relation(fields: [etiquetaId], references: [id])
+
+  @@map("impressoes_etiqueta")
+}

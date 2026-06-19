@@ -1,0 +1,50 @@
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +37ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mThrottlerModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mHttpModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +25ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mServicesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCamerasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mEventosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mGravacoesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mReconhecimentoFacialModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLeituraPlacasModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAlertasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCamerasController {/api/v1/cftv/cameras}:[39m[38;5;3m +59ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras, GET} route[39m[38;5;3m +6ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras/resumo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras/:id, PUT} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras/:id/status, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/cameras/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mEventosController {/api/v1/cftv/eventos}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/eventos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/eventos/resumo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/eventos/:id, GET} route[39m[38;5;3m +12ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mGravacoesController {/api/v1/cftv/gravacoes}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/gravacoes, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/gravacoes/resumo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/gravacoes/camera/:cameraId, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/gravacoes/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mReconhecimentoFacialController {/api/v1/cftv/reconhecimento-facial}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/reconhecimento-facial, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/reconhecimento-facial/resumo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/reconhecimento-facial/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/reconhecimento-facial, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLeituraPlacasController {/api/v1/cftv/leitura-placas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/leitura-placas, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/leitura-placas/buscar/:placa, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/leitura-placas/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/leitura-placas, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAlertasController {/api/v1/cftv/alertas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/alertas, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/alertas/nao-enviados, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/alertas/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/alertas, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/cftv/alertas/:id/enviado, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +4ms[39m
+[32m[Nest] 10976  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[CFTVService] [39m[32mCFTV Service running on port 3010[39m

@@ -1,0 +1,203 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum WorkflowCategoria {
+  COMPRAS
+  RH
+  FINANCEIRO
+  ESTOQUE
+  CRM
+  FISCAL
+}
+
+enum EstadoTipo {
+  INICIAL
+  INTERMEDIARIO
+  FINAL
+  APROVACAO
+  REJEICAO
+}
+
+enum InstanciaStatus {
+  ATIVA
+  COMPLETA
+  CANCELADA
+}
+
+enum AcaoTipo {
+  NOTIFICACAO
+  ATUALIZACAO_CAMPO
+  API_CALL
+  EMAIL
+  CRIAR_TAREFA
+  AGENDAR
+}
+
+enum TarefaStatus {
+  PENDENTE
+  EM_ANDAMENTO
+  COMPLETA
+}
+
+model Workflow {
+  id          String             @id @default(uuid())
+  nome        String
+  descricao   String?
+  categoria   WorkflowCategoria
+  ativo       Boolean            @default(true)
+  versao      Int                @default(1)
+  criadoEm    DateTime           @default(now()) @map("criado_em")
+  atualizadoEm DateTime          @updatedAt @map("atualizado_em")
+
+  estados     WorkflowEstado[]
+  transicoes  WorkflowTransicao[]
+  instancias  WorkflowInstancia[]
+  regras      WorkflowRegra[]
+
+  @@index([categoria])
+  @@index([ativo])
+  @@index([nome])
+  @@map("workflows")
+}
+
+model WorkflowEstado {
+  id         String     @id @default(uuid())
+  workflowId String     @map("workflow_id")
+  workflow   Workflow   @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  nome       String
+  tipo       EstadoTipo
+  ordem      Int        @default(0)
+  configJson Json?      @map("config_json")
+  criadoEm   DateTime   @default(now()) @map("criado_em")
+
+  estadoOrigem  WorkflowTransicao[] @relation("estado_origem")
+  estadoDestino WorkflowTransicao[] @relation("estado_destino")
+
+  instancias            WorkflowInstancia[]
+  historicoOrigem       WorkflowHistorico[] @relation("historico_origem")
+  historicoDestino      WorkflowHistorico[] @relation("historico_destino")
+
+  @@index([workflowId])
+  @@index([tipo])
+  @@map("workflow_estados")
+}
+
+model WorkflowTransicao {
+  id              String   @id @default(uuid())
+  workflowId      String   @map("workflow_id")
+  workflow        Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  estadoOrigemId  String   @map("estado_origem_id")
+  estadoOrigem    WorkflowEstado @relation("estado_origem", fields: [estadoOrigemId], references: [id])
+  estadoDestinoId String   @map("estado_destino_id")
+  estadoDestino   WorkflowEstado @relation("estado_destino", fields: [estadoDestinoId], references: [id])
+  nome            String
+  condicaoJson    Json?    @map("condicao_json")
+  acaoJson        Json?    @map("acao_json")
+  criadoEm        DateTime @default(now()) @map("criado_em")
+
+  historicos WorkflowHistorico[]
+
+  @@index([workflowId])
+  @@index([estadoOrigemId])
+  @@index([estadoDestinoId])
+  @@map("workflow_transicoes")
+}
+
+model WorkflowInstancia {
+  id           String          @id @default(uuid())
+  workflowId   String          @map("workflow_id")
+  workflow     Workflow        @relation(fields: [workflowId], references: [id])
+  entidadeTipo String          @map("entidade_tipo")
+  entidadeId   String          @map("entidade_id")
+  estadoAtualId String?         @map("estado_atual_id")
+  estadoAtual  WorkflowEstado? @relation(fields: [estadoAtualId], references: [id])
+  status       InstanciaStatus @default(ATIVA)
+  dadosJson    Json?           @map("dados_json")
+  criadoPor    String?         @map("criado_por")
+  criadoEm     DateTime        @default(now()) @map("criado_em")
+  atualizadoEm DateTime        @updatedAt @map("atualizado_em")
+  concluidoEm  DateTime?       @map("concluido_em")
+
+  historicos WorkflowHistorico[]
+  tarefas    WorkflowTarefa[]
+
+  @@index([workflowId])
+  @@index([entidadeTipo, entidadeId])
+  @@index([status])
+  @@index([estadoAtualId])
+  @@map("workflow_instancias")
+}
+
+model WorkflowHistorico {
+  id             String            @id @default(uuid())
+  instanciaId    String            @map("instancia_id")
+  instancia      WorkflowInstancia @relation(fields: [instanciaId], references: [id])
+  estadoOrigemId String?           @map("estado_origem_id")
+  estadoOrigem   WorkflowEstado?   @relation("historico_origem", fields: [estadoOrigemId], references: [id])
+  estadoDestinoId String?           @map("estado_destino_id")
+  estadoDestino  WorkflowEstado?   @relation("historico_destino", fields: [estadoDestinoId], references: [id])
+  acao           String?
+  transicaoId    String?           @map("transicao_id")
+  transicao      WorkflowTransicao? @relation(fields: [transicaoId], references: [id])
+  dadosJson      Json?             @map("dados_json")
+  usuarioId      String?           @map("usuario_id")
+  criadoEm       DateTime          @default(now()) @map("criado_em")
+
+  @@index([instanciaId])
+  @@index([criadoEm])
+  @@map("workflow_historicos")
+}
+
+model WorkflowAcao {
+  id         String   @id @default(uuid())
+  nome       String
+  descricao  String?
+  tipo       AcaoTipo
+  configJson Json?    @map("config_json")
+  ativo      Boolean  @default(true)
+  criadoEm   DateTime @default(now()) @map("criado_em")
+
+  @@index([tipo])
+  @@index([ativo])
+  @@map("workflow_acoes")
+}
+
+model WorkflowRegra {
+  id           String   @id @default(uuid())
+  workflowId   String   @map("workflow_id")
+  workflow     Workflow @relation(fields: [workflowId], references: [id], onDelete: Cascade)
+  nome         String
+  descricao    String?
+  condicaoJson Json?    @map("condicao_json")
+  prioridade   Int      @default(0)
+  ativo        Boolean  @default(true)
+  criadoEm     DateTime @default(now()) @map("criado_em")
+
+  @@index([workflowId])
+  @@index([ativo])
+  @@map("workflow_regras")
+}
+
+model WorkflowTarefa {
+  id          String        @id @default(uuid())
+  instanciaId String        @map("instancia_id")
+  instancia   WorkflowInstancia @relation(fields: [instanciaId], references: [id])
+  usuarioId   String?       @map("usuario_id")
+  titulo      String
+  descricao   String?
+  status      TarefaStatus  @default(PENDENTE)
+  dataLimite  DateTime?     @map("data_limite")
+  criadoEm    DateTime      @default(now()) @map("criado_em")
+  concluidoEm DateTime?     @map("concluido_em")
+
+  @@index([instanciaId])
+  @@index([usuarioId])
+  @@index([status])
+  @@map("workflow_tarefas")
+}

@@ -1,0 +1,54 @@
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +27ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +8ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mNotificacaoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDestinatariosModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mModelosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPromocoesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAutomacoesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCampanhasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCampanhasController {/api/v1/marketing/campanhas}:[39m[38;5;3m +47ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas/:id/enviar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/campanhas/:id/metricas, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDestinatariosController {/api/v1/marketing/destinatarios}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios/batch, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios/:id, PATCH} route[39m[38;5;3m +90ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios/:id/marcar-abertura, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/destinatarios/:id/marcar-clique, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mModelosController {/api/v1/marketing/modelos}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/modelos, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/modelos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/modelos/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/modelos/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/modelos/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAutomacoesController {/api/v1/marketing/automacoes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes/:id/ativar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes/:id/desativar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/automacoes/processar/:gatilho, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPromocoesController {/api/v1/marketing/promocoes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes/:id, PATCH} route[39m[38;5;3m +76ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes/:id/ativar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/marketing/promocoes/:id/desativar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 13508  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[MarketingService] [39m[32mMarketing Service running on port 3007[39m

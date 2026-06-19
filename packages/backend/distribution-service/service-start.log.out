@@ -1,0 +1,52 @@
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +29ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSeparacaoModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRoteirizacaoModule dependencies initialized[39m[38;5;3m +12ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mVeiculosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMotoristasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mExpedicaoModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSeparacaoController {/separacao}:[39m[38;5;3m +205ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id/start, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id/complete, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id/start-conference, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/separacao/:id/complete-conference, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRoteirizacaoController {/roteirizacao}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/:id/start, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/:id/finish, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/:id/cancel, POST} route[39m[38;5;3m +12ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/roteirizacao/optimize, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mVeiculosController {/veiculos}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/veiculos, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/veiculos, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/veiculos/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/veiculos/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/veiculos/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/veiculos/:id/status, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mMotoristasController {/motoristas}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/motoristas, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/motoristas, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/motoristas/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/motoristas/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/motoristas/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mExpedicaoController {/expedicao}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao/:id/dispatch, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/expedicao/:id/cancel, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 12560  - [39m18/06/2026, 22:09:58 [32m    LOG[39m [38;5;3m[DistributionService] [39m[32mDistribution service running on port 3011[39m

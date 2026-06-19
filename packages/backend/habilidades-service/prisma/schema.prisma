@@ -1,0 +1,189 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum HabilidadeCategoria {
+  Operacional
+  Administrativa
+  Comercial
+  Tecnica
+  Gerencial
+  Atendimento
+  Idioma
+}
+
+enum CertificacaoStatus {
+  Valida
+  Vencida
+  Revogada
+}
+
+enum TreinamentoModalidade {
+  Presencial
+  EAD
+  Hibrido
+}
+
+enum TurmaStatus {
+  Planejada
+  EmAndamento
+  Concluida
+  Cancelada
+}
+
+enum AvaliacaoTipo {
+  Autoavaliacao
+  Gestor
+  TrezentosSessenta
+}
+
+enum AvaliacaoStatus {
+  Pendente
+  Concluida
+}
+
+model Habilidade {
+  id          String             @id @default(uuid()) @db.Uuid
+  nome        String
+  categoria   HabilidadeCategoria
+  nivelMinimo Int                @default(1) @map("nivel_minimo")
+  descricao   String?
+  createdAt   DateTime           @default(now()) @map("created_at")
+  updatedAt   DateTime           @updatedAt @map("updated_at")
+
+  funcionarios FuncionarioHabilidade[]
+
+  @@map("habilidades")
+}
+
+model FuncionarioHabilidade {
+  id                  String   @id @default(uuid()) @db.Uuid
+  funcionarioId       String   @map("funcionario_id") @db.Uuid
+  habilidadeId        String   @map("habilidade_id") @db.Uuid
+  nivelAtual          Int      @default(1) @map("nivel_atual")
+  dataAquisicao       DateTime @default(now()) @map("data_aquisicao")
+  dataUltimaAtualizacao DateTime? @map("data_ultima_atualizacao")
+  observacoes         String?
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  habilidade          Habilidade @relation(fields: [habilidadeId], references: [id])
+
+  @@unique([funcionarioId, habilidadeId])
+  @@index([funcionarioId])
+  @@map("funcionario_habilidades")
+}
+
+model Certificacao {
+  id           String   @id @default(uuid()) @db.Uuid
+  nome         String
+  orgaoEmissor String   @map("orgao_emissor")
+  descricao    String?
+  validadeMeses Int     @map("validade_meses")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  funcionarios FuncionarioCertificacao[]
+
+  @@map("certificacoes")
+}
+
+model FuncionarioCertificacao {
+  id              String             @id @default(uuid()) @db.Uuid
+  funcionarioId   String             @map("funcionario_id") @db.Uuid
+  certificacaoId  String             @map("certificacao_id") @db.Uuid
+  dataObtencao    DateTime           @map("data_obtencao")
+  dataValidade    DateTime           @map("data_validade")
+  status          CertificacaoStatus @default(Valida)
+  documentoPath   String?            @map("documento_path")
+  observacoes     String?
+  createdAt       DateTime           @default(now()) @map("created_at")
+  updatedAt       DateTime           @updatedAt @map("updated_at")
+
+  certificacao    Certificacao       @relation(fields: [certificacaoId], references: [id])
+
+  @@unique([funcionarioId, certificacaoId])
+  @@index([funcionarioId])
+  @@index([dataValidade])
+  @@map("funcionario_certificacoes")
+}
+
+model Treinamento {
+  id          String              @id @default(uuid()) @db.Uuid
+  nome        String
+  descricao   String?
+  cargaHoraria Int                @map("carga_horaria")
+  modalidade  TreinamentoModalidade @default(Presencial)
+  conteudo    String?
+  createdAt   DateTime            @default(now()) @map("created_at")
+  updatedAt   DateTime            @updatedAt @map("updated_at")
+
+  turmas      TurmaTreinamento[]
+
+  @@map("treinamentos")
+}
+
+model TurmaTreinamento {
+  id               String      @id @default(uuid()) @db.Uuid
+  treinamentoId    String      @map("treinamento_id") @db.Uuid
+  codigo           String
+  dataInicio       DateTime    @map("data_inicio")
+  dataFim          DateTime?   @map("data_fim")
+  horario          String?
+  instrutor        String?
+  local            String?
+  vagas            Int         @default(0)
+  vagasPreenchidas Int         @default(0) @map("vagas_preenchidas")
+  status           TurmaStatus @default(Planejada)
+  observacoes      String?
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  treinamento      Treinamento @relation(fields: [treinamentoId], references: [id])
+  participantes    ParticipacaoTreinamento[]
+
+  @@index([treinamentoId])
+  @@map("turmas_treinamento")
+}
+
+model ParticipacaoTreinamento {
+  id                String   @id @default(uuid()) @db.Uuid
+  turmaId           String   @map("turma_id") @db.Uuid
+  funcionarioId     String   @map("funcionario_id") @db.Uuid
+  frequencia        Decimal  @default(0) @db.Decimal(5, 2)
+  nota              Decimal? @db.Decimal(5, 2)
+  aprovado          Boolean  @default(false)
+  certificadoEmitido Boolean @default(false) @map("certificado_emitido")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  turma             TurmaTreinamento @relation(fields: [turmaId], references: [id])
+
+  @@unique([turmaId, funcionarioId])
+  @@index([funcionarioId])
+  @@map("participacoes_treinamento")
+}
+
+model AvaliacaoCompetencia {
+  id               String           @id @default(uuid()) @db.Uuid
+  funcionarioId    String           @map("funcionario_id") @db.Uuid
+  avaliadorId      String           @map("avaliador_id") @db.Uuid
+  data             DateTime         @default(now())
+  tipo             AvaliacaoTipo
+  periodoAvaliacao String           @map("periodo_avaliacao")
+  competencia      String
+  nota             Int              @default(1)
+  feedback         String?
+  status           AvaliacaoStatus  @default(Pendente)
+  createdAt        DateTime         @default(now()) @map("created_at")
+  updatedAt        DateTime         @updatedAt @map("updated_at")
+
+  @@index([funcionarioId])
+  @@index([status])
+  @@map("avaliacoes_competencia")
+}

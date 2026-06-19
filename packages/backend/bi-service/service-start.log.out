@@ -1,0 +1,38 @@
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +23ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +8ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mDashboardsModule dependencies initialized[39m[38;5;3m +3ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mIndicadoresModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mKpisModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRelatoriosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mKpisController {/kpis}:[39m[38;5;3m +87ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/kpis, POST} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/kpis, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/kpis/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/kpis/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/kpis/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/kpis/calculate, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRelatoriosController {/relatorios}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios/:id/generate, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/relatorios/generate, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mDashboardsController {/dashboards}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dashboards, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dashboards, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dashboards/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dashboards/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dashboards/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/dashboards/:id/render, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mIndicadoresController {/indicadores}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/indicadores, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/indicadores, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/indicadores/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/indicadores/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/indicadores/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 20988  - [39m18/06/2026, 22:09:59 [32m    LOG[39m [38;5;3m[BIService] [39m[32mBI service running on port 3012[39m

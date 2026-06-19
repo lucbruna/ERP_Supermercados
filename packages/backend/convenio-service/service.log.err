@@ -1,0 +1,45 @@
+[96msrc/contratos/contratos.service.ts[0m:[93m90[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType '{ status?: string | undefined; observacao?: string | undefined; jurosMora?: number | undefined; multaAtraso?: number | undefined; taxaJuros?: number | undefined; carencia?: number | undefined; limiteMensal?: number | undefined; valor?: number | undefined; dataFim?: Date | ... 1 more ... | undefined; dataInicio?: Dat...' is not assignable to type '(Without<ContratoUpdateInput, ContratoUncheckedUpdateInput> & ContratoUncheckedUpdateInput) | (Without<...> & ContratoUpdateInput)'.
+  Type '{ status?: string | undefined; observacao?: string | undefined; jurosMora?: number | undefined; multaAtraso?: number | undefined; taxaJuros?: number | undefined; carencia?: number | undefined; limiteMensal?: number | undefined; valor?: number | undefined; dataFim?: Date | ... 1 more ... | undefined; dataInicio?: Dat...' is not assignable to type 'Without<ContratoUncheckedUpdateInput, ContratoUpdateInput> & ContratoUpdateInput'.
+    Types of property 'status' are incompatible.
+      Type 'string | undefined' is not assignable to type 'ContratoStatus | EnumContratoStatusFieldUpdateOperationsInput | undefined'.
+        Type 'string' is not assignable to type 'ContratoStatus | EnumContratoStatusFieldUpdateOperationsInput | undefined'.
+
+[7m90[0m       data: {
+[7m  [0m [91m      ~~~~[0m
+
+  [96mnode_modules/.prisma/client/index.d.ts[0m:[93m3527[0m:[93m5[0m
+    [7m3527[0m     data: XOR<ContratoUpdateInput, ContratoUncheckedUpdateInput>
+    [7m    [0m [96m    ~~~~[0m
+    The expected type comes from property 'data' which is declared here on type '{ select?: ContratoSelect<DefaultArgs> | null | undefined; include?: ContratoInclude<DefaultArgs> | null | undefined; data: (Without<...> & ContratoUncheckedUpdateInput) | (Without<...> & ContratoUpdateInput); where: ContratoWhereUniqueInput; }'
+[96msrc/convenios/convenios.service.ts[0m:[93m29[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'TipoFaturamento | undefined'.
+
+[7m29[0m         tipoFaturamento: dto.tipoFaturamento || 'MENSAL',
+[7m  [0m [91m        ~~~~~~~~~~~~~~~[0m
+
+  [96mnode_modules/.prisma/client/index.d.ts[0m:[93m6827[0m:[93m5[0m
+    [7m6827[0m     tipoFaturamento?: $Enums.TipoFaturamento
+    [7m    [0m [96m    ~~~~~~~~~~~~~~~[0m
+    The expected type comes from property 'tipoFaturamento' which is declared here on type '(Without<ConvenioCreateInput, ConvenioUncheckedCreateInput> & ConvenioUncheckedCreateInput) | (Without<...> & ConvenioCreateInput)'
+[96msrc/convenios/convenios.service.ts[0m:[93m114[0m:[93m7[0m - [91merror[0m[90m TS2322: [0mType '{ status?: string | undefined; observacao?: string | undefined; diaFechamento?: number | undefined; tipoFaturamento?: string | undefined; prazoPagamento?: number | undefined; descontoPadrao?: number | undefined; ... 5 more ...; nome?: string | undefined; }' is not assignable to type '(Without<ConvenioUpdateInput, ConvenioUncheckedUpdateInput> & ConvenioUncheckedUpdateInput) | (Without<...> & ConvenioUpdateInput)'.
+  Type '{ status?: string | undefined; observacao?: string | undefined; diaFechamento?: number | undefined; tipoFaturamento?: string | undefined; prazoPagamento?: number | undefined; descontoPadrao?: number | undefined; ... 5 more ...; nome?: string | undefined; }' is not assignable to type 'Without<ConvenioUncheckedUpdateInput, ConvenioUpdateInput> & ConvenioUpdateInput'.
+    Types of property 'tipoFaturamento' are incompatible.
+      Type 'string | undefined' is not assignable to type 'TipoFaturamento | EnumTipoFaturamentoFieldUpdateOperationsInput | undefined'.
+        Type 'string' is not assignable to type 'TipoFaturamento | EnumTipoFaturamentoFieldUpdateOperationsInput | undefined'.
+
+[7m114[0m       data: {
+[7m   [0m [91m      ~~~~[0m
+
+  [96mnode_modules/.prisma/client/index.d.ts[0m:[93m2346[0m:[93m5[0m
+    [7m2346[0m     data: XOR<ConvenioUpdateInput, ConvenioUncheckedUpdateInput>
+    [7m    [0m [96m    ~~~~[0m
+    The expected type comes from property 'data' which is declared here on type '{ select?: ConvenioSelect<DefaultArgs> | null | undefined; include?: ConvenioInclude<DefaultArgs> | null | undefined; data: (Without<...> & ConvenioUncheckedUpdateInput) | (Without<...> & ConvenioUpdateInput); where: ConvenioWhereUniqueInput; }'
+[96msrc/faturas/faturas.service.ts[0m:[93m105[0m:[93m9[0m - [91merror[0m[90m TS2322: [0mType 'string' is not assignable to type 'FaturaStatus | EnumFaturaStatusFieldUpdateOperationsInput | undefined'.
+
+[7m105[0m         status: novoStatus,
+[7m   [0m [91m        ~~~~~~[0m
+
+  [96mnode_modules/.prisma/client/index.d.ts[0m:[93m7329[0m:[93m5[0m
+    [7m7329[0m     status?: EnumFaturaStatusFieldUpdateOperationsInput | $Enums.FaturaStatus
+    [7m    [0m [96m    ~~~~~~[0m
+    The expected type comes from property 'status' which is declared here on type '(Without<FaturaConvenioUpdateInput, FaturaConvenioUncheckedUpdateInput> & FaturaConvenioUncheckedUpdateInput) | (Without<...> & FaturaConvenioUpdateInput)'
+

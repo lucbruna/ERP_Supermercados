@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProvedorArmazenamento {
+  LOCAL
+  S3
+  AZURE
+  GCS
+}
+
+enum StatusArquivo {
+  PROCESSANDO
+  ARMAZENADO
+  ERRO
+  DELETADO
+}
+
+enum PermissaoCompartilhamento {
+  VISUALIZAR
+  EDITAR
+  ADMIN
+}
+
+model Arquivo {
+  id            String                   @id @default(uuid()) @db.Uuid
+  nome          String
+  nomeOriginal  String                   @map("nome_original")
+  extensao      String
+  mimeType      String                   @map("mime_type")
+  tamanhoBytes  Int                      @map("tamanho_bytes")
+  hash          String
+  bucket        String?
+  key           String
+  url           String?
+  provedor      ProvedorArmazenamento    @default(LOCAL)
+  pasta         String                   @default("/")
+  tags          String[]
+  dimensoes     Json?                    @db.Json
+  status        StatusArquivo            @default(PROCESSANDO)
+  criadoPor     String                   @map("criado_por")
+  criadoEm      DateTime                 @default(now()) @map("criado_em")
+  atualizadoEm  DateTime                 @updatedAt @map("atualizado_em")
+
+  versoes       VersaoArquivo[]
+  compartilhamentos Compartilhamento[]
+
+  @@map("arquivos")
+}
+
+model Pasta {
+  id        String   @id @default(uuid()) @db.Uuid
+  nome      String
+  caminho   String
+  paiId     String?  @map("pai_id") @db.Uuid
+  criadoPor String   @map("criado_por")
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  pastaPai  Pasta?  @relation("PastasFilhas", fields: [paiId], references: [id])
+  filhas    Pasta[] @relation("PastasFilhas")
+
+  @@map("pastas")
+}
+
+model VersaoArquivo {
+  id           String   @id @default(uuid()) @db.Uuid
+  arquivoId    String   @map("arquivo_id") @db.Uuid
+  versao       Int
+  nomeOriginal String   @map("nome_original")
+  tamanhoBytes Int      @map("tamanho_bytes")
+  hash         String
+  key          String
+  url          String?
+  criadoPor    String   @map("criado_por")
+  criadoEm     DateTime @default(now()) @map("criado_em")
+
+  arquivo Arquivo @relation(fields: [arquivoId], references: [id])
+
+  @@map("versoes_arquivo")
+}
+
+model Compartilhamento {
+  id         String                      @id @default(uuid()) @db.Uuid
+  arquivoId  String                      @map("arquivo_id") @db.Uuid
+  usuarioId  String                      @map("usuario_id")
+  permissao  PermissaoCompartilhamento
+  expiraEm   DateTime?                   @map("expira_em")
+  criadoEm   DateTime                    @default(now()) @map("criado_em")
+
+  arquivo    Arquivo @relation(fields: [arquivoId], references: [id])
+
+  @@map("compartilhamentos")
+}

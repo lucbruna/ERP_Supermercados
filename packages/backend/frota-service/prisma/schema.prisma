@@ -1,0 +1,271 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum TipoVeiculo {
+  PASSEIO
+  CARGA
+  UTILITARIO
+  CAMINHAO
+  VAN
+}
+
+enum Combustivel {
+  GASOLINA
+  ETANOL
+  DIESEL
+  FLEX
+  ELETRICO
+}
+
+enum SituacaoVeiculo {
+  ATIVO
+  INATIVO
+  MANUTENCAO
+  BAIXADO
+}
+
+enum SituacaoMotorista {
+  ATIVO
+  INATIVO
+  FERIAS
+}
+
+enum TipoManutencao {
+  PREVENTIVA
+  CORRETIVA
+  REVISAO
+}
+
+enum StatusManutencao {
+  AGENDADA
+  EM_ANDAMENTO
+  CONCLUIDA
+  CANCELADA
+}
+
+enum TipoContrato {
+  SEGURO
+  FINANCIAMENTO
+  LEASING
+}
+
+enum StatusContrato {
+  ATIVO
+  VENCIDO
+  CANCELADO
+}
+
+enum StatusMulta {
+  PENDENTE
+  PAGA
+  RECORRENDO
+}
+
+enum StatusRota {
+  PLANEJADA
+  EM_ANDAMENTO
+  CONCLUIDA
+  CANCELADA
+}
+
+enum TipoKmRegistro {
+  INICIO_TURNO
+  FIM_TURNO
+  VIAGEM
+}
+
+model Veiculo {
+  id               String          @id @default(uuid())
+  placa            String          @unique
+  renavam          String?
+  chassi           String?
+  marca            String
+  modelo           String
+  anoFabricacao    Int             @map("ano_fabricacao")
+  anoModelo        Int             @map("ano_modelo")
+  cor              String?
+  tipo             TipoVeiculo
+  categoria        String?
+  capacidadeCarga  Decimal?        @map("capacidade_carga") @db.Decimal(10, 2)
+  capacidadeTanque Decimal?        @map("capacidade_tanque") @db.Decimal(10, 2)
+  combustivel      Combustivel
+  kmAtual          Decimal         @default(0) @map("km_atual") @db.Decimal(10, 2)
+  situacao         SituacaoVeiculo @default(ATIVO)
+  observacoes      String?
+  createdAt        DateTime        @default(now()) @map("created_at")
+  updatedAt        DateTime        @updatedAt @map("updated_at")
+
+  abastecimentos   Abastecimento[]
+  manutencoes      Manutencao[]
+  contratos        ContratoVeiculo[]
+  multas           Multa[]
+  rotas            Rota[]
+  kmRegistros      KmRegistro[]
+
+  @@index([placa])
+  @@index([situacao])
+  @@index([tipo])
+  @@map("veiculos")
+}
+
+model Motorista {
+  id            String              @id @default(uuid())
+  nome          String
+  cpf           String              @unique
+  cnh           String
+  categoriaCnh  String              @map("categoria_cnh")
+  validadeCnh   DateTime            @map("validade_cnh")
+  dataExame     DateTime?           @map("data_exame")
+  telefone      String?
+  email         String?
+  situacao      SituacaoMotorista   @default(ATIVO)
+  createdAt     DateTime            @default(now()) @map("created_at")
+  updatedAt     DateTime            @updatedAt @map("updated_at")
+
+  abastecimentos Abastecimento[]
+  rotas          Rota[]
+  kmRegistros    KmRegistro[]
+
+  @@index([cpf])
+  @@index([situacao])
+  @@map("motoristas")
+}
+
+model Abastecimento {
+  id              String      @id @default(uuid())
+  veiculoId       String      @map("veiculo_id")
+  veiculo         Veiculo     @relation(fields: [veiculoId], references: [id])
+  motoristaId     String?     @map("motorista_id")
+  motorista       Motorista?  @relation(fields: [motoristaId], references: [id])
+  data            DateTime
+  litros          Decimal     @db.Decimal(10, 2)
+  valorLitro      Decimal     @map("valor_litro") @db.Decimal(10, 2)
+  valorTotal      Decimal     @map("valor_total") @db.Decimal(10, 2)
+  kmAtual         Decimal?    @map("km_atual") @db.Decimal(10, 2)
+  tipoCombustivel Combustivel @map("tipo_combustivel")
+  posto           String?
+  notaFiscal      String?     @map("nota_fiscal")
+  createdAt       DateTime    @default(now()) @map("created_at")
+
+  @@index([veiculoId])
+  @@index([motoristaId])
+  @@index([data])
+  @@map("abastecimentos")
+}
+
+model Manutencao {
+  id                  String           @id @default(uuid())
+  veiculoId           String           @map("veiculo_id")
+  veiculo             Veiculo          @relation(fields: [veiculoId], references: [id])
+  data                DateTime
+  tipo                TipoManutencao
+  descricao           String
+  kmAtual             Decimal?         @map("km_atual") @db.Decimal(10, 2)
+  valorPecas          Decimal?         @default(0) @map("valor_pecas") @db.Decimal(10, 2)
+  valorMaoObra        Decimal?         @default(0) @map("valor_mao_obra") @db.Decimal(10, 2)
+  valorTotal          Decimal          @map("valor_total") @db.Decimal(10, 2)
+  oficina             String?
+  notaFiscal          String?          @map("nota_fiscal")
+  dataProximaManutencao DateTime?       @map("data_proxima_manutencao")
+  status              StatusManutencao @default(AGENDADA)
+  observacoes         String?
+  createdAt           DateTime         @default(now()) @map("created_at")
+  updatedAt           DateTime         @updatedAt @map("updated_at")
+
+  @@index([veiculoId])
+  @@index([status])
+  @@index([data])
+  @@map("manutencoes")
+}
+
+model ContratoVeiculo {
+  id                String        @id @default(uuid())
+  veiculoId         String        @map("veiculo_id")
+  veiculo           Veiculo       @relation(fields: [veiculoId], references: [id])
+  tipo              TipoContrato
+  seguradora        String?
+  instituicao       String?
+  numeroApolice     String?       @map("numero_apolice")
+  numeroContrato    String?       @map("numero_contrato")
+  valor             Decimal       @db.Decimal(12, 2)
+  dataInicio        DateTime      @map("data_inicio")
+  dataFim           DateTime?     @map("data_fim")
+  dataVencimento    DateTime?     @map("data_vencimento")
+  status            StatusContrato @default(ATIVO)
+  observacoes       String?
+  createdAt         DateTime      @default(now()) @map("created_at")
+  updatedAt         DateTime      @updatedAt @map("updated_at")
+
+  @@index([veiculoId])
+  @@index([status])
+  @@index([dataVencimento])
+  @@map("contratos_veiculo")
+}
+
+model Multa {
+  id            String      @id @default(uuid())
+  veiculoId     String      @map("veiculo_id")
+  veiculo       Veiculo     @relation(fields: [veiculoId], references: [id])
+  data          DateTime
+  orgao         String
+  infracao      String
+  pontuacao     Int         @default(0)
+  valor         Decimal     @db.Decimal(10, 2)
+  local         String?
+  status        StatusMulta @default(PENDENTE)
+  dataPagamento DateTime?   @map("data_pagamento")
+  createdAt     DateTime    @default(now()) @map("created_at")
+  updatedAt     DateTime    @updatedAt @map("updated_at")
+
+  @@index([veiculoId])
+  @@index([status])
+  @@map("multas")
+}
+
+model Rota {
+  id           String     @id @default(uuid())
+  descricao    String
+  veiculoId    String     @map("veiculo_id")
+  veiculo      Veiculo    @relation(fields: [veiculoId], references: [id])
+  motoristaId  String?    @map("motorista_id")
+  motorista    Motorista? @relation(fields: [motoristaId], references: [id])
+  origem       String
+  destino      String
+  distanciaKm  Decimal?   @map("distancia_km") @db.Decimal(10, 2)
+  dataSaida    DateTime?  @map("data_saida")
+  dataChegada  DateTime?  @map("data_chegada")
+  status       StatusRota @default(PLANEJADA)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  @@index([veiculoId])
+  @@index([motoristaId])
+  @@index([status])
+  @@map("rotas")
+}
+
+model KmRegistro {
+  id            String         @id @default(uuid())
+  veiculoId     String         @map("veiculo_id")
+  veiculo       Veiculo        @relation(fields: [veiculoId], references: [id])
+  motoristaId   String?        @map("motorista_id")
+  motorista     Motorista?     @relation(fields: [motoristaId], references: [id])
+  data          DateTime
+  kmAnterior    Decimal        @map("km_anterior") @db.Decimal(10, 2)
+  kmAtual       Decimal        @map("km_atual") @db.Decimal(10, 2)
+  kmPercorrido  Decimal        @map("km_percorrido") @db.Decimal(10, 2)
+  tipo          TipoKmRegistro
+  observacoes   String?
+  createdAt     DateTime       @default(now()) @map("created_at")
+
+  @@index([veiculoId])
+  @@index([motoristaId])
+  @@index([data])
+  @@map("km_registros")
+}

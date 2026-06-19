@@ -1,0 +1,16 @@
+# PgBouncer userlist.txt
+# Generate SCRAM-SHA-256 entries using PostgreSQL's SCRAM secret format:
+#
+# 1. Get the SCRAM secret for a user from PostgreSQL:
+#    psql -U admin -d crm_supermercado -c "SELECT pg_shadow.passwd FROM pg_shadow WHERE pg_shadow.usename = 'admin';"
+#
+# 2. Or generate using the pgbouncer auth tool:
+#    docker run --rm bitnami/pgbouncer:latest pgbouncer-auth-file -u admin -p supersecret
+#
+# Format: "username" "scram_secret"
+#
+# Example (user: admin, password: supersecret):
+# "admin" "SCRAM-SHA-256$4096:2d2d2d2d2d2d...2d2d2d=:2d2d2d2d2d...2d2d2d="
+#
+# IMPORTANT: Replace the line below with the actual SCRAM secret for each user.
+# The scram_secret is stored in pg_shadow.passwd in PostgreSQL.

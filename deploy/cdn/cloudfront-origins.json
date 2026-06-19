@@ -1,0 +1,80 @@
+{
+  "origins": [
+    {
+      "id": "api-gateway",
+      "domain": "api-gateway:3000",
+      "protocol": "HTTP",
+      "description": "API Gateway - backend API requests"
+    },
+    {
+      "id": "web-app",
+      "domain": "web-app:3080",
+      "protocol": "HTTP",
+      "description": "Web Application - SSR frontend"
+    },
+    {
+      "id": "storage-service",
+      "domain": "storage-service:3022",
+      "protocol": "HTTP",
+      "description": "Storage Service - file uploads and downloads"
+    },
+    {
+      "id": "minio",
+      "domain": "minio:9000",
+      "protocol": "HTTP",
+      "description": "MinIO - image and asset storage"
+    }
+  ],
+  "behaviors": [
+    {
+      "path": "/api/*",
+      "origin": "api-gateway",
+      "cache_policy": "CachingDisabled",
+      "allowed_methods": ["GET", "HEAD", "OPTIONS", "PUT", "POST", "PATCH", "DELETE"]
+    },
+    {
+      "path": "/storage/*",
+      "origin": "storage-service",
+      "cache_policy": "CachingOptimized",
+      "allowed_methods": ["GET", "HEAD", "OPTIONS"]
+    },
+    {
+      "path": "/assets/*",
+      "origin": "minio",
+      "cache_policy": "CachingOptimized",
+      "allowed_methods": ["GET", "HEAD", "OPTIONS"]
+    },
+    {
+      "path": "/*",
+      "origin": "web-app",
+      "cache_policy": "CachingOptimized",
+      "allowed_methods": ["GET", "HEAD", "OPTIONS"]
+    }
+  ],
+  "default_cache_behavior": {
+    "target_origin": "web-app",
+    "cache_policy": "CachingOptimized",
+    "compress": true,
+    "viewer_protocol_policy": "redirect-to-https"
+  },
+  "cache_policies": {
+    "CachingDisabled": {
+      "TTL": 0,
+      "description": "No caching for dynamic API content"
+    },
+    "CachingOptimized": {
+      "TTL": 60,
+      "max_ttl": 86400,
+      "default_ttl": 60,
+      "description": "Short TTL for semi-dynamic content"
+    },
+    "StaticAssets": {
+      "TTL": 2592000,
+      "max_ttl": 2592000,
+      "default_ttl": 2592000,
+      "description": "30 day cache for static assets (images, CSS, JS)"
+    }
+  },
+  "price_class": "PriceClass_100",
+  "enabled": true
+}

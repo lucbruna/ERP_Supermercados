@@ -1,0 +1,20 @@
+{{- $allServices := list "apiGateway" "authService" "rhService" "financialService" "pdvService" "inventoryService" "crmService" "marketingService" "securityService" "purchasingService" "cftvService" "distributionService" "biService" "aiService" "notificationService" "webApp" "dashboard" -}}
+{{- range $serviceName := $allServices }}
+{{- $service := index $.Values $serviceName }}
+{{- if and $service.enabled $service.pdb.enabled }}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ $service.name }}-pdb
+  namespace: {{ $.Release.Namespace }}
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+spec:
+  minAvailable: {{ $service.pdb.minAvailable | default 1 }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $service.name }}
+{{- end }}
+{{- end }}

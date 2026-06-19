@@ -1,0 +1,374 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum StatusNFe {
+  AUTORIZADA
+  DENEGADA
+  CANCELADA
+  EM_DIGITACAO
+  ASSINADA
+  REJEITADA
+  TRANSMITIDA
+  VALIDADA
+}
+
+enum StatusSped {
+  EM_GERACAO
+  GERADO
+  ENTREGUE
+  ERRO
+}
+
+enum FinalidadeNFe {
+  NORMAL
+  COMPLEMENTAR
+  AJUSTE
+  DEVOLUCAO
+}
+
+enum TipoDocumento {
+  NFe
+  NFCe
+  CTe
+  MDFe
+}
+
+enum Frete {
+  CIF
+  FOB
+}
+
+enum CRT {
+  SimplesNacional
+  LucroPresumido
+  LucroReal
+  LucroArbitrado
+}
+
+enum Ambiente {
+  Producao
+  Homologacao
+}
+
+enum TipoCertificado {
+  A1
+  A3
+}
+
+enum TipoEvento {
+  Cancelamento
+  CartaCorrecao
+  Manifestacao
+}
+
+enum TipoManifestacao {
+  Confirmacao
+  Desconhecimento
+  NaoRealizacao
+}
+
+model Cfop {
+  id          String @id @default(cuid())
+  codigo      String @unique
+  descricao   String
+  tipo        String
+  aplicacao   String?
+  observacao  String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  nfeEntrada  NFeEntrada[]
+
+  @@map("cfop")
+}
+
+model NFeEntrada {
+  id               String      @id @default(cuid())
+  companyId        String      @map("company_id")
+  unidadeId        String      @map("unidade_id")
+  numero           Int
+  serie            Int         @default(1)
+  chaveAcesso      String      @unique @map("chave_acesso")
+  protocolo        String?
+  dataEmissao      DateTime    @map("data_emissao")
+  dataEntrada      DateTime    @default(now()) @map("data_entrada")
+  fornecedorCpfCnpj String    @map("fornecedor_cpf_cnpj")
+  fornecedorNome   String      @map("fornecedor_nome")
+  cfopId           String      @map("cfop_id")
+  valorNota        Decimal     @db.Decimal(15, 2)
+  baseCalculo      Decimal?    @map("base_calculo") @db.Decimal(15, 2)
+  valorIcms        Decimal?    @map("valor_icms") @db.Decimal(15, 2)
+  valorIcmsSt      Decimal?    @map("valor_icms_st") @db.Decimal(15, 2)
+  valorPis         Decimal?    @map("valor_pis") @db.Decimal(15, 2)
+  valorCofins      Decimal?    @map("valor_cofins") @db.Decimal(15, 2)
+  valorIpi         Decimal?    @map("valor_ipi") @db.Decimal(15, 2)
+  status           StatusNFe  @default(AUTORIZADA)
+  xmlArquivo       String?     @map("xml_arquivo")
+  pedidoCompraId   String?     @map("pedido_compra_id")
+  itens            Json        @default("[]")
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  cfop             Cfop        @relation(fields: [cfopId], references: [id])
+
+  @@index([companyId])
+  @@index([chaveAcesso])
+  @@index([dataEntrada])
+  @@map("nfes_entrada")
+}
+
+model NFceSaida {
+  id               String      @id @default(cuid())
+  companyId        String      @map("company_id")
+  unidadeId        String      @map("unidade_id")
+  vendaId          String      @unique @map("venda_id")
+  numero           Int
+  serie            Int         @default(1)
+  chaveAcesso      String      @unique @map("chave_acesso")
+  protocolo        String?
+  dataEmissao      DateTime    @default(now()) @map("data_emissao")
+  destinatarioCpfCnpj String?  @map("destinatario_cpf_cnpj")
+  destinatarioNome String?     @map("destinatario_nome")
+  valorNota        Decimal     @db.Decimal(15, 2)
+  status           StatusNFe   @default(EM_DIGITACAO)
+  finalidade       FinalidadeNFe @default(NORMAL)
+  xmlArquivo       String?     @map("xml_arquivo")
+  itens            Json        @default("[]")
+  pagamentos       Json        @default("[]")
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  @@index([companyId])
+  @@index([vendaId])
+  @@index([dataEmissao])
+  @@map("nfces_saida")
+}
+
+model Nfe {
+  id                      String        @id @default(cuid())
+  chaveAcesso             String        @unique @map("chave_acesso")
+  numero                  Int
+  serie                   Int           @default(1)
+  tipo                    TipoDocumento @default(NFe)
+  modelo                  Int           @default(55)
+  naturezaOperacao        String        @map("natureza_operacao")
+  emitenteCnpj            String        @map("emitente_cnpj")
+  emitenteRazaoSocial     String        @map("emitente_razao_social")
+  destinatarioCpfCnpj     String        @map("destinatario_cpf_cnpj")
+  destinatarioNome        String        @map("destinatario_nome")
+  valorProdutos           Decimal       @map("valor_produtos") @db.Decimal(15, 2)
+  valorFrete              Decimal?      @map("valor_frete") @db.Decimal(15, 2)
+  valorSeguro             Decimal?      @map("valor_seguro") @db.Decimal(15, 2)
+  valorDesconto           Decimal?      @map("valor_desconto") @db.Decimal(15, 2)
+  valorTotal              Decimal       @map("valor_total") @db.Decimal(15, 2)
+  valorICMS               Decimal?      @map("valor_icms") @db.Decimal(15, 2)
+  valorIPI                Decimal?      @map("valor_ipi") @db.Decimal(15, 2)
+  valorPIS                Decimal?      @map("valor_pis") @db.Decimal(15, 2)
+  valorCOFINS             Decimal?      @map("valor_cofins") @db.Decimal(15, 2)
+  baseCalculoICMS         Decimal?      @map("base_calculo_icms") @db.Decimal(15, 2)
+  frete                   Frete?        @default(CIF)
+  modalidadeFrete         String?       @map("modalidade_frete")
+  xmlEnvio                String?       @map("xml_envio")
+  xmlRetorno              String?       @map("xml_retorno")
+  protocolo               String?
+  status                  StatusNFe     @default(EM_DIGITACAO)
+  justificativaCancelamento String?     @map("justificativa_cancelamento")
+  dataEmissao             DateTime      @map("data_emissao")
+  dataAutorizacao         DateTime?     @map("data_autorizacao")
+  dataCancelamento        DateTime?     @map("data_cancelamento")
+  empresaFiscalId         String?       @map("empresa_fiscal_id")
+  createdAt               DateTime      @default(now()) @map("created_at")
+  updatedAt               DateTime      @updatedAt @map("updated_at")
+
+  itens                   NfeItem[]
+  cancelamentos           NfeCancelamento[]
+  eventos                 NfeEvento[]
+  cartasCorrecao          CartaCorrecao[]
+  manifestacoes           ManifestacaoDestinatario[]
+  empresaFiscal           EmpresaFiscal? @relation(fields: [empresaFiscalId], references: [id])
+
+  @@index([chaveAcesso])
+  @@index([emitenteCnpj])
+  @@index([status])
+  @@index([dataEmissao])
+  @@map("nfes")
+}
+
+model NfeItem {
+  id             String   @id @default(cuid())
+  nfeId          String   @map("nfe_id")
+  codigoProduto  String   @map("codigo_produto")
+  descricao      String
+  ncm            String
+  cfop           String
+  unidade        String
+  quantidade     Decimal  @db.Decimal(15, 4)
+  valorUnitario  Decimal  @map("valor_unitario") @db.Decimal(15, 2)
+  valorTotal     Decimal  @map("valor_total") @db.Decimal(15, 2)
+  valorDesconto  Decimal? @map("valor_desconto") @db.Decimal(15, 2)
+  valorICMS      Decimal? @map("valor_icms") @db.Decimal(15, 2)
+  valorIPI       Decimal? @map("valor_ipi") @db.Decimal(15, 2)
+  valorPIS       Decimal? @map("valor_pis") @db.Decimal(15, 2)
+  valorCOFINS    Decimal? @map("valor_cofins") @db.Decimal(15, 2)
+  baseICMS       Decimal? @map("base_icms") @db.Decimal(15, 2)
+  aliquotaICMS   Decimal? @map("aliquota_icms") @db.Decimal(15, 2)
+  cstICMS        String?  @map("cst_icms")
+  csosn          String?
+  cest           String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  nfe            Nfe      @relation(fields: [nfeId], references: [id])
+
+  @@map("nfe_itens")
+}
+
+model NfeCancelamento {
+  id              String   @id @default(cuid())
+  nfeId           String   @map("nfe_id")
+  numeroProtocolo String   @map("numero_protocolo")
+  justificativa   String
+  dataHora        DateTime @map("data_hora")
+  xmlRetorno      String?  @map("xml_retorno")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  nfe             Nfe      @relation(fields: [nfeId], references: [id])
+
+  @@map("nfe_cancelamentos")
+}
+
+model NfeEvento {
+  id          String      @id @default(cuid())
+  nfeId       String      @map("nfe_id")
+  tipo        TipoEvento
+  sequencia   Int
+  descricao   String?
+  xmlRetorno  String?     @map("xml_retorno")
+  dataHora    DateTime    @map("data_hora")
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  nfe         Nfe         @relation(fields: [nfeId], references: [id])
+
+  @@map("nfe_eventos")
+}
+
+model EmpresaFiscal {
+  id                  String           @id @default(cuid())
+  cnpj                String           @unique
+  razaoSocial         String           @map("razao_social")
+  nomeFantasia        String?          @map("nome_fantasia")
+  ie                  String?
+  im                  String?
+  cnae                String?
+  crt                 CRT              @default(SimplesNacional)
+  regimeTributario    String?          @map("regime_tributario")
+  certificadoDigital  String?          @map("certificado_digital")
+  certificadoSenha    String?          @map("certificado_senha")
+  validadeCertificado DateTime?        @map("validade_certificado")
+  cert                TipoCertificado? @default(A1)
+  csc                 String?
+  cscToken            String?          @map("csc_token")
+  idToken             String?          @map("id_token")
+  ambiente            Ambiente         @default(Homologacao)
+  uf                  String
+  cidade              String
+  ibge                String?
+  logradouro          String?
+  numero              String?
+  bairro              String?
+  cep                 String?
+  telefone            String?
+  email               String?
+  createdAt           DateTime         @default(now()) @map("created_at")
+  updatedAt           DateTime         @updatedAt @map("updated_at")
+
+  nfes                Nfe[]
+  cscs                NfceCsc[]
+
+  @@map("empresas_fiscais")
+}
+
+model NfceCsc {
+  id         String   @id @default(cuid())
+  empresaId  String   @map("empresa_id")
+  csc        String
+  token      String
+  ativo      Boolean  @default(true)
+  criadoEm   DateTime @default(now()) @map("criado_em")
+
+  empresa    EmpresaFiscal @relation(fields: [empresaId], references: [id])
+
+  @@map("nfce_cscs")
+}
+
+model CartaCorrecao {
+  id         String   @id @default(cuid())
+  nfeId      String   @map("nfe_id")
+  sequencia  Int
+  correcao   String
+  xmlRetorno String?  @map("xml_retorno")
+  dataHora   DateTime @map("data_hora")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  nfe        Nfe      @relation(fields: [nfeId], references: [id])
+
+  @@map("cartas_correcao")
+}
+
+model ManifestacaoDestinatario {
+  id         String            @id @default(cuid())
+  nfeId      String            @map("nfe_id")
+  chaveAcesso String           @map("chave_acesso")
+  cpfCnpj    String            @map("cpf_cnpj")
+  tipo       TipoManifestacao
+  dataHora   DateTime          @map("data_hora")
+  createdAt  DateTime          @default(now()) @map("created_at")
+
+  nfe        Nfe               @relation(fields: [nfeId], references: [id])
+
+  @@map("manifestacoes_destinatario")
+}
+
+model SpedFiscal {
+  id               String      @id @default(cuid())
+  companyId        String      @map("company_id")
+  unidadeId        String      @map("unidade_id")
+  mes              Int
+  ano              Int
+  versao           String      @default("018")
+  codigoVerificacao String?    @map("codigo_verificacao")
+  status           StatusSped  @default(EM_GERACAO)
+  tipo             String?     @default("FISCAL")
+  arquivoTxt       String?     @map("arquivo_txt")
+  dataGeracao      DateTime?   @map("data_geracao")
+  dataEntrega      DateTime?   @map("data_entrega")
+  observacao       String?
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  @@unique([companyId, unidadeId, mes, ano, tipo])
+  @@map("sped_fiscal")
+}
+
+model SpedPisCofins {
+  id               String      @id @default(cuid())
+  companyId        String      @map("company_id")
+  unidadeId        String      @map("unidade_id")
+  mes              Int
+  ano              Int
+  versao           String      @default("1.04")
+  status           StatusSped  @default(EM_GERACAO)
+  arquivoTxt       String?     @map("arquivo_txt")
+  dataGeracao      DateTime?   @map("data_geracao")
+  dataEntrega      DateTime?   @map("data_entrega")
+  observacao       String?
+  createdAt        DateTime    @default(now()) @map("created_at")
+  updatedAt        DateTime    @updatedAt @map("updated_at")
+
+  @@unique([companyId, unidadeId, mes, ano])
+  @@map("sped_pis_cofins")
+}

@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model IntegracaoEcommerce {
+  id            String   @id @default(cuid())
+  companyId     String   @map("company_id")
+  plataforma    String   // shopify, woocommerce, magento, etc
+  url           String
+  apiKey        String   @map("api_key")
+  apiSecret     String?  @map("api_secret")
+  webhookSecret String?  @map("webhook_secret")
+  ativo         Boolean  @default(true)
+  ultimaSinc    DateTime? @map("ultima_sinc")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("integracoes_ecommerce")
+}
+
+model LogSincronizacao {
+  id              String   @id @default(cuid())
+  integracaoId    String   @map("integracao_id")
+  tipo            String   // PRODUTO, ESTOQUE, PRECO, PEDIDO
+  direcao         String   // EXPORT, IMPORT
+  status          String   // SUCESSO, ERRO
+  registros       Int      @default(0)
+  erro            String?
+  dataInicio      DateTime @default(now()) @map("data_inicio")
+  dataFim         DateTime?
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  @@map("logs_sincronizacao")
+}
+
+model PesoRegistrado {
+  id            String   @id @default(cuid())
+  companyId     String   @map("company_id")
+  unidadeId     String   @map("unidade_id")
+  balancaId     String   @map("balanca_id")
+  produtoId     String?  @map("produto_id")
+  peso          Decimal  @db.Decimal(15, 4)
+  unidade       String   @default("KG")
+  dataHora      DateTime @default(now()) @map("data_hora")
+  lote          String?
+  valido        Boolean  @default(true)
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  @@index([balancaId, dataHora])
+  @@map("pesos_registrados")
+}
+
+model SessaoColetor {
+  id            String   @id @default(cuid())
+  companyId     String   @map("company_id")
+  unidadeId     String   @map("unidade_id")
+  usuarioId     String   @map("usuario_id")
+  tipo          String   // INVENTARIO, RECEBIMENTO, SEPARACAO, EXPEDICAO
+  referenciaId  String?  @map("referencia_id")
+  status        String   @default("ABERTA")
+  inicio        DateTime @default(now())
+  fim           DateTime?
+  totalLidos    Int      @default(0)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  leituras      LeituraColetor[]
+
+  @@map("sessoes_coletor")
+}
+
+model LeituraColetor {
+  id              String   @id @default(cuid())
+  sessaoId        String   @map("sessao_id")
+  produtoId       String?  @map("produto_id")
+  codigoBarras    String   @map("codigo_barras")
+  quantidade      Decimal  @default(1) @db.Decimal(15, 4)
+  localizacao     String?
+  lote            String?
+  dataValidade    DateTime? @map("data_validade")
+  dataHora        DateTime @default(now()) @map("data_hora")
+  createdAt       DateTime @default(now()) @map("created_at")
+
+  sessao          SessaoColetor @relation(fields: [sessaoId], references: [id], onDelete: Cascade)
+
+  @@index([sessaoId])
+  @@map("leituras_coletor")
+}

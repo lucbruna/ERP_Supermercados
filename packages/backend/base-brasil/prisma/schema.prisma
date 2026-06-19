@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Cep {
+  id        String @id @default(cuid())
+  cep       String
+  logradouro String
+  bairro    String
+  cidade    String
+  estado    String
+  ibge      String?
+
+  @@unique([cep])
+  @@map("ceps")
+}
+
+model CidadeIbge {
+  codigo   String @id
+  nome     String
+  uf       String
+  regiao   String
+
+  @@map("cidades_ibge")
+}
+
+model Ncm {
+  codigo     String @id
+  descricao  String
+  cest       String?
+
+  @@map("ncms")
+}
+
+model Cfop {
+  codigo    String @id
+  descricao String
+  tipo      String
+  aplicacao String?
+
+  @@map("cfops")
+}
+
+model Cnae {
+  codigo     String @id
+  descricao  String
+  categoria  String?
+
+  @@map("cnaes")
+}
+
+model Cest {
+  codigo         String @id
+  descricao      String
+  ncmRelacionado String?
+
+  @@map("cests")
+}

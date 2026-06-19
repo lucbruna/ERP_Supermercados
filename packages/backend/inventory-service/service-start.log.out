@@ -1,0 +1,64 @@
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +29ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +7ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mProdutosModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCategoriasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mMovimentosModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mLotesModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mInventarioModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTransferenciasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCurvaAbcModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mSugestaoCompraModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mProdutosController {/api/v1/estoque/produtos}:[39m[38;5;3m +44ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/produtos, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/produtos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/produtos/codigo-barras/:codigo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/produtos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/produtos/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/produtos/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCategoriasController {/api/v1/estoque/categorias}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/categorias, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/categorias, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/categorias/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/categorias/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/categorias/:id, DELETE} route[39m[38;5;3m +22ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mMovimentosController {/api/v1/estoque/movimentos}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/movimentos/entrada, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/movimentos/saida, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/movimentos/ajuste, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/movimentos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/movimentos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mLotesController {/api/v1/estoque/lotes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/lotes, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/lotes, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/lotes/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/lotes/:id/baixar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/lotes/validade/proximos-vencer, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mInventarioController {/api/v1/estoque/inventarios}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/inventarios, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/inventarios, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/inventarios/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/inventarios/:id/contagem, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/inventarios/:id/fechar, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/inventarios/:id/ajustar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTransferenciasController {/api/v1/estoque/transferencias}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/transferencias, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/transferencias, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/transferencias/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/transferencias/:id/expedir, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/transferencias/:id/receber, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/transferencias/:id/cancelar, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCurvaAbcController {/api/v1/estoque/curva-abc}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/curva-abc/calcular, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/curva-abc, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/curva-abc/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mSugestaoCompraController {/api/v1/estoque/sugestoes-compra}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/sugestoes-compra/gerar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/sugestoes-compra, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/sugestoes-compra/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/estoque/sugestoes-compra/:id/processar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +3ms[39m
+[32m[Nest] 16164  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InventoryService] [39m[32mInventory Service running on port 3005[39m

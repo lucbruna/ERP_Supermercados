@@ -1,0 +1,415 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum FuncionarioStatus {
+  ATIVO
+  FERIAS
+  AFASTADO
+  DEMITIDO
+  DECESSO
+}
+
+enum PontoTipo {
+  ENTRADA
+  SAIDA
+  INTERVALO_INICIO
+  INTERVALO_FIM
+  HORA_EXTRA_INICIO
+  HORA_EXTRA_FIM
+}
+
+enum PontoOrigem {
+  FACE_ID
+  BIOMETRIA
+  MANUAL
+  RELOGIO
+}
+
+enum FolhaStatus {
+  CALCULADA
+  FECHADA
+  PAGA
+  CANCELADA
+}
+
+enum FeriasStatus {
+  AGENDADA
+  CONCEDIDA
+  CANCELADA
+}
+
+enum RecrutamentoStatus {
+  ABERTA
+  EM_ANDAMENTO
+  FECHADA
+  CANCELADA
+}
+
+enum TreinamentoStatus {
+  AGENDADO
+  EM_ANDAMENTO
+  CONCLUIDO
+  CANCELADO
+}
+
+enum TreinamentoFuncionarioStatus {
+  INSCRITO
+  EM_ANDAMENTO
+  APROVADO
+  REPROVADO
+  CANCELADO
+}
+
+enum CandidatoStatus {
+  RECEBIDO
+  TRIAGEM
+  ENTREVISTA
+  TESTE
+  APROVADO
+  REPROVADO
+  CONTRATADO
+}
+
+model Funcionario {
+  id             String           @id @default(uuid()) @db.Uuid
+  companyId      String           @map("company_id") @db.Uuid
+  unidadeId      String           @map("unidade_id") @db.Uuid
+  matricula      String           @unique
+  nome           String
+  cpf            String           @unique
+  rg             String?
+  email          String           @unique
+  celular        String
+  foto           String?
+  dataAdmissao   DateTime         @map("data_admissao")
+  dataDemissao   DateTime?        @map("data_demissao")
+  salario        Decimal          @db.Decimal(12, 2)
+  cargo          String
+  departamento   String
+  setor          String?
+  jornadaTrabalho Json            @map("jornada_trabalho") @default("{}")
+  dadosBancarios Json             @map("dados_bancarios") @default("{}")
+  documentos     Json             @default("[]")
+  status         FuncionarioStatus @default(ATIVO)
+  ativo          Boolean          @default(true)
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  ponto          RegistroPonto[]
+  espelhos       EspelhoPonto[]
+  folhas         FolhaPagamento[]
+  ferias         Ferias[]
+  treinamentos   TreinamentoFuncionario[]
+  beneficios     FuncionarioBeneficio[]
+  bancoHoras     BancoHoras[]
+  avaliacoesFeitas   Avaliacao[]  @relation("avaliador")
+  avaliacoesRecebidas Avaliacao[] @relation("avaliado")
+  biometrias     Biometria[]
+  tentativasBiometria BiometriaTentativa[]
+  spoofingAlerts SpoofingAlert[]
+
+  @@map("funcionarios")
+}
+
+model RegistroPonto {
+  id              String     @id @default(uuid()) @db.Uuid
+  funcionarioId   String     @map("funcionario_id") @db.Uuid
+  funcionario     Funcionario @relation(fields: [funcionarioId], references: [id])
+  tipo            PontoTipo
+  dataHora        DateTime   @map("data_hora")
+  latitude        Decimal?   @db.Decimal(10, 7)
+  longitude       Decimal?   @db.Decimal(10, 7)
+  fotoUrl         String?    @map("foto_url")
+  biometriaHash   String?    @map("biometria_hash")
+  faceMatch       Boolean?   @map("face_match")
+  digitalMatch    Boolean?   @map("digital_match")
+  origem          PontoOrigem
+  metodoBiometrico String?   @map("metodo_biometrico")
+  ip              String?
+  dispositivoId   String?    @map("dispositivo_id")
+  validado        Boolean    @default(false)
+  createdAt       DateTime   @default(now()) @map("created_at")
+
+  @@index([funcionarioId])
+  @@index([dataHora])
+  @@index([funcionarioId, dataHora])
+  @@map("registros_ponto")
+}
+
+model EspelhoPonto {
+  id            String   @id @default(uuid()) @db.Uuid
+  funcionarioId String   @map("funcionario_id") @db.Uuid
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [id])
+  mes           Int
+  ano           Int
+  totalHoras    Decimal  @map("total_horas") @db.Decimal(6, 2)
+  totalHorasExtras Decimal @map("total_horas_extras") @db.Decimal(6, 2)
+  totalAtrasos  Decimal  @map("total_atrasos") @db.Decimal(6, 2)
+  totalFaltas   Int      @map("total_faltas")
+  diasTrabalhados Int    @map("dias_trabalhados")
+  saldoBancoHoras Decimal? @map("saldo_banco_horas") @db.Decimal(6, 2)
+  observacoes   String?
+  dataFechamento DateTime? @map("data_fechamento")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@unique([funcionarioId, mes, ano])
+  @@map("espelhos_ponto")
+}
+
+model FolhaPagamento {
+  id            String   @id @default(uuid()) @db.Uuid
+  funcionarioId String   @map("funcionario_id") @db.Uuid
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [id])
+  mes           Int
+  ano           Int
+  salarioBase   Decimal  @map("salario_base") @db.Decimal(12, 2)
+  proventos     Json     @default("[]")
+  descontos     Json     @default("[]")
+  salarioBruto  Decimal  @map("salario_bruto") @db.Decimal(12, 2)
+  salarioLiquido Decimal @map("salario_liquido") @db.Decimal(12, 2)
+  fgts          Decimal  @db.Decimal(12, 2)
+  inss          Decimal  @db.Decimal(12, 2)
+  irrf          Decimal  @db.Decimal(12, 2)
+  dataPagamento DateTime? @map("data_pagamento")
+  status        FolhaStatus @default(CALCULADA)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@unique([funcionarioId, mes, ano])
+  @@map("folhas_pagamento")
+}
+
+model Ferias {
+  id              String       @id @default(uuid()) @db.Uuid
+  funcionarioId   String       @map("funcionario_id") @db.Uuid
+  funcionario     Funcionario  @relation(fields: [funcionarioId], references: [id])
+  dataInicio      DateTime     @map("data_inicio")
+  dataFim         DateTime     @map("data_fim")
+  dataPagamento   DateTime?    @map("data_pagamento")
+  dias            Int
+  abonoPecuniario Boolean      @default(false) @map("abono_pecuniario")
+  status          FeriasStatus @default(AGENDADA)
+  createdAt       DateTime     @default(now()) @map("created_at")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  @@map("ferias")
+}
+
+model Recrutamento {
+  id            String            @id @default(uuid()) @db.Uuid
+  companyId     String            @map("company_id") @db.Uuid
+  cargo         String
+  departamento  String
+  descricao     String
+  requisitos    Json              @default("[]")
+  salarioMin    Decimal           @map("salario_min") @db.Decimal(12, 2)
+  salarioMax    Decimal           @map("salario_max") @db.Decimal(12, 2)
+  status        RecrutamentoStatus @default(ABERTA)
+  dataAbertura  DateTime          @default(now()) @map("data_abertura")
+  dataFechamento DateTime?        @map("data_fechamento")
+  createdAt     DateTime          @default(now()) @map("created_at")
+  updatedAt     DateTime          @updatedAt @map("updated_at")
+
+  candidatos    Candidato[]
+
+  @@map("recrutamentos")
+}
+
+model Candidato {
+  id             String          @id @default(uuid()) @db.Uuid
+  recrutamentoId String          @map("recrutamento_id") @db.Uuid
+  recrutamento   Recrutamento    @relation(fields: [recrutamentoId], references: [id])
+  nome           String
+  email          String          @unique
+  celular        String
+  curriculoUrl   String?         @map("curriculo_url")
+  status         CandidatoStatus @default(RECEBIDO)
+  etapas         Json            @default("[]")
+  createdAt      DateTime        @default(now()) @map("created_at")
+  updatedAt      DateTime        @updatedAt @map("updated_at")
+
+  @@map("candidatos")
+}
+
+model Treinamento {
+  id          String            @id @default(uuid()) @db.Uuid
+  nome        String
+  descricao   String?
+  dataInicio  DateTime          @map("data_inicio")
+  dataFim     DateTime          @map("data_fim")
+  cargaHoraria Int              @map("carga_horaria")
+  instrutor   String
+  status      TreinamentoStatus @default(AGENDADO)
+  createdAt   DateTime          @default(now()) @map("created_at")
+  updatedAt   DateTime          @updatedAt @map("updated_at")
+
+  funcionarios TreinamentoFuncionario[]
+
+  @@map("treinamentos")
+}
+
+model TreinamentoFuncionario {
+  id             String                       @id @default(uuid()) @db.Uuid
+  treinamentoId  String                       @map("treinamento_id") @db.Uuid
+  treinamento    Treinamento                  @relation(fields: [treinamentoId], references: [id])
+  funcionarioId  String                       @map("funcionario_id") @db.Uuid
+  funcionario    Funcionario                  @relation(fields: [funcionarioId], references: [id])
+  status         TreinamentoFuncionarioStatus @default(INSCRITO)
+  nota           Decimal?                     @db.Decimal(5, 2)
+  createdAt      DateTime                     @default(now()) @map("created_at")
+  updatedAt      DateTime                     @updatedAt @map("updated_at")
+
+  @@unique([treinamentoId, funcionarioId])
+  @@map("treinamento_funcionarios")
+}
+
+model Beneficio {
+  id          String   @id @default(uuid()) @db.Uuid
+  companyId   String   @map("company_id") @db.Uuid
+  nome        String
+  tipo        String
+  valor       Decimal  @db.Decimal(12, 2)
+  descricao   String?
+  ativo       Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  funcionarios FuncionarioBeneficio[]
+
+  @@map("beneficios")
+}
+
+model FuncionarioBeneficio {
+  id             String    @id @default(uuid()) @db.Uuid
+  funcionarioId  String    @map("funcionario_id") @db.Uuid
+  funcionario    Funcionario @relation(fields: [funcionarioId], references: [id])
+  beneficioId    String    @map("beneficio_id") @db.Uuid
+  beneficio      Beneficio @relation(fields: [beneficioId], references: [id])
+  dataConcessao  DateTime  @default(now()) @map("data_concessao")
+  ativo          Boolean   @default(true)
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  @@unique([funcionarioId, beneficioId])
+  @@map("funcionario_beneficios")
+}
+
+model BancoHoras {
+  id             String   @id @default(uuid()) @db.Uuid
+  funcionarioId  String   @map("funcionario_id") @db.Uuid
+  funcionario    Funcionario @relation(fields: [funcionarioId], references: [id])
+  mes            Int
+  ano            Int
+  saldoAnterior  Decimal  @map("saldo_anterior") @db.Decimal(6, 2)
+  horasCreditadas Decimal @map("horas_creditadas") @db.Decimal(6, 2)
+  horasDebitadas Decimal  @map("horas_debitadas") @db.Decimal(6, 2)
+  saldoAtual     Decimal  @map("saldo_atual") @db.Decimal(6, 2)
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@unique([funcionarioId, mes, ano])
+  @@map("banco_horas")
+}
+
+model Biometria {
+  id              String           @id @default(uuid()) @db.Uuid
+  funcionarioId   String           @map("funcionario_id") @db.Uuid
+  funcionario     Funcionario      @relation(fields: [funcionarioId], references: [id])
+  tipo            String           // DIGITAL, FACE, IRIS
+  templateHash    String           @map("template_hash")
+  templateFormato String           @map("template_formato")
+  qualidade       Int              @default(85)
+  status          String           @default("ATIVO") // ATIVO, BLOQUEADO, EXPIRADO
+  dispositivoId   String?          @map("dispositivo_id") @db.Uuid
+  deviceId        String?          @map("device_id")
+  metadata        Json             @default("{}")
+  ultimoUso       DateTime?        @map("ultimo_uso")
+  criadoEm        DateTime         @default(now()) @map("criado_em")
+  atualizadoEm    DateTime         @updatedAt @map("atualizado_em")
+
+  tentativas      BiometriaTentativa[]
+  alerts          SpoofingAlert[]
+
+  @@unique([funcionarioId, tipo, status])
+  @@index([funcionarioId])
+  @@index([tipo, status])
+  @@map("biometrias")
+}
+
+model BiometriaTentativa {
+  id            String    @id @default(uuid()) @db.Uuid
+  funcionarioId String    @map("funcionario_id") @db.Uuid
+  funcionario   Funcionario @relation(fields: [funcionarioId], references: [id])
+  tipo          String    // DIGITAL, FACE
+  sucesso       Boolean   @default(false)
+  mensagem      String?
+  biometriaId   String?   @map("biometria_id") @db.Uuid
+  biometria     Biometria? @relation(fields: [biometriaId], references: [id])
+  ip            String?
+  deviceId      String?   @map("device_id")
+  latitude      Decimal?  @db.Decimal(10, 7)
+  longitude     Decimal?  @db.Decimal(10, 7)
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  @@index([funcionarioId])
+  @@index([createdAt])
+  @@map("biometria_tentativas")
+}
+
+model BiometriaDevice {
+  id          String   @id @default(uuid()) @db.Uuid
+  nome        String
+  fabricante  String?
+  modelo      String?
+  tipo        String   // RELOGIO_PONTO, LEITOR_DIGITAL, CAMERA, TABLET, CELULAR
+  ip          String?
+  mac         String?
+  serial      String?
+  unidadeId   String?  @map("unidade_id") @db.Uuid
+  localizacao String?
+  ativo       Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("biometria_devices")
+}
+
+model SpoofingAlert {
+  id              String    @id @default(uuid()) @db.Uuid
+  funcionarioId   String    @map("funcionario_id") @db.Uuid
+  funcionario     Funcionario @relation(fields: [funcionarioId], references: [id])
+  tipo            String    // DIGITAL, FACE
+  motivo          String
+  scoreSuspeita   Float     @default(0) @map("score_suspeita")
+  deviceId        String?   @map("device_id")
+  fotoEvidencia   String?   @map("foto_evidencia")
+  resolvido       Boolean   @default(false)
+  biometriaId     String?   @map("biometria_id") @db.Uuid
+  biometria       Biometria? @relation(fields: [biometriaId], references: [id])
+  createdAt       DateTime  @default(now()) @map("created_at")
+
+  @@index([funcionarioId])
+  @@map("spoofing_alerts")
+}
+
+model Avaliacao {
+  id             String   @id @default(uuid()) @db.Uuid
+  funcionarioId  String   @map("funcionario_id") @db.Uuid
+  funcionario    Funcionario @relation("avaliado", fields: [funcionarioId], references: [id])
+  avaliadorId    String   @map("avaliador_id") @db.Uuid
+  avaliador      Funcionario @relation("avaliador", fields: [avaliadorId], references: [id])
+  periodo        String
+  notas          Json     @default("[]")
+  resultado      Decimal  @db.Decimal(5, 2)
+  status         String   @default("PENDENTE")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  @@map("avaliacoes")
+}

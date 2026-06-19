@@ -1,0 +1,67 @@
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +31ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +10ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mFornecedoresModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCotacoesModule dependencies initialized[39m[38;5;3m +14ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPedidosCompraModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRecebimentoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mContratosModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mTabelasPrecoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAvaliacoesModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mFornecedoresController {/api/v1/compras/fornecedores}:[39m[38;5;3m +80ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/fornecedores, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/fornecedores, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/fornecedores/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/fornecedores/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/fornecedores/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCotacoesController {/api/v1/compras/cotacoes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes/:id/abrir, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes/:id/fechar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes/:id/selecionar-vencedor, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/cotacoes/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPedidosCompraController {/api/v1/compras/pedidos-compra}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/from-cotacao, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id/enviar-aprovacao, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id/aprovar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id/rejeitar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id/enviar-fornecedor, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id/receber, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id/cancelar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/pedidos-compra/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRecebimentoController {/api/v1/compras/recebimento}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/recebimento, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/recebimento, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/recebimento/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/recebimento/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mContratosController {/api/v1/compras/contratos}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id, PATCH} route[39m[38;5;3m +14ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id/renovar, POST} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id/suspender, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id/reativar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id/encerrar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/contratos/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mTabelasPrecoController {/api/v1/compras/tabelas-preco}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/tabelas-preco, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/tabelas-preco, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/tabelas-preco/fornecedor/:fornecedorId, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/tabelas-preco/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/tabelas-preco/:id, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/tabelas-preco/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAvaliacoesController {/api/v1/compras/avaliacoes}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/avaliacoes, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/avaliacoes, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/avaliacoes/fornecedor/:fornecedorId, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/avaliacoes/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/compras/avaliacoes/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 14984  - [39m18/06/2026, 22:09:57 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +381ms[39m

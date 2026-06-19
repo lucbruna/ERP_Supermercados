@@ -1,0 +1,66 @@
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +24ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +5ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mContasPagarModule dependencies initialized[39m[38;5;3m +6ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mContasReceberModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mFluxoCaixaModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBancosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConciliacaoModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPixModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mCategoriasModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRelatoriosModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mContasPagarController {/api/v1/financeiro/contas-pagar}:[39m[38;5;3m +99ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar, POST} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar/:id/baixa, PATCH} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar/:id/cancelar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-pagar/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mContasReceberController {/api/v1/financeiro/contas-receber}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber/:id/receber, PATCH} route[39m[38;5;3m +150ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber/:id/cancelar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/contas-receber/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mFluxoCaixaController {/api/v1/financeiro/fluxo-caixa}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/fluxo-caixa/saldo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/fluxo-caixa/projetar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/fluxo-caixa/resumo, GET} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBancosController {/api/v1/financeiro/bancos}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/bancos, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/bancos, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/bancos/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/bancos/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/bancos/:id/movimentar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/bancos/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mConciliacaoController {/api/v1/financeiro/conciliacao}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/conciliacao, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/conciliacao, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/conciliacao/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/conciliacao/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/conciliacao/:id/conciliar, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/conciliacao/:id, DELETE} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mPixController {/api/v1/financeiro/pix}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix, GET} route[39m[38;5;3m +91ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix/:id, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix/:id, PUT} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix/:id/confirmar, PATCH} route[39m[38;5;3m +5ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix/:id/estornar, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/pix/:id, DELETE} route[39m[38;5;3m +2ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mCategoriasController {/api/v1/financeiro/categorias}:[39m[38;5;3m +2ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/categorias, POST} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/categorias, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/categorias/:id, GET} route[39m[38;5;3m +3ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/categorias/:id, PUT} route[39m[38;5;3m +10ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/categorias/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRelatoriosController {/api/v1/financeiro/relatorios}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/relatorios/fluxo-caixa, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/relatorios/aging, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:55 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/financeiro/relatorios/dre, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +4ms[39m
+[32m[Nest] 21992  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[FinancialService] [39m[32mFinancial Service running on port 3003[39m

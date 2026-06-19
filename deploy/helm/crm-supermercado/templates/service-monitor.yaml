@@ -1,0 +1,30 @@
+{{- if .Values.serviceMonitor.enabled }}
+{{- $allServices := list "apiGateway" "authService" "rhService" "financialService" "pdvService" "inventoryService" "crmService" "marketingService" "securityService" "purchasingService" "cftvService" "distributionService" "biService" "aiService" "notificationService" "webApp" "dashboard" -}}
+{{- range $serviceName := $allServices }}
+{{- $service := index $.Values $serviceName }}
+{{- if $service.enabled }}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ $service.name }}
+  namespace: {{ $.Release.Namespace }}-monitoring
+  labels:
+    {{- include "crm.labels" $ | nindent 4 }}
+    app.kubernetes.io/name: {{ $service.name }}
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ $service.name }}
+  namespaceSelector:
+    matchNames:
+      - {{ $.Release.Namespace }}
+  endpoints:
+    - port: http
+      interval: {{ $.Values.serviceMonitor.interval }}
+      scrapeTimeout: {{ $.Values.serviceMonitor.scrapeTimeout }}
+      path: /metrics
+{{- end }}
+{{- end }}
+{{- end }}

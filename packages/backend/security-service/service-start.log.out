@@ -1,0 +1,32 @@
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestFactory] [39m[32mStarting Nest application...[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mPrismaModule dependencies initialized[39m[38;5;3m +33ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mThrottlerModule dependencies initialized[39m[38;5;3m +4ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigHostModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAppModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mAuditoriaModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mRegrasModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mBloqueioModule dependencies initialized[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[InstanceLoader] [39m[32mConfigModule dependencies initialized[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mAuditoriaController {/api/v1/security/auditoria}:[39m[38;5;3m +72ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/auditoria, GET} route[39m[38;5;3m +4ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/auditoria/resumo, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/auditoria/exportar, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/auditoria/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/auditoria/registrar, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mRegrasController {/api/v1/security/regras}:[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/regras, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/regras/:id, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/regras, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/regras/:id, PUT} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/regras/:id/toggle, PATCH} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/regras/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RoutesResolver] [39m[32mBloqueioController {/api/v1/security/bloqueios}:[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/bloqueios, GET} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/bloqueios/verificar/:ip, GET} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/bloqueios/:id, GET} route[39m[38;5;3m +34ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/bloqueios, POST} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/bloqueios/:id, PUT} route[39m[38;5;3m +0ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[RouterExplorer] [39m[32mMapped {/api/v1/security/bloqueios/:id, DELETE} route[39m[38;5;3m +1ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[PrismaService] [39m[32mConnected to database[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[NestApplication] [39m[32mNest application successfully started[39m[38;5;3m +2ms[39m
+[32m[Nest] 16556  - [39m18/06/2026, 22:09:56 [32m    LOG[39m [38;5;3m[SecurityService] [39m[32mSecurity Service running on port 3008[39m

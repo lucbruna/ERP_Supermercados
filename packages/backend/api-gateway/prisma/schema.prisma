@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ApiKey {
+  id         String    @id @default(uuid()) @db.Uuid
+  name       String
+  keyHash    String    @unique @map("key_hash")
+  keyPrefix  String    @map("key_prefix")
+  permissions String   @default("read")
+  tier       String    @default("standard")
+  expiresAt  DateTime? @map("expires_at")
+  ativo      Boolean   @default(true)
+  revokedAt  DateTime? @map("revoked_at")
+  lastUsedAt DateTime? @map("last_used_at")
+  usageCount Int       @default(0) @map("usage_count")
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  @@map("api_keys")
+}
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  companyId String   @map("company_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  userNome  String   @map("user_nome")
+  acao      String
+  recurso   String
+  recursoId String?  @map("recurso_id")
+  detalhes  String?
+  ip        String
+  userAgent String   @map("user_agent")
+  gravidade String   @default("BAIXA")
+  createdAt DateTime @default(now()) @map("created_at")
+  metadata  Json?
+
+  @@map("audit_logs")
+}
